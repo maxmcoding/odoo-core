@@ -1,3 +1,11 @@
+
+## GOAL
+
+- Get object with empty context, 
+- then  read file reference on filePath and fileLine 
+- with that info analize and generate context 
+- save context on node
+
 ### DO NOT — read this before touching anything
 
 **Never run a shell/Bash/`python -c` command, never open a `neo4j` Python driver connection, never
@@ -25,7 +33,7 @@ door to editing repo files as part of running this task.)
 - if write_neo4j_cypher fail, continue  to next step
 
 **Only call the exact tools and JSON shapes documented below — verbatim, one real MCP tool call at a
-time.** Do not invent pseudo-XML tags, and do not invent path-style addressing — none of that is real
+time.**  
 syntax, it will not execute anything, and producing it means you've stopped calling tools and started
 narrating make-believe ones.
 
@@ -64,8 +72,36 @@ Keep it to 2–4 sentences. Do not hallucinate behavior that isn't in the code.
 
 **Scale:** ~105,000 nodes repo-wide need `context` as of 2026-08-04 — most of it is `File`,
 `ModelMethod`, `ModelField`, and `XMLRecord`; everything else is smaller. This will never finish in
-one sitting, so it isn't meant to: work **one node at a time** (below), stop whenever, resume later —
-every unprocessed node is still sitting there waiting, nothing to track or resume from manually.
+one sitting, so it isn't meant to: work **one shared-file batch at a time** (below), stop whenever,
+resume later — every unprocessed node is still sitting there waiting, nothing to track or resume from
+manually.
+
+### Read-only listing vs. running the loop — do not conflate these
+
+A message like *"list 10 nodes"*, *"show me some nodes missing context"*, or *"how many `X` need
+context"* is an **information request**, not an instruction to start or continue the recurring loop.
+For requests like that:
+- Run only a read query (Step 1's `read_neo4j_cypher` shape below, or a simpler count/list query) and
+  show the results in your reply. Stop there.
+- Do **not** open Step 2 (reading source files), do **not** open Step 3 (`write_neo4j_cypher`), and do
+  **not** create a `task_progress`/todo checklist for the full ~105,000-node objective. That checklist
+  and the READ/WRITE steps are for when the user actually asks you to *process*, *fill*, *continue*, or
+  *work through* nodes — verbs like "process", "fill in context for", "continue", "do the next batch",
+  "keep going". "List" or "show" is not one of those verbs, no matter how naturally the request seems
+  to "align with Step 1" — matching Step 1's query shape does not authorize Steps 2–4.
+- If it's genuinely ambiguous whether the user wants a listing or wants you to start processing, ask —
+  don't assume a listing request means "begin the recurring loop and read every matching file."
+
+**Never pick a label** (`ModelMethod`, `XMLRecord`, etc.) because it seems "common" or "representative"
+when the user didn't name one — that is a guess, and this task runs on verified facts, not guesses. If
+the request doesn't specify a label, either ask which label is meant, or drop the label filter entirely
+(`MATCH (n)` with no label in Step 1, still one shared `filePath` per cycle) so results aren't silently
+narrowed to a type nobody asked for.
+
+Also: because Step 1 batches by *shared filePath*, the row count it returns is however many matching
+nodes that one file happens to have — it can be fewer than the `LIMIT`, even 1, and that's correct
+behavior, not a failure to "get 10." Don't chase a specific row count across multiple files in one
+cycle; one file per cycle is the rule (see below).
 
 ### How to talk to Neo4j — SEARCH and UPDATE only, nothing else
 
@@ -77,53 +113,100 @@ graph is a separate, empty, generic entity/observation store and has nothing to 
 architecture graph. `get_neo4j_schema` is unavailable here (this instance has no APOC plugin
 installed) — use `read_neo4j_cypher` for schema discovery too, if ever needed.
 
-### The enforced loop — exactly one node at a time
+### The enforced loop — batched by shared file, capped
 
-**Never pull more than one node into play at once.** No batches, no lookahead, no "grab 10 and work
-through the list." Repeat this four-step loop, in order, for one node per cycle:
+**Performance rule:** many `ModelMethod`/`ModelField`/`XMLRecord`/`Function` nodes point at the *same*
+`filePath` (e.g. a model file with 20 methods). Re-opening that file once per node is the main reason
+this was slow. Instead, pull every empty-context node that shares one file, read that file **once**,
+and write all of their `context` values back in a **single** batched query. Never batch across
+*different* files — one `filePath` per cycle, always.
 
-**Step 1 — SEARCH: get exactly one candidate.**
+**Step 1 — SEARCH: get one filePath's worth of candidates, capped.**
 
 Tool: `read_neo4j_cypher`
 ```json
 {
-  "query": "MATCH (n:ModelMethod) WHERE n.context IS NULL OR n.context = '' RETURN elementId(n) AS id, labels(n) AS labels, n LIMIT 1"
+  "query": "MATCH (n) WHERE (n.context IS NULL OR n.context = '') AND n.filePath IS NOT NULL WITH n.filePath AS filePath LIMIT 1 MATCH (m) WHERE m.filePath = filePath AND (m.context IS NULL OR m.context = '') RETURN elementId(m) AS id, labels(m) AS labels, m LIMIT 10"
 }
 ```
 
 Swap the label (`ModelMethod`, `PythonModel`, `Controller`, `ControllerMethod`, `Function`,
 `QWebTemplate`, `XMLRecord`, `JSComponent`, `Addon`, `AssetBundle`, `Asset`, `Folder`, `File`,
-`ModelField`) to choose which slice to work through; drop it (`MATCH (n) WHERE ...`) only if you
-deliberately want to move through all label types mixed together.
+`ModelField`) to choose which slice to work through; drop it from both `MATCH` clauses only if you
+deliberately want to move through all label types mixed together (still one shared `filePath` per
+cycle). The inner `LIMIT 10` caps batch size so one cycle stays reviewable — if a file has more than 10
+matching nodes, the remainder is simply picked up again on a later cycle (it's still there, still
+matching, nothing is lost).
 
 No `SKIP`/pagination bookkeeping needed: once a node's `context` is set in Step 3, it stops matching
 `context IS NULL OR context = ''`, so re-running this exact query always returns the next untouched
-node. The `id` it returns (an `elementId(n)` string, e.g. `"4:e179a577-119d-49cc-9910-746aa300882b:0"`)
-is only valid for the current session — always take it fresh from this call, never reuse one from an
-earlier session or from this document.
+file's batch. Every `id` returned (an `elementId(n)` string, e.g.
+`"4:e179a577-119d-49cc-9910-746aa300882b:0"`) is only valid for the current session — always take it
+fresh from this call, never reuse one from an earlier session or from this document.
 
-**Step 2 — READ: open the real source.**
+**Step 2 — READ: open that one file, once.**
 
-Use the row's `filePath` (and `fileLine` when present) to read the actual file. Python for
-`ModelMethod`/`Function`/`ControllerMethod`/`PythonModel`/`Controller`; XML for
-`QWebTemplate`/`XMLRecord`; JS/OWL for `JSComponent`. Do not write `context` from the node's name or
-`description` alone — the point of this step is to have actually looked.
+Use the shared `filePath` (and each row's `fileLine` when present) to read the actual file — one Read
+call covers the whole batch. Python for `ModelMethod`/`Function`/`ControllerMethod`/`PythonModel`/
+`Controller`; XML for `QWebTemplate`/`XMLRecord`; JS/OWL for `JSComponent`.
 
-**Step 3 — WRITE: set `context` on that one node, nothing else.**
+**Every node in the batch still needs its own real look**, using its own `fileLine`/name to find its
+specific section in the file you just opened — do not write `context` for any node from its name or
+`description` alone, and do not let one node's real behavior bleed into another's description. If the
+file is large enough that some rows' sections fall outside what you actually read, drop those rows from
+the Step 3 batch (they'll be picked up again next cycle) rather than guessing.
+
+**Step 3 — WRITE: set `context` for the whole verified batch, nothing else.**
 
 Tool: `write_neo4j_cypher`
 ```json
 {
-  "query": "MATCH (n) WHERE elementId(n) = $id SET n.context = $context",
+  "query": "UNWIND $updates AS u MATCH (n) WHERE elementId(n) = u.id SET n.context = u.context",
   "params": {
-    "id": "4:e179a577-119d-49cc-9910-746aa300882b:0",
-    "context": "Confirms the order, generates a procurement group + stock pickings via _action_launch_stock_rule, and posts the analytic entries; the docstring already says 'Confirm the given quotation(s)' so this adds the side effects it doesn't mention."
+    "updates": [
+      {
+        "id": "4:e179a577-119d-49cc-9910-746aa300882b:0",
+        "context": "Confirms the order, generates a procurement group + stock pickings via _action_launch_stock_rule, and posts the analytic entries; the docstring already says 'Confirm the given quotation(s)' so this adds the side effects it doesn't mention."
+      },
+      {
+        "id": "4:e179a577-119d-49cc-9910-746aa300882b:1",
+        "context": "Trivial override: just calls super() and adds no behavior of its own."
+      }
+    ]
   }
 }
 ```
-- `id` must be the exact value Step 1 returned for *this* node — never invented, never reused.
+- Every `id` in `updates` must be an exact value Step 1 returned in *this* cycle's batch — never
+  invented, never reused, and never a row you dropped for lack of a real look in Step 2.
 - This exact shape only — no other clause, no other property, no `DELETE`/`REMOVE`/`CREATE`/`MERGE`
-  (see the DO NOT section above if write_neo4j_cypher fail, continue  to next step).
+  (see the DO NOT section above). If `write_neo4j_cypher` fails, continue to the next step.
 
-**Step 4 — REPEAT.** Go back to Step 1. Do not queue up reasoning for a second node before this one's
-Step 3 has actually been sent — one full loop, then the next.
+**Step 4 — REPEAT.** Go back to Step 1. Do not queue up reasoning for the next file's batch before this
+one's Step 3 has actually been sent — one full loop (one file, its whole verified batch), then the
+next.
+
+
+### Prevention Checklist (Do Before Each Tool Call):
+
+__1. JSON Validation:__
+
+- Verify complete, valid JSON with proper quoting and no trailing commas
+- For Neo4j read/write tools: ensure exact shape `{ "query": "...", "params": {...} }`
+- Double-check `write_neo4j_cypher` params follow documented structure
+
+__2. Fresh Results Verification:__
+
+- Never reuse node IDs from previous responses - always use fresh results
+- Clear cached state before next query after successful writes
+- Cross-reference file paths match between Step 1 and Step 2 queries
+
+__3. File Path Handling (MCP filesystem):__
+
+- Use `@workspace:full/path/to/file.ext` format for read_file/write_to_file tools
+- Don't use simple relative paths like `addons/...` without the prefix
+- Verify file existence at intended path before reading
+
+__4. MCP Server Selection:__
+
+- Always use server name `neo4j-database` (not `neo4j-memory`)
+- Confirm JSON matches documented schemas verbatim
