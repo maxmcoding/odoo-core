@@ -20,6 +20,10 @@ explicit user instruction in-chat after the tool references below were found to 
 one-off human-directed documentation fix, not part of the recurring loop, and it doesn't reopen the
 door to editing repo files as part of running this task.)
 
+- only use provide query  like examples
+
+- if write_neo4j_cypher fail, continue  to next step
+
 **Only call the exact tools and JSON shapes documented below — verbatim, one real MCP tool call at a
 time.** Do not invent pseudo-XML tags, and do not invent path-style addressing — none of that is real
 syntax, it will not execute anything, and producing it means you've stopped calling tools and started
@@ -56,7 +60,7 @@ it, and write back what you learned. `context` must say something `description` 
 Structural nodes with no code body (`Folder`, `Addon`, `AssetBundle`, `Asset`, plain `File`) get one
 sentence on role/purpose instead, based on actually looking at contents/manifest — not the name alone.
 
-Keep it to 2–8 sentences. Do not hallucinate behavior that isn't in the code.
+Keep it to 2–4 sentences. Do not hallucinate behavior that isn't in the code.
 
 **Scale:** ~105,000 nodes repo-wide need `context` as of 2026-08-04 — most of it is `File`,
 `ModelMethod`, `ModelField`, and `XMLRecord`; everything else is smaller. This will never finish in
@@ -119,7 +123,7 @@ Tool: `write_neo4j_cypher`
 ```
 - `id` must be the exact value Step 1 returned for *this* node — never invented, never reused.
 - This exact shape only — no other clause, no other property, no `DELETE`/`REMOVE`/`CREATE`/`MERGE`
-  (see the DO NOT section above).
+  (see the DO NOT section above if write_neo4j_cypher fail, continue  to next step).
 
 **Step 4 — REPEAT.** Go back to Step 1. Do not queue up reasoning for a second node before this one's
 Step 3 has actually been sent — one full loop, then the next.
