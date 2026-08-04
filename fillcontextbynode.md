@@ -5,31 +5,8 @@
 - then  read file reference on filePath and fileLine 
 - with that info analize and generate context 
 - save context on node
-
-### DO NOT — read this before touching anything
-
-**Never run a shell/Bash/`python -c` command, never open a `neo4j` Python driver connection, never
-call `cypher-shell`, and never `curl`/HTTP the Bolt or browser endpoint directly.** There is no
-approved way to reach this graph except the two MCP tool calls in the "How to talk to Neo4j" section
-below: `read_neo4j_cypher` (search/read) and `write_neo4j_cypher` (update). Cypher itself is fine and
-required — it's how those two tools work — but it must always go through one of those two tool calls,
-never through a terminal command containing `GraphDatabase`, `bolt://`, or `session.run` (e.g.
-`neo4j_odoo_ingest.py`, which is unrelated tooling used once to build the graph, not something to
-imitate here).
-
-**Never edit, create, rename, or delete any file in this repository — not even a comment, not even
-one line.** This task reads source files (to understand what the code does) but the *only* write
-operation that exists anywhere in the recurring node-processing loop is the `write_neo4j_cypher` call
-that sets `context` on a graph node. If you are about to use an edit/write/replace-in-file tool for
-*any* path — application code, CSVs, security rules, anything — stop. That action is not part of this
-task, no matter how small or well-intentioned. Reading a file is fine and required; writing to one is
-never fine here. (This file, `fillcontextbynode.md`, was itself corrected on 2026-08-03 by direct,
-explicit user instruction in-chat after the tool references below were found to be wrong — that was a
-one-off human-directed documentation fix, not part of the recurring loop, and it doesn't reopen the
-door to editing repo files as part of running this task.)
-
+- Use `neo4j-database`
 - only use provide query  like examples
-
 - if write_neo4j_cypher fail, continue  to next step
 
 **Only call the exact tools and JSON shapes documented below — verbatim, one real MCP tool call at a
@@ -70,38 +47,12 @@ sentence on role/purpose instead, based on actually looking at contents/manifest
 
 Keep it to 2–4 sentences. Do not hallucinate behavior that isn't in the code.
 
-**Scale:** ~105,000 nodes repo-wide need `context` as of 2026-08-04 — most of it is `File`,
-`ModelMethod`, `ModelField`, and `XMLRecord`; everything else is smaller. This will never finish in
-one sitting, so it isn't meant to: work **one shared-file batch at a time** (below), stop whenever,
-resume later — every unprocessed node is still sitting there waiting, nothing to track or resume from
-manually.
-
-### Read-only listing vs. running the loop — do not conflate these
-
-A message like *"list 10 nodes"*, *"show me some nodes missing context"*, or *"how many `X` need
-context"* is an **information request**, not an instruction to start or continue the recurring loop.
-For requests like that:
-- Run only a read query (Step 1's `read_neo4j_cypher` shape below, or a simpler count/list query) and
-  show the results in your reply. Stop there.
-- Do **not** open Step 2 (reading source files), do **not** open Step 3 (`write_neo4j_cypher`), and do
-  **not** create a `task_progress`/todo checklist for the full ~105,000-node objective. That checklist
-  and the READ/WRITE steps are for when the user actually asks you to *process*, *fill*, *continue*, or
-  *work through* nodes — verbs like "process", "fill in context for", "continue", "do the next batch",
-  "keep going". "List" or "show" is not one of those verbs, no matter how naturally the request seems
-  to "align with Step 1" — matching Step 1's query shape does not authorize Steps 2–4.
-- If it's genuinely ambiguous whether the user wants a listing or wants you to start processing, ask —
-  don't assume a listing request means "begin the recurring loop and read every matching file."
-
 **Never pick a label** (`ModelMethod`, `XMLRecord`, etc.) because it seems "common" or "representative"
 when the user didn't name one — that is a guess, and this task runs on verified facts, not guesses. If
 the request doesn't specify a label, either ask which label is meant, or drop the label filter entirely
-(`MATCH (n)` with no label in Step 1, still one shared `filePath` per cycle) so results aren't silently
-narrowed to a type nobody asked for.
-
-Also: because Step 1 batches by *shared filePath*, the row count it returns is however many matching
-nodes that one file happens to have — it can be fewer than the `LIMIT`, even 1, and that's correct
-behavior, not a failure to "get 10." Don't chase a specific row count across multiple files in one
-cycle; one file per cycle is the rule (see below).
+(`MATCH (n)` with no label in Step 1, still one shared `filePath` per cycle)
+- every unprocessed node is still sitting there waiting, nothing to track or resume from
+manually.
 
 ### How to talk to Neo4j — SEARCH and UPDATE only, nothing else
 
