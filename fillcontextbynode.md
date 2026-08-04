@@ -40,46 +40,28 @@ reads on 2026-08-03. Use `neo4j-database`, not `neo4j-memory`, for everything be
 
 ### PRIMARY OBJECTIVE
 
-For every node where `context = ""` (or the property is missing), go to its real source location,
-actually read the code there, and write back a short, genuinely analytical `context` string — not a
-restatement of what's already in `description` (which already holds the docstring / `help`/`string`
-text, and may itself be empty).
+**Goal, in one line: give every graph node a real, source-verified `context` sentence explaining what
+it actually does — never a copy of its `description`, never a guess from its name.**
 
-`context` must add value `description` doesn't already give:
-- What the code **actually does**, based on reading its body — not a guess from the name.
+For each node where `context` is empty or missing: open its real source at `filePath`/`fileLine`, read
+it, and write back what you learned. `context` must say something `description` doesn't already say:
+- What the code **actually does**, based on its body — not a guess from the name.
 - Non-obvious behavior, side effects, or edge cases visible in the implementation.
-- How it connects to what the graph already knows about it — pull the node's existing relationships
-  (`DEPENDS_ON`, `EXTENDS_MODEL`/`DEFINES_MODEL`, `HAS_FIELD`, `HAS_METHOD`, `USES_MODEL`,
-  `RENDERS_TEMPLATE`, `CALLS_METHOD`, `TARGETS_MODEL`, `INHERITS_VIEW`, `INCLUDES_BUNDLE`/
-  `INCLUDES_ASSET`) and weave them in instead of re-deriving them from scratch.
-- If the code is trivial or pure boilerplate (`return True`, a one-line `super()` passthrough), say
-  that plainly in one short sentence rather than inventing significance.
+- How it connects to relationships the graph already has on it (`DEPENDS_ON`, `EXTENDS_MODEL`,
+  `HAS_FIELD`, `HAS_METHOD`, `USES_MODEL`, `RENDERS_TEMPLATE`, `CALLS_METHOD`, `TARGETS_MODEL`,
+  `INHERITS_VIEW`, `INCLUDES_BUNDLE`/`INCLUDES_ASSET`) — weave those in, don't re-derive them.
+- If the code is trivial or boilerplate (`return True`, a bare `super()` call), say so in one short
+  sentence instead of inventing significance.
 
-For structural/non-code nodes (`Folder`, `Addon`, `AssetBundle`, `Asset`, plain `File`), there's no
-method body to analyze — `context` should instead be one short sentence on the node's role/purpose in
-the addon, derived from actually looking at its contents or manifest, not invented from the name
-alone.
+Structural nodes with no code body (`Folder`, `Addon`, `AssetBundle`, `Asset`, plain `File`) get one
+sentence on role/purpose instead, based on actually looking at contents/manifest — not the name alone.
 
-Keep it to 2–4 sentences. Do not hallucinate behavior that isn't in the code.
+Keep it to 2–8 sentences. Do not hallucinate behavior that isn't in the code.
 
-**Scale note (as of 2026-08-03):** ~104,551 nodes repo-wide currently have empty/missing `context`,
-across these labels (counts from a real query, not an estimate):
-
-| label | count | label | count |
-|---|---|---|---|
-| File | 40,719 | JSComponent | 1,166 |
-| ModelMethod | 15,441 | PythonModel | 1,030 |
-| ModelField | 12,817 | Function | 741 |
-| XMLRecord | 11,920 | Addon | 620 |
-| Folder | 6,720 | ControllerMethod+Route | 488 |
-| Asset | 6,114 | ControllerMethod | 249 |
-| XMLRecord+View | 3,401 | Controller | 155 |
-| QWebTemplate | 2,876 | AssetBundle | 94 |
-
-This is too large to finish in one sitting. Prefer working through one label at a time (see the query
-below) so a session's worth of work is a coherent, resumable slice — check with whoever's driving this
-before churning through the highest-volume, lowest-signal labels (`File`, `Folder`) if the goal is
-depth on code behavior rather than raw coverage.
+**Scale:** ~105,000 nodes repo-wide need `context` as of 2026-08-04 — most of it is `File`,
+`ModelMethod`, `ModelField`, and `XMLRecord`; everything else is smaller. This will never finish in
+one sitting, so it isn't meant to: work **one node at a time** (below), stop whenever, resume later —
+every unprocessed node is still sitting there waiting, nothing to track or resume from manually.
 
 ### How to talk to Neo4j — SEARCH and UPDATE only, nothing else
 
@@ -91,67 +73,53 @@ graph is a separate, empty, generic entity/observation store and has nothing to 
 architecture graph. `get_neo4j_schema` is unavailable here (this instance has no APOC plugin
 installed) — use `read_neo4j_cypher` for schema discovery too, if ever needed.
 
-**SEARCH — find nodes still missing context, one label at a time:**
+### The enforced loop — exactly one node at a time
+
+**Never pull more than one node into play at once.** No batches, no lookahead, no "grab 10 and work
+through the list." Repeat this four-step loop, in order, for one node per cycle:
+
+**Step 1 — SEARCH: get exactly one candidate.**
 
 Tool: `read_neo4j_cypher`
 ```json
 {
-  "query": "MATCH (n:ModelMethod) WHERE n.context IS NULL OR n.context = '' RETURN elementId(n) AS id, labels(n) AS labels, n LIMIT 10"
+  "query": "MATCH (n:ModelMethod) WHERE n.context IS NULL OR n.context = '' RETURN elementId(n) AS id, labels(n) AS labels, n LIMIT 1"
 }
 ```
 
 Swap the label (`ModelMethod`, `PythonModel`, `Controller`, `ControllerMethod`, `Function`,
 `QWebTemplate`, `XMLRecord`, `JSComponent`, `Addon`, `AssetBundle`, `Asset`, `Folder`, `File`,
-`ModelField`) to choose which slice to work through. Drop the label entirely
-(`MATCH (n) WHERE ...`) only if you deliberately want a mixed batch across all label types.
+`ModelField`) to choose which slice to work through; drop it (`MATCH (n) WHERE ...`) only if you
+deliberately want to move through all label types mixed together.
 
-You do **not** need `SKIP`/pagination bookkeeping: once a node's `context` is set (via the UPDATE step
-below), it stops matching `context IS NULL OR context = ''`, so simply re-running the exact same query
-after each processed batch naturally returns the next 10 unprocessed nodes. Re-running with the same
-`LIMIT 10` and no offset is correct and expected.
+No `SKIP`/pagination bookkeeping needed: once a node's `context` is set in Step 3, it stops matching
+`context IS NULL OR context = ''`, so re-running this exact query always returns the next untouched
+node. The `id` it returns (an `elementId(n)` string, e.g. `"4:e179a577-119d-49cc-9910-746aa300882b:0"`)
+is only valid for the current session — always take it fresh from this call, never reuse one from an
+earlier session or from this document.
 
-Each returned row's `id` (an `elementId(n)` string, e.g. `"4:e179a577-119d-49cc-9910-746aa300882b:0"`)
-is only valid for the current database session — always get it fresh from a `read_neo4j_cypher` call
-in this session, never reuse an `id` string left over from an earlier conversation or from this
-document.
+**Step 2 — READ: open the real source.**
 
-Use the returned `filePath` (and `fileLine` when present) property on `n` to go read the real source
-before writing `context`. For code-bearing labels (`ModelMethod`, `Function`, `ControllerMethod`,
-`PythonModel`, `Controller`) that's a Python file; for `QWebTemplate`/`XMLRecord` it's XML; for
-`JSComponent` it's JS/OWL.
+Use the row's `filePath` (and `fileLine` when present) to read the actual file. Python for
+`ModelMethod`/`Function`/`ControllerMethod`/`PythonModel`/`Controller`; XML for
+`QWebTemplate`/`XMLRecord`; JS/OWL for `JSComponent`. Do not write `context` from the node's name or
+`description` alone — the point of this step is to have actually looked.
 
-**UPDATE — batch-set `context` on those same nodes by `elementId`:**
+**Step 3 — WRITE: set `context` on that one node, nothing else.**
 
 Tool: `write_neo4j_cypher`
 ```json
 {
-  "query": "UNWIND $rows AS row MATCH (n) WHERE elementId(n) = row.id SET n.context = row.context",
+  "query": "MATCH (n) WHERE elementId(n) = $id SET n.context = $context",
   "params": {
-    "rows": [
-      {
-        "id": "4:e179a577-119d-49cc-9910-746aa300882b:0",
-        "context": "Confirms the order, generates a procurement group + stock pickings via _action_launch_stock_rule, and posts the analytic entries; the docstring already says 'Confirm the given quotation(s)' so this adds the side effects it doesn't mention."
-      }
-    ]
+    "id": "4:e179a577-119d-49cc-9910-746aa300882b:0",
+    "context": "Confirms the order, generates a procurement group + stock pickings via _action_launch_stock_rule, and posts the analytic entries; the docstring already says 'Confirm the given quotation(s)' so this adds the side effects it doesn't mention."
   }
 }
 ```
+- `id` must be the exact value Step 1 returned for *this* node — never invented, never reused.
+- This exact shape only — no other clause, no other property, no `DELETE`/`REMOVE`/`CREATE`/`MERGE`
+  (see the DO NOT section above).
 
-Rules for the update call:
-- `id` values must come verbatim from `elementId(n)` returned by the search step in this same session
-  — never invent one.
-- `params.rows` can cover the whole batch of up to 10 nodes in one call — no need to call
-  `write_neo4j_cypher` once per node.
-- The query must only ever be this `SET n.context = row.context` shape (see the DO NOT section above)
-  — no other clauses, no other properties, no `DELETE`/`REMOVE`/`CREATE`/`MERGE`.
-
-### Batch size — 10 rows per pass, then repeat
-
-**Rule: never pull more than 10 candidate nodes into a single working batch.** Call
-`read_neo4j_cypher` with `LIMIT 10` (optionally filtered to one label, see above), fully process that
-batch — read each node's real source, write one `context` string per node — then send all 10 in a
-single `write_neo4j_cypher` call. Only then re-run the same `read_neo4j_cypher` query for the next 10
-(it will naturally skip everything already processed, since those nodes no longer match
-`context IS NULL OR context = ''`). Do not try to write context for more than 10 nodes before calling
-`write_neo4j_cypher`, and do not batch multiple `write_neo4j_cypher` calls' worth of reasoning before
-sending the first one.
+**Step 4 — REPEAT.** Go back to Step 1. Do not queue up reasoning for a second node before this one's
+Step 3 has actually been sent — one full loop, then the next.
