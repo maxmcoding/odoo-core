@@ -126,7 +126,7 @@ and write all of their `context` values back in a **single** batched query. Neve
 Tool: `read_neo4j_cypher`
 ```json
 {
-  "query": "MATCH (n) WHERE (n.context IS NULL OR n.context = '') AND n.filePath IS NOT NULL WITH n.filePath AS filePath LIMIT 1 MATCH (m) WHERE m.filePath = filePath AND (m.context IS NULL OR m.context = '') RETURN elementId(m) AS id, labels(m) AS labels, m LIMIT 10"
+  "query": "MATCH (n) WHERE  n.filePath IS NOT NULL RETURN elementId(n) AS id, labels(n), n.context, n.description LIMIT 10"
 }
 ```
 
