@@ -4,8 +4,12 @@ from base64 import b64encode
 from collections import defaultdict
 from datetime import datetime
 import logging
+import unicodedata
 from lxml import etree
+import string
 import uuid
+
+from stdnum.it import codicefiscale, iva
 
 from odoo import _, api, Command, fields, models, modules
 from odoo.addons.base.models.ir_qweb_fields import Markup, nl2br, nl2br_enclose
@@ -69,6 +73,7 @@ class AccountMove(models.Model):
             ('accepted_by_pa_partner_after_expiry', 'SdI Accepted, PA Partner Expired Terms'),
         ],
         copy=False, tracking=True,
+        inverse="_inverse_l10n_it_edi_state",
         help="This state is updated by default, but you can force the value. ",
     )
     l10n_it_edi_header = fields.Html(
@@ -173,7 +178,7 @@ class AccountMove(models.Model):
         # EXTENDS 'account'
         super()._compute_show_reset_to_draft_button()
         for move in self:
-            move.show_reset_to_draft_button = not move.l10n_it_edi_transaction and move.show_reset_to_draft_button
+            move.show_reset_to_draft_button = not (move.is_sale_document() and move.l10n_it_edi_transaction) and move.show_reset_to_draft_button
 
     def _get_edi_decoder(self, file_data, new=False):
         # EXTENDS 'account'
@@ -185,6 +190,11 @@ class AccountMove(models.Model):
         # EXTENDS 'account'
         self.with_context(skip_is_manually_modified=True).write({'l10n_it_edi_header': False})
         return super()._post(soft)
+
+    def _inverse_l10n_it_edi_state(self):
+        for move in self:
+            if move.is_move_sent and move.l10n_it_edi_state in ('rejected', 'rejected_by_pa_partner'):
+                move.is_move_sent = False
 
     def _extend_with_attachments(self, attachments, new=False):
         result = False
@@ -204,6 +214,10 @@ class AccountMove(models.Model):
         fields_list = super()._get_fields_to_detach()
         fields_list.append('l10n_it_edi_attachment_file')
         return fields_list
+
+    def _should_detach_attachments(self):
+        # EXTENDS account
+        return self.l10n_it_edi_is_self_invoice or super()._should_detach_attachments()
 
     # -------------------------------------------------------------------------
     # Business actions
@@ -725,19 +739,54 @@ class AccountMove(models.Model):
             requiring the address and other information about the buyer.
             The maximum threshold is 400 Euro, except for the forfettario tax regime (RF19), which can
             issue simplified invoices without the amount limit.
+
+            Deprecated since 18.0: use `not _l10n_it_edi_is_simplified_checks`.
+            It will be removed in ``20.0``.
         """
         self.ensure_one()
-        template_reference = self.env.ref('l10n_it_edi.account_invoice_it_simplified_FatturaPA_export', raise_if_not_found=False)
-        buyer = self.commercial_partner_id
-        checks = ['partner_address_missing', 'partner_vat_codice_fiscale_missing']
-        return bool(
-            template_reference
-            and not self.l10n_it_edi_is_self_invoice
-            and list(buyer._l10n_it_edi_export_check(checks).keys()) == ['l10n_it_edi_partner_address_missing']
-            and (not buyer.country_id or buyer.country_id.code == 'IT')
-            and (buyer.l10n_it_codice_fiscale or (buyer.vat and (buyer.vat[:2].upper() == 'IT' or buyer.vat[:2].isdecimal())))
-            and (self.company_id.l10n_it_tax_system == 'RF19' or self.amount_total <= 400)
-        )
+        return not self._l10n_it_edi_is_simplified_checks()
+
+    def _l10n_it_edi_is_simplified_checks(self):
+        """ Warnings can be ignored by setting `l10n_it_document_type == 'TD07'`
+            in the optional `l10n_it_edi_ndd` module
+        """
+        errors = {}
+        build_error = self._l10n_it_edi_build_move_error
+
+        if wrong_partner_moves := self.filtered(lambda move:
+            not move.commercial_partner_id._l10n_it_edi_is_italian()
+            or move.commercial_partner_id._l10n_it_edi_is_public_administration()
+        ):
+            errors['l10n_it_edi_move_simplified_partner'] = build_error(self.env._(
+                "Simplified Invoices (TD07) can only be used with domestic partners"
+                " that do not belong to the Public Administration."
+                " Please issue an ordinary invoice instead."),
+                records=wrong_partner_moves,
+            )
+        if wrong_amount_moves := self.filtered(lambda move:
+            move.company_id.l10n_it_tax_system != 'RF19' and move.amount_total > 400
+        ):
+            errors['l10n_it_edi_move_simplified_amount'] = build_error(self.env._(
+                "Simplified Invoices (TD07) can only be issued for a total amount of up to 400€."
+                " Please issue an ordinary invoice instead."),
+                records=wrong_amount_moves,
+            )
+        if reverse_charge_moves := self.filtered(lambda move: move.l10n_it_edi_is_self_invoice):
+            errors['l10n_it_edi_move_simplified_self_invoice'] = build_error(self.env._(
+                "Simplified Invoices (TD07) cannot be used for self-invoices."
+                " Please issue an ordinary invoice instead."),
+                records=reverse_charge_moves,
+            )
+        if incomplete_address_moves := self.filtered(lambda move:
+            'l10n_it_edi_partner_address_missing' not in move.commercial_partner_id._l10n_it_edi_export_check()
+        ):
+            errors['l10n_it_edi_move_simplified_address_complete'] = build_error(self.env._(
+                "Simplified Invoices (TD07) are generally preferred when partner address"
+                " is incomplete, so please issue an ordinary invoice instead."),
+                records=incomplete_address_moves,
+                level='info',
+            )
+        return errors
 
     def _l10n_it_edi_is_professional_fees(self):
         """
@@ -984,7 +1033,7 @@ class AccountMove(models.Model):
                 invoice_data['key'],
                 proxy_user,
             ):
-
+                move.l10n_it_edi_transaction = id_transaction
                 if not modules.module.current_test:
                     self.env.cr.commit()
                 moves |= move
@@ -1026,7 +1075,7 @@ class AccountMove(models.Model):
             return False
 
         # Create the attachment, an empty move, then attach the two and commit
-        move = self.with_company(proxy_user.company_id).create({})
+        move = self.with_company(proxy_user.company_id).create({'move_type': 'in_invoice'})
         attachment = Attachment.create({
             'name': filename,
             'raw': decrypted_content,
@@ -1050,6 +1099,58 @@ class AccountMove(models.Model):
                     domain + self.env['res.partner']._check_company_domain(company), limit=1)):
                 return partner
         return self.env['res.partner']
+
+    def _l10n_it_edi_import_partner(self, company_id, name, phone, email, vat, country_code=False, street=False, street2=False, city=False, zip_code=False, **_kwargs):
+        """Retrieve the partner, create one when no match is found.
+
+        Local copy of account.edi.common._import_partner so l10n_it_edi does not
+        need to depend on account_edi_ubl_cii for the FatturaPA import flow.
+        """
+        logs = []
+        partner = self.env['res.partner'] \
+            .with_company(company_id) \
+            ._retrieve_partner(name=name, phone=phone, email=email, vat=vat)
+        if not partner and name and vat:
+            partner_vals = {
+                'name': name, 'email': email, 'phone': phone,
+                'street': street, 'street2': street2,
+                'zip': zip_code, 'city': city, 'is_company': True,
+            }
+            if country_code == 'GB':
+                country_code = 'UK'
+            country = self.env.ref(f'base.{country_code.lower()}', raise_if_not_found=False) if country_code else False
+            if country:
+                partner_vals['country_id'] = country.id
+            partner = self.env['res.partner'].create(partner_vals)
+            if vat and self.env['res.partner']._run_vat_test(vat, country, partner.is_company):
+                partner.vat = vat
+            logs.append(_("Could not retrieve a partner corresponding to '%s'. A new partner was created.", name))
+        return partner, logs
+
+    def _l10n_it_edi_import_partner_bank(self, invoice, bank_details):
+        """Search or create the partner bank account for the imported invoice.
+
+        Local copy of account.edi.common._import_partner_bank so l10n_it_edi does
+        not need to depend on account_edi_ubl_cii for the FatturaPA import flow.
+        """
+        if invoice.move_type in ('out_refund', 'in_invoice'):
+            partner = invoice.partner_id
+        elif invoice.move_type in ('out_invoice', 'in_refund'):
+            partner = invoice.company_id.partner_id
+        else:
+            return
+        banks = self.env['res.partner.bank']
+        for account_number in bank_details:
+            try:
+                banks += self.env['res.partner.bank']._find_or_create_bank_account(
+                    account_number=account_number,
+                    partner=partner,
+                    company=invoice.company_id,
+                )
+            except UserError as e:
+                invoice._message_log(body=_("The bank account couldn't be fetched: %s", str(e)))
+        if banks:
+            invoice.partner_bank_id = banks[0]
 
     def _l10n_it_edi_search_tax_for_import(self, company, percentage, extra_domain=None, l10n_it_exempt_reason=None):
         """ Returns the VAT, Withholding or Pension Fund tax that suits the conditions given
@@ -1084,6 +1185,96 @@ class AccountMove(models.Model):
             'simplified': self.env['account.move']._l10n_it_edi_is_simplified_document_type(document_type),
             'type_tax_use_domain': [('type_tax_use', '=', 'purchase' if incoming else 'sale')],
         }, []
+
+    def _l10n_it_edi_get_payment_info(self, tree):
+        """ Map XML payment data from node //DatiPagamento/DettaglioPagamento to dict """
+        payment_info = []
+        amount_total = 0.0
+        for node in tree.xpath('//DatiPagamento/DettaglioPagamento'):
+            amount = get_float(node, './ImportoPagamento')
+            payment_info.append({
+                'acc_number': get_text(node, './IBAN') or False,
+                'payment_mode': get_text(node, './ModalitaPagamento') or False,
+                'invoice_date_due': get_date(node, './DataScadenzaPagamento') or False,
+                'amount': amount,
+                'payment_code': get_text(node, './CodicePagamento') or False,
+            })
+            amount_total += amount
+        return {
+            'info': payment_info,
+            'amount_total': amount_total,
+        }
+
+    def _l10n_it_edi_get_partner_info(self, node, is_simplified=False):
+        """ Map the XML partner data to dict from one of the nodes:
+            - CedentePrestatore (seller)
+            - CessionarioCommittente (buyer)
+
+            The Codice Fiscale can have two forms:
+                - personal: GTTPLA84T04F205G
+                - equal to the company VAT: 01234567890
+
+            A company may be part of a VAT group:
+                - the VAT is shared and the Codice Fiscale is the old VAT number before grouping
+                - Both VAT and Codice Fiscale must be specified
+
+            So in case:
+                - Partner is domestic (country == IT)
+                - VAT is not specified
+                - the Codice Fiscale looks like 01234567890
+            we also set it as VAT number
+        """
+        # Simplified invoice has a different structure
+        personal_data_node = node.xpath('.//Anagrafica')[0] if not is_simplified else node
+
+        # name
+        company_name = get_text(personal_data_node, './Denominazione')
+        first_name = get_text(personal_data_node, './Nome')
+        last_name = get_text(personal_data_node, './Cognome')
+        name = company_name or f"{last_name} {first_name}"
+
+        # country_code, VAT and codice_fiscale
+        codice_fiscale = get_text(node, './/CodiceFiscale') or False
+        vat_no_prefix = get_text(node, './/IdFiscaleIVA/IdCodice') or False
+        is_company = True
+        if vat_no_prefix:
+            # Take country from VAT node
+            country_code = get_text(node, './/IdFiscaleIVA/IdPaese').upper()
+        else:
+            # Take country from address, that's a mandatory field
+            country_code = get_text(node, './Sede/Nazione').upper()
+            # Italian Codice Fiscale may be used as VAT number if it is not a personal one
+            if country_code == 'IT':
+                if codicefiscale._code_re.match(codice_fiscale):
+                    is_company = False
+                else:
+                    if iva.is_valid(codice_fiscale):
+                        vat_no_prefix = codice_fiscale
+
+        # address
+        postal_address = {'country_code': country_code}
+        if not is_simplified:
+            # Simplified invoice has no address tag
+            address_node = node.xpath('./Sede')[0]
+            address = get_text(address_node, './Indirizzo')
+            address_no = get_text(address_node, './NumeroCivico')
+            full_address = f"{address} {address_no}".rstrip()
+            postal_address = {
+                **postal_address,
+                'street': string.capwords(full_address) or False,
+                'city': string.capwords(get_text(address_node, './Comune')) or False,
+                'zip_code': get_text(address_node, './CAP') or False,
+            }
+
+        return {
+            **postal_address,
+            'vat': f"{country_code}{vat_no_prefix}" if vat_no_prefix else '/',
+            'codice_fiscale': codice_fiscale,
+            'is_company': is_company,
+            'name': name,
+            'phone': get_text(node, './Contatti/Telefono') or False,
+            'email': get_text(node, './Contatti/Email') or False,
+        }
 
     def _l10n_it_edi_import_invoice(self, invoice, data, is_new):
         """ Decodes a l10n_it_edi move into an Odoo move.
@@ -1148,25 +1339,29 @@ class AccountMove(models.Model):
             # Collect extra info from the XML that may be used by submodules to further put information on the invoice lines
             extra_info, message_to_log = self._l10n_it_edi_get_extra_info(company, document_type, tree, incoming=incoming)
 
-            # Partner
+            # Partner -------------------------------------------
+            Partner = self.env['res.partner'].with_company(company)
             partner_info = buyer_seller_info[partner_role]
-            vat = get_text(tree, partner_info['vat_xpath'])
-            codice_fiscale = get_text(tree, partner_info['codice_fiscale_xpath'])
-            email = get_text(tree, '//DatiTrasmissione//Email') if partner_info['role'] == 'seller' else ''
-            if partner := self._l10n_it_edi_search_partner(company, vat, codice_fiscale, email):
-                self.partner_id = partner
-            else:
-                message = Markup("<br/>").join((
-                    _("Partner not found, useful informations from XML file:"),
-                    self._compose_info_message(tree, partner_info['section_xpath'])
-                ))
-                message_to_log.append(message)
+            partner_node = tree.xpath(partner_info['section_xpath'])[0]
+            partner_info = self._l10n_it_edi_get_partner_info(partner_node, is_simplified=extra_info['simplified'])
+            partner_cf = partner_info.get('codice_fiscale')
 
-            # Payment code
-            if payment_code := get_text(tree, './/DettaglioPagamento[1]/CodicePagamento'):
-                self.payment_reference = payment_code
+            # Italy has a TIN (Codice Fiscale) that is more unique (key) than VAT
+            self.partner_id = partner_cf and Partner.search([
+                *Partner._check_company_domain(company),
+                ('l10n_it_codice_fiscale', '=like', partner_cf),
+            ], limit=1)
 
-            # Document Number
+            # If not found by Codice Fiscale, search for VAT or create, just like all other EDIs do
+            if not self.partner_id:
+                import_partner_args = {k: v for k, v in partner_info.items() if k not in ('codice_fiscale', 'is_company')}
+                self.partner_id, logs = self._l10n_it_edi_import_partner(company_id=company, **import_partner_args)
+                if logs:
+                    self.partner_id.is_company = partner_info.get('is_company')
+                    self.partner_id.l10n_it_codice_fiscale = partner_info.get('codice_fiscale', False)
+                    message_to_log.extend(logs)
+
+            # Document Number -----------------------------------
             if number := get_text(tree, './/DatiGeneraliDocumento//Numero'):
                 self.ref = number
 
@@ -1206,58 +1401,26 @@ class AccountMove(models.Model):
                 ))
                 message_to_log.append(message)
 
-            # Due date. <2.4.2.5>
-            if due_date := get_date(tree, './/DatiPagamento/DettaglioPagamento/DataScadenzaPagamento'):
-                self.invoice_date_due = fields.Date.to_string(due_date)
-            else:
-                message_to_log.append(_("Payment due date invalid in XML file: %s", str(due_date)))
-
             # Information related to the purchase order <2.1.2>
             if (po_refs := get_text(tree, '//DatiGenerali/DatiOrdineAcquisto/IdDocumento', many=True)):
                 self.invoice_origin = ", ".join(po_refs)
 
-            # Total amount. <2.4.2.6>
-            if amount_total := sum(float(x) for x in get_text(tree, './/ImportoPagamento', many=True) if x):
-                message_to_log.append(_("Total amount from the XML File: %s", amount_total))
+            # Payment / Bank --------------------------------------
+            payments_info = self._l10n_it_edi_get_payment_info(tree)
+            if payments_info['info']:
+                message_to_log.append(_("Total amount from the XML File: %s", payments_info['amount_total']))
+                payment_due_dates = []
+                for payment_info in payments_info['info']:
+                    # Search / Create the bank account only on incoming docs
+                    if self.move_type not in ('out_invoice', 'in_refund') and (iban := payment_info.get('acc_number')):
+                        self.with_company(company)._l10n_it_edi_import_partner_bank(self, [iban])
+                    # Set payment data on the bill
+                    self.payment_reference = self.payment_reference or payment_info.get('payment_code', False)
+                    payment_due_dates.append(payment_info.get('invoice_date_due'))
+                if payment_due_dates := [x for x in payment_due_dates if x]:
+                    self.invoice_date_due = max(payment_due_dates)
 
-            # Bank account. <2.4.2.13>
-            if self.move_type not in ('out_invoice', 'in_refund'):
-                if acc_number := get_text(tree, './/DatiPagamento/DettaglioPagamento/IBAN'):
-                    if self.partner_id and self.partner_id.commercial_partner_id:
-                        bank = self.env['res.partner.bank'].search([
-                            ('acc_number', '=', acc_number),
-                            ('partner_id', '=', self.partner_id.commercial_partner_id.id),
-                            ('company_id', 'in', [self.company_id.id, False])
-                        ], order='company_id', limit=1)
-                    else:
-                        bank = self.env['res.partner.bank'].search([
-                            ('acc_number', '=', acc_number),
-                            ('company_id', 'in', [self.company_id.id, False])
-                        ], order='company_id', limit=1)
-                    if bank:
-                        self.partner_bank_id = bank
-                    else:
-                        message = Markup("<br/>").join((
-                            _("Bank account not found, useful informations from XML file:"),
-                            self._compose_info_message(tree, [
-                                './/DatiPagamento//Beneficiario',
-                                './/DatiPagamento//IstitutoFinanziario',
-                                './/DatiPagamento//IBAN',
-                                './/DatiPagamento//ABI',
-                                './/DatiPagamento//CAB',
-                                './/DatiPagamento//BIC',
-                                './/DatiPagamento//ModalitaPagamento'
-                            ])
-                        ))
-                        message_to_log.append(message)
-            elif elements := tree.xpath('.//DatiPagamento/DettaglioPagamento'):
-                message = Markup("<br/>").join((
-                    _("Bank account not found, useful informations from XML file:"),
-                    self._compose_info_message(tree, './/DatiPagamento')
-                ))
-                message_to_log.append(message)
-
-            # Invoice lines. <2.2.1>
+            # Invoice lines ---------------------------------------
             tag_name = './/DettaglioLinee' if not extra_info['simplified'] else './/DatiBeniServizi'
             for element in tree.xpath(tag_name):
                 move_line = self.invoice_line_ids.create({
@@ -1368,7 +1531,10 @@ class AccountMove(models.Model):
         elif amount := get_float(element, './/Importo'):
             percentage = get_float(element, './/Aliquota')
             if not percentage and (tax_amount := get_float(element, './/Imposta')):
-                percentage = round(tax_amount / (amount - tax_amount) * 100)
+                if amount == tax_amount:
+                    percentage = 0.0
+                else:
+                    percentage = round(tax_amount / (amount - tax_amount) * 100)
             move_line.price_unit = amount / (1 + percentage / 100)
 
         move_line.tax_ids = [Command.clear()]
@@ -1380,7 +1546,7 @@ class AccountMove(models.Model):
                 tax_scope = 'service' if move_line.product_id.type == 'service' else 'consu'
                 extra_domain += [('tax_scope', 'in', [tax_scope, False])]
             if tax := self._l10n_it_edi_search_tax_for_import(company, percentage, extra_domain, l10n_it_exempt_reason=l10n_it_exempt_reason):
-                move_line.tax_ids |= tax
+                move_line.tax_ids |= self.fiscal_position_id.map_tax(tax)
             else:
                 message = Markup("<br/>").join((
                     _("Tax not found for line with description '%s'", move_line.name),
@@ -1463,17 +1629,25 @@ class AccountMove(models.Model):
             **self._l10n_it_edi_export_taxes_check(),
         }
 
-    def _l10n_it_edi_base_export_check(self):
-        def build_error(message, records):
-            return {
-                'message': message,
-                **({
-                    'action_text': _("View invoice(s)"),
-                    'action': records._get_records_action(name=_("Invoice(s) to check")),
-                } if len(self) > 1 else {})
-            }
+    def _l10n_it_edi_build_move_error(self, message, records=None, level='warning'):
+        return {
+            'message': message,
+            'level': level,
+            **({
+                'action_text': _("View invoices"),
+                'action': (records or self)._get_records_action(name=_("Invoices to check")),
+            } if len(self) > 1 else {}),
+        }
 
+    def _l10n_it_edi_base_export_check(self):
         errors = {}
+
+        build_error = self._l10n_it_edi_build_move_error
+
+        if pdf_moves := self.filtered(lambda move: move.invoice_pdf_report_id and not move.l10n_it_edi_attachment_id):
+            message = _("Please delete the PDF attachment before sending to the SDI. Odoo will regenerate the PDF, making sure everything is consistent with the XML.")
+            errors['l10n_it_edi_pdf_already_generated'] = build_error(message=message, records=pdf_moves)
+
         if moves := self.filtered(lambda move: move.l10n_it_edi_is_self_invoice and move._l10n_it_edi_services_or_goods() == 'both'):
             errors['l10n_it_edi_move_rc_mixed_product_types'] = build_error(
                 message=_("Cannot apply Reverse Charge to bills which contains both services and goods."),
@@ -1495,11 +1669,18 @@ class AccountMove(models.Model):
     def _l10n_it_edi_export_taxes_check(self):
         return self._l10n_it_edi_check_lines_for_tax_kind('vat', _('VAT'))
 
+    def _l10n_it_edi_get_max_limit_per_tax(self, kind_code):
+        return 1
+
     def _l10n_it_edi_check_lines_for_tax_kind(self, kind_code, kind_desc, min_len=1):
         assert min_len in (0, 1)
+
+        # TODO: pass this as a parameter of the function in master
+        max_len = self._l10n_it_edi_get_max_limit_per_tax(kind_code)
+
         if self.invoice_line_ids.filtered(lambda line:
             line.display_type == 'product'
-            and not (min_len <= len(line.tax_ids._l10n_it_filter_kind(kind_code)) <= 1)
+            and not (min_len <= len(line.tax_ids._l10n_it_filter_kind(kind_code)) <= max_len)
         ):
             return {
                 f'l10n_it_edi_move_{kind_code}_tax_per_line': {
@@ -1572,6 +1753,13 @@ class AccountMove(models.Model):
             sep = ' ' if street and street2 else ''
             return format_alphanumeric(f"{street}{sep}{street2}", maxlen)
 
+        def format_uom(uom, maxlen=None):
+            if not uom:
+                return False
+
+            uom = unicodedata.normalize('NFKC', uom)
+            return format_alphanumeric(uom, maxlen)
+
         return {
             'format_date': format_date,
             'format_float': format_float,
@@ -1581,6 +1769,7 @@ class AccountMove(models.Model):
             'format_phone': format_phone,
             'format_alphanumeric': format_alphanumeric,
             'format_address': format_address,
+            'format_uom': format_uom,
         }
 
     def _l10n_it_edi_render_xml(self, pdf_values=None):

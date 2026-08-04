@@ -1053,9 +1053,9 @@ class Project(models.Model):
             elif project.privacy_visibility == 'portal':
                 portal_users = project.message_partner_ids.user_ids.filtered('share')
                 project.message_unsubscribe(partner_ids=portal_users.partner_id.ids)
-                project.tasks._unsubscribe_portal_users()
+                project.with_context(active_test=False).tasks._unsubscribe_portal_users()
                 # revoke access_token since the project and its tasks are no longer accessible for portal/public users
-                project.tasks.access_token = ''
+                project.with_context(active_test=False).tasks.access_token = ''
                 project.access_token = ''
 
     # ---------------------------------------------------
@@ -1115,7 +1115,7 @@ class Project(models.Model):
         if request_list and "followers" in request_list:
             store.add(
                 self,
-                {"collaborator_ids": Store.many(self.collaborator_ids.partner_id, only_id=True)},
+                {"collaborator_ids": Store.many(self.sudo().collaborator_ids.partner_id, only_id=True)},
                 as_thread=True,
             )
 

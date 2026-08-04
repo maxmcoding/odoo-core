@@ -4680,11 +4680,24 @@ class SnippetsMenu extends Component {
             this._openAddSnippetDialog(ev.currentTarget.dataset.snippetGroup, ev.currentTarget);
         } else {
             const $els = this.getEditableArea().find('.oe_structure.oe_empty').addBack('.oe_structure.oe_empty');
-            for (const el of $els) {
-                if (!el.children.length) {
-                    $(el).odooBounce('o_we_snippet_area_animation');
-                }
+            const snippetEls = [...$els].filter((el) => !el.children.length);
+            if (!snippetEls.length) {
+                return;
             }
+
+            this.options.wysiwyg.odooEditor.observerUnactive();
+            for (const el of snippetEls) {
+                el.classList.add("o_catch_attention", "o_we_snippet_area_animation");
+            }
+            this.options.wysiwyg.odooEditor.observerActive();
+
+            setTimeout(() => {
+                this.options.wysiwyg.odooEditor.observerUnactive();
+                for (const el of snippetEls) {
+                    el.classList.remove("o_catch_attention", "o_we_snippet_area_animation");
+                }
+                this.options.wysiwyg.odooEditor.observerActive();
+            }, 400);
         }
     }
     /**
@@ -5147,9 +5160,13 @@ class SnippetsMenu extends Component {
                 dropZoneEls.forEach(dropZoneEl => dropZoneEl.classList.add("invisible"));
                 // Do not allow drop by click in another snippet
                 // (e.g., "table of content") unless it is a "s_popup".
-                dropZoneEls = [...dropZoneEls].filter(dropzoneEl => {
+                // If no dropzone is left after the filter, then allow the drop
+                // by click inside [data-snippet] elements
+                dropZoneEls = [...dropZoneEls];
+                const filteredDropzoneEls = dropZoneEls.filter(dropzoneEl => {
                     return !dropzoneEl.closest("[data-snippet]:not(.s_popup), #website_cookies_bar");
                 });
+                dropZoneEls = filteredDropzoneEls.length ? filteredDropzoneEls : dropZoneEls;
                 if (dropZoneEls?.length) {
                     hookEl = this._getClosestDropzone(dropZoneEls)
                         || dropZoneEls[dropZoneEls.length - 1];

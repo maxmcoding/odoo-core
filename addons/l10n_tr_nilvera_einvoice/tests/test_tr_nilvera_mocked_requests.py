@@ -1,4 +1,5 @@
 import re
+from base64 import b64encode
 from functools import wraps
 from io import BytesIO
 from unittest.mock import MagicMock, call, patch
@@ -99,7 +100,10 @@ def mock_requests_request(method, url, *args, **kwargs):
                 response = xml.read()
         elif '/pdf' in url:
             with file_open('l10n_tr_nilvera_einvoice/tests/test_files/fetching/invoice.pdf', 'rb') as pdf:
-                response = pdf.read()
+                # Nilvera's /pdf endpoint returns the PDF base64-encoded inside a JSON
+                # string body. NilveraClient.request() calls response.json() by default,
+                # so the caller receives a base64 str, not raw bytes.
+                response = b64encode(pdf.read()).decode()
         else:
             response.get.return_value = [
                 {'UUID': 'invoice_uuid'},
@@ -133,6 +137,12 @@ class TestTRNilveraMockedRequests(TestUBLTRCommon):
         cls.env.context = {**cls.env.context, 'l10n_tr_nilvera_use_mock': True}
         cls.einvoice_partner.flush_recordset()
         cls.earchive_partner.flush_recordset()
+
+    def test_amount_in_words_rounds_subunit(self):
+        note = self.env['account.edi.xml.ubl.tr']._l10n_tr_get_amount_integer_partn_text_note(
+            3989.33, self.env.ref('base.TRY'),
+        )
+        self.assertEqual(note, 'YALNIZ : ÜÇBINDOKUZYÜZSEKSENDOKUZ TRY OTUZÜÇ KURUS')
 
     @patch_nilvera_request
     def test_which_service_to_call(self):
@@ -246,4 +256,8 @@ class TestTRNilveraMockedRequests(TestUBLTRCommon):
             self.assertListEqual(
                 [invoice.attachment_ids.mimetype, invoice.ubl_cii_xml_id.mimetype],
                 ['application/pdf', 'application/xml']
+            )
+            self.assertTrue(
+                invoice.attachment_ids.raw.startswith(b'%PDF-'),
+                "PDF attachment must contain decoded PDF bytes, not base64 text",
             )

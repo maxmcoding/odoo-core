@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-16 16:38+0000\n"
-"PO-Revision-Date: 2026-03-04 17:23+0000\n"
-"Last-Translator: Alina Lisnenko <alina.lisnenko@erp.co.ua>\n"
+"PO-Revision-Date: 2026-07-24 05:09+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Ukrainian <https://translate.odoo.com/projects/odoo-18/base/"
 "uk/>\n"
 "Language: uk\n"
@@ -25,7 +25,7 @@ msgstr ""
 "? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > "
 "14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % "
 "100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
-"X-Generator: Weblate 5.16.1\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_at_reports
@@ -22059,7 +22059,7 @@ msgstr "Очистіть це"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_website_sale_collect
 msgid "Click & Collect"
-msgstr ""
+msgstr "Клік і забрати"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_logging__type__client
@@ -22115,7 +22115,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_cloud_storage_migration
 msgid "Cloud Storage Migration"
-msgstr ""
+msgstr "Міграція хмарного сховища"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_website_cf_turnstile
@@ -22140,7 +22140,7 @@ msgstr "CodaBox"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_be_codaclean
 msgid "Codaclean"
-msgstr ""
+msgstr "Codaclean"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_base_import_language
@@ -25515,7 +25515,7 @@ msgstr "Співробітники на Зустрічах"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_employment_hero
 msgid "Employment Hero Payroll"
-msgstr ""
+msgstr "Employment Hero Зарплата"
 
 #. module: base
 #. odoo-python
@@ -27884,7 +27884,7 @@ msgstr "GPL-3 або пізніша версія"
 #. module: base
 #: model:res.country,vat_label:base.nz
 msgid "GST"
-msgstr ""
+msgstr "GST"
 
 #. module: base
 #: model:res.country,vat_label:base.sg
@@ -28164,7 +28164,7 @@ msgstr "Гібралтар"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.form_res_users_key_description
 msgid "Give a duration for the key's validity"
-msgstr ""
+msgstr "Вкажіть термін дії ключа"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_rule__global
@@ -29036,7 +29036,7 @@ msgstr "Форми інтерв'ю рекрутингу кадрів"
 #. module: base
 #: model:res.currency,currency_unit_label:base.UAH
 msgid "Hryvnia"
-msgstr ""
+msgstr "Гривня"
 
 #. module: base
 #. odoo-python
@@ -30856,12 +30856,12 @@ msgstr "Італія - Бухгалтерські звіти"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_riba
 msgid "Italy - Bank Receipts (Ri.Ba.)"
-msgstr ""
+msgstr "Італія - банківські квитанції (Ri.Ba.)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_edi_doi
 msgid "Italy - Declaration of Intent"
-msgstr ""
+msgstr "Італія - Декларація про наміри"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_edi
@@ -30889,12 +30889,12 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_pos
 msgid "Italy - Point of Sale"
-msgstr ""
+msgstr "Італія - Точка продажу"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_edi_sale
 msgid "Italy - Sale E-invoicing"
-msgstr ""
+msgstr "Італія - Електронне виставлення рахунків для продажів"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_stock_ddt
@@ -33293,7 +33293,7 @@ msgstr "Користувачі Microsoft"
 #. module: base
 #: model:ir.module.module,summary:base.module_cloud_storage_migration
 msgid "Migrate local attachments to cloud storage"
-msgstr ""
+msgstr "Міграція локальних прикріплень до хмарного сховища"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.TND
@@ -37974,7 +37974,7 @@ msgstr "Інтеграція планування з вихідними"
 #: model:ir.model.fields,field_description:base.field_res_device__platform
 #: model:ir.model.fields,field_description:base.field_res_device_log__platform
 msgid "Platform"
-msgstr ""
+msgstr "Платформа"
 
 #. module: base
 #. odoo-python
@@ -40602,7 +40602,7 @@ msgstr "Статистика продажів у соцмережах"
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_br_sale_subscription
 msgid "Sale subscription modifications for Brazil"
-msgstr ""
+msgstr "Модифікації передплати продажу для Бразилії"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_sales
@@ -40788,7 +40788,7 @@ msgstr "Саудівська Аравія - Електронне виставл�
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_sa_edi_pos
 msgid "Saudi Arabia - E-invoicing (Simplified)"
-msgstr ""
+msgstr "Саудівська Аравія - Електронне виставлення рахунків (спрощене)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_sa_hr_payroll
@@ -43821,7 +43821,7 @@ msgstr ""
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.form_res_users_key_description
 msgid "The key will be deleted once this period has elapsed."
-msgstr ""
+msgstr "Ключ буде видалено після закінчення цього період."
 
 #. module: base
 #. odoo-python
@@ -45494,7 +45494,7 @@ msgstr "Тувалу"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_sms_twilio
 msgid "Twilio SMS"
-msgstr ""
+msgstr "Twilio SMS"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_auth_totp
@@ -45616,7 +45616,7 @@ msgstr "U - ДІЯЛЬНІСТЬ ЕКСТРА ТЕРИТОРІАЛЬНИХ ОР�
 #. module: base
 #: model:ir.module.category,name:base.module_category_accounting_localizations_uk
 msgid "UK"
-msgstr ""
+msgstr "Великобританія"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_uk_reports
@@ -46447,7 +46447,7 @@ msgstr "Рівні доступу користувачів до модулю Wha
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users__device_ids
 msgid "User devices"
-msgstr ""
+msgstr "Пристрої користувача"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users__log_ids

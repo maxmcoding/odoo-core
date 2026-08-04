@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-16 16:38+0000\n"
-"PO-Revision-Date: 2026-03-21 09:27+0000\n"
+"PO-Revision-Date: 2026-07-30 06:10+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Portuguese <https://translate.odoo.com/projects/odoo-18/base/"
 "pt/>\n"
@@ -37,7 +37,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : ((n != 0 && n % "
 "1000000 == 0) ? 1 : 2);\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_at_reports
@@ -13999,7 +13999,7 @@ msgstr "Agorot"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_agriculture_shop
 msgid "Agricultural Store"
-msgstr ""
+msgstr "Loja agrícola"
 
 #. module: base
 #: model:res.partner.industry,name:base.res_partner_industry_A
@@ -15450,7 +15450,7 @@ msgstr "Diferença de arquitetura"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_architects
 msgid "Architecture Firm"
-msgstr ""
+msgstr "Gabinete de arquitectura"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_bank_form
@@ -15565,7 +15565,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_art_craft
 msgid "Arts & Crafts Store"
-msgstr ""
+msgstr "Loja de artesanato"
 
 #. module: base
 #: model:res.country,name:base.aw
@@ -16204,7 +16204,7 @@ msgstr "Atrair visitantes para se inscreverem em listas de discussão"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_certification_organism
 msgid "Audit & Certification"
-msgstr ""
+msgstr "Auditoria e certificação"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.ISK
@@ -16447,7 +16447,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_automobile
 msgid "Automobile Spare Parts"
-msgstr ""
+msgstr "Peças de reposição para automóveis"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_server__available_model_ids
@@ -16809,7 +16809,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_bar_industry
 msgid "Bar & Pub"
-msgstr ""
+msgstr "Bar e pub"
 
 #. module: base
 #: model:res.country,name:base.bb
@@ -17216,7 +17216,7 @@ msgstr "Bermuda"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_beverage_distributor
 msgid "Beverage Distributor"
-msgstr ""
+msgstr "Distribuidor de bebidas"
 
 #. module: base
 #: model:res.country,name:base.bt
@@ -17236,7 +17236,7 @@ msgstr "Faturar no seu número de conta UPS"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_billboard_rental
 msgid "Billboard Rental"
-msgstr ""
+msgstr "Aluguer de painéis publicitários"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_act_url__binding_model_id
@@ -18588,7 +18588,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_cleaning_services
 msgid "Cleaning Services"
-msgstr ""
+msgstr "Serviços de limpeza"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__update_m2m_operation__clear
@@ -18634,7 +18634,7 @@ msgstr "Fechar"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_clothing_boutique
 msgid "Clothing Store"
-msgstr ""
+msgstr "Loja de roupa"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_cloud_storage
@@ -19450,7 +19450,7 @@ msgstr "Corporativo"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_corporate_gifts
 msgid "Corporate Gifts"
-msgstr ""
+msgstr "Brindes promocionais"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_theme_buzzy
@@ -20188,7 +20188,7 @@ msgstr "Campo Personalizado"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_custom_furniture
 msgid "Custom Furniture Production"
-msgstr ""
+msgstr "Produção de mobiliário por medida"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_model__state__manual
@@ -20331,7 +20331,7 @@ msgstr "Entrega rápida DHL"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_dhl
 msgid "DHL Express Shipping (Legacy)"
-msgstr ""
+msgstr "Envio por DHL Express (descontinuado)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_din5008
@@ -22246,7 +22246,7 @@ msgstr "Total de entradas"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_envia
 msgid "Envia Shipping"
-msgstr ""
+msgstr "Envio com a Envia"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_theme_environment
@@ -23425,7 +23425,7 @@ msgstr "Extraterritorial"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_eyewear_shop
 msgid "Eyewear Store"
-msgstr ""
+msgstr "Ótica"
 
 #. module: base
 #: model:res.partner.industry,full_name:base.res_partner_industry_F
@@ -23487,7 +23487,7 @@ msgstr "Ilhas Faroé"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_fast_food
 msgid "Fast Food"
-msgstr ""
+msgstr "Comida rápida"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_l10n_it_edi_website_sale
@@ -23521,7 +23521,7 @@ msgstr "Expedição Fedex"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_fedex
 msgid "Fedex Shipping (Legacy)"
-msgstr ""
+msgstr "Envio por Fedex (descontinuado)"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.CNH
@@ -24056,7 +24056,7 @@ msgstr "Comida"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_food_trucks
 msgid "Food Trucks"
-msgstr ""
+msgstr "Food trucks"
 
 #. module: base
 #: model:res.partner.industry,name:base.res_partner_industry_I
@@ -24192,7 +24192,7 @@ msgstr "Fórum em cursos"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_coal_petroleum
 msgid "Fossil Fuel Trading"
-msgstr ""
+msgstr "Comércio de combustíveis fósseis"
 
 #. module: base
 #. odoo-python
@@ -24381,7 +24381,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_furniture_store
 msgid "Furniture Store"
-msgstr ""
+msgstr "Loja de móveis"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_theme_loftspace
@@ -24857,7 +24857,7 @@ msgstr "Visualização em Grelha"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_fmcg_store
 msgid "Grocery Store"
-msgstr ""
+msgstr "Mercearia"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.PLN
@@ -25115,7 +25115,7 @@ msgstr "Rotas HTTP"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hair_salon
 msgid "Hair Salon"
-msgstr ""
+msgstr "Cabeleireiro"
 
 #. module: base
 #: model:res.country,name:base.ht
@@ -25150,7 +25150,7 @@ msgstr "Processe pedidos de refeições de seus funcionários"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_handyman
 msgid "Handyman Services"
-msgstr ""
+msgstr "Serviços de manutenção e reparações"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_1
@@ -25173,7 +25173,7 @@ msgstr "Proxy de Hardware"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hardware_shop
 msgid "Hardware Store"
-msgstr ""
+msgstr "Loja de ferragens"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_reset_view_arch_wizard__has_diff
@@ -25801,7 +25801,7 @@ msgstr "Código ISO"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_it_hardware
 msgid "IT Hardware & Support"
-msgstr ""
+msgstr "Hardware e suporte de TI"
 
 #. module: base
 #: model:res.partner.industry,name:base.res_partner_industry_J
@@ -28162,7 +28162,7 @@ msgstr "Executar Assistente de Configuração"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_industry_lawyer
 msgid "Law Firm"
-msgstr ""
+msgstr "Sociedade de advogados"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__layout_background
@@ -29492,7 +29492,7 @@ msgstr "Marketing"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_marketing_agency
 msgid "Marketing Agency"
-msgstr ""
+msgstr "Agência de marketing"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_marketing_marketing_automation
@@ -30945,7 +30945,7 @@ msgstr "Nenhum(a)"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_non_profit_organization
 msgid "Nonprofit Organization"
-msgstr ""
+msgstr "Organização sem fins lucrativos"
 
 #. module: base
 #: model:res.country,name:base.nf
@@ -31868,7 +31868,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_odoo_partner
 msgid "Odoo Partner"
-msgstr ""
+msgstr "Parceiro da Odoo"
 
 #. module: base
 #: model:ir.module.module,description:base.module_point_of_sale
@@ -32909,7 +32909,7 @@ msgstr "Ofertas Emprego Online"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_website_membership
 msgid "Online Members Directory"
-msgstr ""
+msgstr "Diretório de membros online"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_website_project
@@ -33501,7 +33501,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_outdoor_activities
 msgid "Outdoor Activities"
-msgstr ""
+msgstr "Atividades ao ar livre"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_ir_mail_server_search
@@ -34540,7 +34540,7 @@ msgstr "Pessoal"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_personal_trainer
 msgid "Personal Trainer"
-msgstr ""
+msgstr "Personal trainer"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_2
@@ -34798,7 +34798,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_preparation_display
 msgid "PoS Preparation Display"
-msgstr ""
+msgstr "Ecrã de preparação do POS"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_hr_preparation_display
@@ -38355,7 +38355,7 @@ msgstr "Integração de envio com a plataforma Sendcloud"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_shiprocket
 msgid "Shiprocket Shipping"
-msgstr ""
+msgstr "Envio pela Shiprocket"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_website_sale_shiprocket
@@ -38370,7 +38370,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_sale_shopee
 msgid "Shopee Connector"
-msgstr ""
+msgstr "Conector do Shopee"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_website_sale_wishlist
@@ -38691,12 +38691,12 @@ msgstr "Configurações para conectores de mídia social da empresa."
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_software_reseller
 msgid "Software Reseller"
-msgstr ""
+msgstr "Revendedor de software"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_solar_installation
 msgid "Solar Energy Systems"
-msgstr ""
+msgstr "Sistemas de energia solar"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.PEN
@@ -39164,7 +39164,7 @@ msgstr "Módulo base para Standard Audit File for Tax"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_starshipit
 msgid "Starshipit Shipping"
-msgstr ""
+msgstr "Envio pela Starshipit"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_base_module_upgrade_install
@@ -39479,7 +39479,7 @@ msgstr "Argumentos suplementares"
 #. module: base
 #: model:ir.module.category,name:base.module_category_supply_chain
 msgid "Supply Chain"
-msgstr ""
+msgstr "Cadeia de abastecimento"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_l10n_pl_edi
@@ -39509,7 +39509,7 @@ msgstr "Suriname"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_surveyor
 msgid "Surveying & Mapping"
-msgstr ""
+msgstr "Topografia e cartografia"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_marketing_surveys
@@ -39824,7 +39824,7 @@ msgstr "Registros de Tarefas"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_tattoo_shop
 msgid "Tattoo Shop"
-msgstr ""
+msgstr "Estúdio de tatuagens"
 
 #. module: base
 #. odoo-python
@@ -42049,7 +42049,7 @@ msgstr "Tours"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_toy_store
 msgid "Toy Store"
-msgstr ""
+msgstr "Loja de brinquedos"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_profile__traces_async
@@ -43994,7 +43994,7 @@ msgstr "Perfil do site da Web"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_wedding_planner
 msgid "Wedding Planner"
-msgstr ""
+msgstr "Organizador de casamentos"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_theme_yes
@@ -44014,7 +44014,7 @@ msgstr "Semanas"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_wellness_practitioner
 msgid "Wellness Practitioner"
-msgstr ""
+msgstr "Terapeuta de bem-estar"
 
 #. module: base
 #: model:res.country,name:base.eh

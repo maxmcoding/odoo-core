@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 import requests
 from requests import RequestException
 
-from odoo import _, api, fields, models
+from odoo import _, api, fields, models, SUPERUSER_ID
 from odoo.exceptions import UserError
 from odoo.tools import float_round, float_repr
 
@@ -265,6 +265,18 @@ class AccountMove(models.Model):
 
         Returns a list of tuple with both file names, mimetype, content and the field it should be stored in.
         """
+
+        def _zip_to_xml_file_data(zip_file):
+            for file in zip_file.infolist():
+                if file.filename.endswith('.xml'):
+                    return {
+                        'name': file.filename,
+                        'mimetype': 'application/xml',
+                        'raw': zip_file.read(file),
+                        'res_field': 'l10n_vn_edi_sinvoice_xml_file',
+                    }
+            return None
+
         self.ensure_one()
         files_data, error_message = self._l10n_vn_edi_fetch_invoice_file_data('ZIP')
         if error_message:
@@ -272,20 +284,20 @@ class AccountMove(models.Model):
 
         file_bytes = base64.b64decode(files_data['fileToBytes'])
 
-        # For some reason, request_response['fileToBytes'] is a zip file containing the other zip file.
-        # The content of the inner zip is a xsl file as well as a xml file.
-        # In our case the xsl file is not important, so we can simply ignore it.
-        with zipfile.ZipFile(io.BytesIO(file_bytes)) as zip_file:
-            inner_zip_bytes = zip_file.read(zip_file.filelist[0])
-            with zipfile.ZipFile(io.BytesIO(inner_zip_bytes)) as inner_zip:
-                for file in inner_zip.filelist:
-                    if file.filename.endswith('.xml'):
-                        return {
-                            'name': file.filename,
-                            'mimetype': 'application/xml',
-                            'raw': inner_zip.read(file),
-                            'res_field': 'l10n_vn_edi_sinvoice_xml_file',
-                        }, ""
+        with zipfile.ZipFile(io.BytesIO(file_bytes)) as outer_zip:
+            result = _zip_to_xml_file_data(outer_zip)
+            if not result:
+                for entry in outer_zip.infolist():
+                    if entry.filename.endswith('.zip'):
+                        with outer_zip.open(entry) as inner_bytes:
+                            with zipfile.ZipFile(inner_bytes) as inner_zip:
+                                result = _zip_to_xml_file_data(inner_zip)
+                                if result:
+                                    break
+
+        if not result:
+            return {}, _("No XML file found in the zip archive.")
+        return result, ""
 
     def _l10n_vn_edi_fetch_invoice_pdf_file_data(self):
         """
@@ -306,6 +318,55 @@ class AccountMove(models.Model):
             'raw': file_bytes,
             'res_field': 'l10n_vn_edi_sinvoice_pdf_file',
         }, ""
+
+    def _l10n_vn_edi_fetch_invoice_files(self):
+        """
+        Fetches the SInvoice XML and PDF data from the SInvoice server if self is a sent invoice.
+        The files are saved in the l10n_vn_edi_sinvoice_pdf_file_id and l10n_vn_edi_sinvoice_xml_file_id.
+        """
+
+        if self.l10n_vn_edi_invoice_state != 'sent':
+            raise UserError(_("Please send the invoice to SInvoice before fetching the tax invoice files."))
+
+        xml_data, xml_error_message = self._l10n_vn_edi_fetch_invoice_xml_file_data()
+        pdf_data, pdf_error_message = self._l10n_vn_edi_fetch_invoice_pdf_file_data()
+
+        # Not using _link_invoice_documents for these because it depends on _need_invoice_document and I can't get it to work
+        # well while allowing users to download the files before sending.
+        attachments_data = []
+        for file, error in [(xml_data, xml_error_message), (pdf_data, pdf_error_message)]:
+            if error:
+                continue
+
+            attachments_data.append({
+                'name': file['name'],
+                'raw': file['raw'],
+                'mimetype': file['mimetype'],
+                'res_model': self._name,
+                'res_id': self.id,
+                'res_field': file['res_field'],  # Binary field
+            })
+
+        if attachments_data:
+            attachments = self.env['ir.attachment'].with_user(SUPERUSER_ID).create(attachments_data)
+            self.invalidate_recordset(fnames=[
+                'l10n_vn_edi_sinvoice_xml_file_id',
+                'l10n_vn_edi_sinvoice_xml_file',
+                'l10n_vn_edi_sinvoice_pdf_file_id',
+                'l10n_vn_edi_sinvoice_pdf_file',
+            ])
+
+            # Log the new attachment in the chatter for reference. Make sure to add the JSON file.
+            self.with_context(no_new_invoice=True).message_post(
+                body=_('Invoice sent to SInvoice'),
+                attachment_ids=attachments.ids + self.l10n_vn_edi_sinvoice_file_id.ids,
+            )
+
+        if xml_error_message or pdf_error_message:
+            return {
+                'error_title': _('Error when receiving SInvoice files.'),
+                'errors': [error_message for error_message in [xml_error_message, pdf_error_message] if error_message],
+            }
 
     def action_l10n_vn_edi_update_payment_status(self):
         """ Send a request to update the payment status of the invoice. """
@@ -706,7 +767,7 @@ class AccountMove(models.Model):
                 'itemCode': line.product_id.code or '',
                 'itemName': textwrap.shorten(item_name, width=500, placeholder='...'),
                 'unitName': line.product_uom_id.name or 'Units',
-                'unitPrice': line.price_unit * sign,
+                'unitPrice': line.currency_id.round(line.price_unit * sign),
                 'quantity': line.quantity,
                 # This amount should be without discount applied.
                 'itemTotalAmountWithoutTax': line.currency_id.round(line.price_unit * line.quantity),

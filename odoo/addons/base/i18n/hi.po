@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-16 16:38+0000\n"
-"PO-Revision-Date: 2026-03-21 09:24+0000\n"
+"PO-Revision-Date: 2026-07-30 01:09+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Hindi <https://translate.odoo.com/projects/odoo-18/base/hi/>\n"
 "Language: hi\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_at_reports
@@ -206,6 +206,83 @@ msgid ""
 "\n"
 "**Købskonto:**      4010 Restaurationsbesøg\n"
 msgstr ""
+"\n"
+"\n"
+"डेनमार्क के लिए लोकलाइज़ेशन मॉड्यूल\n"
+"===============================\n"
+"\n"
+"यह **डेनमार्क के लिए अकाउंटिंग चार्ट** को मैनेज करने वाला मॉड्यूल है. यह एक-व्यक्ति बिज़नेस "
+"के साथ-साथ I/S, IVS, ApS और A/S दोनों को कवर करता है\n"
+"\n"
+"**मॉड्यूल सेट करता है:**\n"
+"\n"
+"- **डेनिश खाता प्लान**\n"
+"\n"
+"- डेनिश वैट\n"
+"        - 25 % mओम्स\n"
+"        - रेस्टोरेंट वैट 6.25 %        - उल्टा भुगतान दायित्व\n"
+"\n"
+"- लेखा समूह\n"
+"        - ईयू (व्यवसाय)\n"
+"        - ईयू (निजी)\n"
+"        - तीसरे देश\n"
+"\n"
+"- वित्तीय रिपोर्ट\n"
+"        - आय विवरण\n"
+"        - बैलेंस शीट\n"
+"        - वैट निपटान\n"
+"            - निपटान\n"
+"            - कॉलम A, B और C\n"
+"\n"
+"- **एंग्लो-सैक्सन अकाउंटिंग विधि**.\n"
+"\n"
+"\n"
+"\n"
+"प्रॉडक्ट सेटअप:\n"
+"=================\n"
+"\n"
+"**वस्तु**\n"
+"\n"
+"**विक्रय टैक्स:**      विक्रय टैक्स 25 %\n"
+"\n"
+"**विक्रय खाता:**     1.010 वस्तुओं का विक्रय (टैक्स सहित)\n"
+"\n"
+"**खरीद टैक्स:**       खरीद टैक्स 25 %\n"
+"\n"
+"**खरीद खाता:**      2.010 प्रत्यक्ष वस्तु लागत (टैक्स सहित)\n"
+"\n"
+".\n"
+"\n"
+"**सेवा**\n"
+"\n"
+"**विक्रय टैक्स:**      विक्रय टैक्स 25 %, सेवाएं\n"
+"\n"
+"**विक्रय खाता:**     1.011 सेवाओं का विक्रय सहित टैक्स\n"
+"\n"
+"**खरीद टैक्स:**       खरीद टैक्स 25 %, सेवाएं\n"
+"\n"
+"**खरीद खाता:**      2.011 प्रत्यक्ष लागत सेवाएँ सहित टैक्स.\n"
+"\n"
+"\n"
+"\n"
+"**उल्टी भुगतान देयता वाली वस्तुएँ**\n"
+"\n"
+"**बिक्री टैक्स:**      उल्टी भुगतान देयता के साथ बिक्री\n"
+"\n"
+"**बिक्री खाता:**     1.012 माल की बिक्री, वैट को छोड़कर\n"
+"\n"
+"**खरीद वैट:**       उल्टी भुगतान देयता के साथ खरीद\n"
+"\n"
+"**खरीद खाता:**      2.012 प्रत्यक्ष माल लागत, वैट को छोड़कर\n"
+"\n"
+"\n"
+".\n"
+"\n"
+"**भोजन**\n"
+"\n"
+"**खरीद पर वैट:**      भोजन पर वैट 6.25 %, खरीद पर वैट\n"
+"\n"
+"**खरीद खाता:**      4010 भोजन व्यय\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_do
@@ -413,6 +490,10 @@ msgid ""
 "This module adds a custom Sales Team for the Point of Sale. This enables you "
 "to view and manage your point of sale sales with more ease.\n"
 msgstr ""
+"\n"
+"\n"
+"यह मॉड्यूल पॉइंट ऑफ़ सेल के लिए एक कस्टम सेल्स टीम जोड़ता है. इससे आप अपनी पॉइंट ऑफ़ सेल "
+"बिक्री को और अधिक आसानी से देख और मैनेज कर सकते हैं.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_pos_sale_margin
@@ -909,6 +990,14 @@ msgid ""
 "It assigns manager and user access rights to the Administrator for the "
 "accounting application and only user rights to the Demo user.\n"
 msgstr ""
+"\n"
+"अकाउंटिंग ऐक्सेस राइट\n"
+"========================\n"
+"यह एडमिनिस्ट्रेटर यूजर को सभी अकाउंटिंग फीचर्स, जैसे जर्नल आइटम्स और चार्ट ऑफ अकाउंट्स तक "
+"ऐक्सेस देता है.\n"
+"\n"
+"यह अकाउंटिंग ऐप्लिकेशन के लिए एडमिनिस्ट्रेटर को 'मैनेजर' और 'यूजर' ऐक्सेस राइट्स देता है, और "
+"'डेमो' यूजर को केवल 'यूजर' राइट्स मिलते हैं.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_in_asset
@@ -2007,6 +2096,17 @@ msgid ""
 "while on the payment screen\n"
 "* Supported cards: Visa, MasterCard, Rupay, UPI\n"
 msgstr ""
+"\n"
+"Paytm पीओएस पेमेंट की अनुमति दें\n"
+"==============================\n"
+"\n"
+"यह मॉड्यूल ग्राहकों को डेबिट/क्रेडिट कार्ड और UPI से अपने ऑर्डर का पेमेंट करने की अनुमति देता "
+"है. लेनदेन Paytm पीओएस द्वारा प्रोसेस किए जाते हैं. एक Paytm व्यापारी खाते की ज़रूरत है. "
+"यह निम्नलिखित की अनुमति देता है:\n"
+"\n"
+"* पेमेंट स्क्रीन पर रहते हुए केवल एक क्रेडिट/डेबिट कार्ड या क्यूआर कोड को स्वाइप/स्कैन करके तेज़ "
+"भुगतान\n"
+"* काम करने वाले कार्ड: Visa, MasterCard, Rupay, UPI\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_pos_pine_labs
@@ -2025,6 +2125,19 @@ msgid ""
 "UPI QR code at the payment terminal.\n"
 "* Supported cards: Visa, MasterCard, RuPay.\n"
 msgstr ""
+"\n"
+"Pine Labs पीओएस पेमेंट की अनुमति दें\n"
+"==============================\n"
+"\n"
+"यह मॉड्यूल सिर्फ़ उन कंपनियों के लिए उपलब्ध है जो INR करेंसी का उपयोग करती हैं.\n"
+"यह ग्राहकों को पाइन लैब्स पीओएस टर्मिनलों के माध्यम से डेबिट/क्रेडिट कार्ड और यूपीआई का "
+"उपयोग करके अपने ऑर्डर का पेमेंट करने में सक्षम बनाता है.\n"
+"ट्रांज़ैक्शन को प्रोसेस करने के लिए एक Pine Labs मर्चेंट खाते की आवश्यकता है.\n"
+"विशेषताओं में शामिल हैं:\n"
+"\n"
+"* पेमेंट टर्मिनल पर अपने क्रेडिट/डेबिट कार्ड या यूपीआई क्यूआर कोड को स्वाइप, स्कैन या टैप "
+"करके तुरंत पेमेंट.\n"
+"* काम करने वाले कार्ड: Visa, MasterCard, RuPay.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_pos_razorpay
@@ -2042,6 +2155,17 @@ msgid ""
 "while on the payment screen\n"
 "* Supported cards: Visa, MasterCard, Rupay, UPI\n"
 msgstr ""
+"\n"
+"Razorpay पीओएस पेमेंट की अनुमति दें\n"
+"==============================\n"
+"\n"
+"यह मॉड्यूल ग्राहकों को डेबिट/क्रेडिट कार्ड और UPI से अपने ऑर्डर का पेमेंट करने की अनुमति देता "
+"है. लेनदेन Razorpay पीओएस द्वारा प्रोसेस किए जाते हैं. एक Razorpay व्यापारी खाते की "
+"ज़रूरत है. यह निम्नलिखित की अनुमति देता है:\n"
+"\n"
+"* पेमेंट स्क्रीन पर रहते हुए केवल एक क्रेडिट/डेबिट कार्ड या क्यूआर कोड को स्वाइप/स्कैन करके तेज़ "
+"भुगतान\n"
+"* काम करने वाले कार्ड: Visa, MasterCard, Rupay, UPI\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_appointment
@@ -2503,6 +2627,55 @@ msgid ""
 "password, if any.\n"
 "\n"
 msgstr ""
+"\n"
+"ऑटोमैटिक DIMONA डिक्लेरेशन\n"
+"=============================\n"
+"\n"
+"ज़रूरी शर्तें:\n"
+"--------------\n"
+"\n"
+"- आपको Global Sign द्वारा जारी किया गया बेल्जियम सरकार के नियमों के अनुरूप एक "
+"डिजिटल\n"
+"   सर्टिफ़िकेट चाहिए. देखें: https://shop.globalsign.com/en/belgian-government-"
+"services\n"
+"\n"
+"- एक टेक्निकल यूज़र (.cer फ़ाइल) बनाने और ONSS (.pem) फ़ाइल में रिमोट तरीके से\n"
+"   ऑथेंटिकेट करने के लिए, अपने SSL सर्टिफ़िकेट (.pfx फ़ाइल) से ज़रूरी सर्टिफ़िकेट फ़ाइलें जनरेट "
+"करें. \n"
+"  UNIX सिस्टम पर, आप इन कमांड्स का उपयोग कर सकते हैं:\n"
+"\n"
+"  - PFX -> CRT: openssl pkcs12 -in my_cert.pfx -out my_cert.crt -nokeys -"
+"clcerts\n"
+"\n"
+"  - CRT -> CER: openssl x509 -inform pem -in my_cert.crt -outform der -out "
+"my_cert.cer\n"
+"\n"
+"  - PFX -> PEM: openssl pkcs12 -in my_cert.pfx -out my_cert.pem -nodes\n"
+"\n"
+"- सोशल सिक्योरिटी REST वेब सर्विस का उपयोग करने से पहले, आपको अपने या\n"
+"   अपने क्लाइंट के लिए एक अकाउंट बनाना होगा और सिक्योरिटी कॉन्फ़िगर करनी होगी. (पूरी "
+"प्रक्रिया\n"
+"  यहां उपलब्ध है: https://www.socialsecurity.be/site_fr/employer/applics/dimona/"
+"introduction/webservice.htm)\n"
+"\n"
+"  - यूज़र अकाउंट मैनेजमेंट: इस प्रक्रिया का पालन करें https://www.socialsecurity.be/"
+"site_fr/general/helpcentre/rest/documents/pdf/"
+"procedure_pour_gestion_des_acces_UMan_FR.pdf\n"
+"\n"
+"  - एक टेक्निकल यूज़र बनाएं: आपके क्लाइंट को अब ऐक्सेस मैनेजमेंट ऑनलाइन सर्विस में एक टेक्निकल\n"
+"     यूज़र बनाना होगा. इस प्रक्रिया का पालन करें: https://www.socialsecurity.be/"
+"site_fr/general/helpcentre/rest/documents/pdf/"
+"webservices_creer_le_canal_FR.pdf\n"
+"\n"
+"  - वेब सर्विस चैनल ऐक्टिवेट करें: टेक्निकल यूज़र बन जाने के बाद, आपके क्लाइंट को ऐक्सेस \n"
+"    मैनेजमेंट में वेब सर्विस चैनल ऐक्टिवेट करना होगा. चैनल ऐक्टिवेट करने के\n"
+"     स्टेप इस मैन्युअल में बताए गए हैं: https://www.socialsecurity.be/site_fr/general/"
+"helpcentre/rest/documents/pdf/webservices_ajouter_le_canal_FR.pdf\n"
+"\n"
+"  - प्रक्रिया के अंत में, आपको एक \"ONSS Expeditor Number\" मिलना चाहिए, जिसे आप "
+".pem फ़ाइल और\n"
+"     उससे जुड़े पासवर्ड (अगर कोई है) के साथ पेरोल सेटिंग्स में एन्कोड कर सकते हैं.\n"
+"\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_mrp_accountant
@@ -2665,6 +2838,48 @@ msgid ""
 "-------------------------------------------------\n"
 "Create electronic sales invoices with Avatax.\n"
 msgstr ""
+"\n"
+"ब्राज़ीलियाई लोकलाइज़ेशन के लिए बेस मॉड्यूल\n"
+"==========================================\n"
+"\n"
+"इस मॉड्यूल में शामिल हैं:\n"
+"\n"
+"- सामान्य ब्राज़ीलियाई अकाउंट चार्ट\n"
+"- ब्राज़ीलियाई टैक्स जैसे:\n"
+"\n"
+"  - IPI\n"
+"  - ICMS\n"
+"  - PIS\n"
+"  - COFINS\n"
+"  - ISS\n"
+"  - IR\n"
+"  - CSLL\n"
+"\n"
+"- दस्तावेज़ प्रकार जैसे NFC-e, NFS-e, वगैरह.\n"
+"- पहचान दस्तावेज़ जैसे CNPJ और CPF\n"
+"\n"
+"ब्राज़ील के नियमों के अनुसार काम करने के लिए इस मुख्य मॉड्यूल के साथ कुछ अन्य मॉड्यूल भी जोड़े "
+"गए हैं.\n"
+"\n"
+"ब्राज़ील - अकाउंटिंग रिपोर्ट (l10n_br_reports)\n"
+"---------------------------------------------\n"
+"एक आसान टैक्स रिपोर्ट जोड़ता है जो किसी दिए गए समय अवधि में प्रति टैक्स समूह टैक्स राशि "
+"की जांच करने में मदद करता है. साथ ही ब्राज़ीलियाई बाज़ार के लिए अनुकूलित P&L और BS भी "
+"जोड़ता है.\n"
+"\n"
+"Avatax ब्राज़ील (l10n_br_avatax)\n"
+"------------------------------\n"
+"Avatax के माध्यम से ब्राज़ीलियाई टैक्स गणना जोड़ता है और Avatax का\n"
+"सही ढंग से उपयोग करने और सही टैक्स प्राप्त करने के लिए ज़रूरी\n"
+"वित्तीय जानकारी भेजने हेतु Odoo को कॉन्फ़िगर करने के लिए सभी ज़रूरी फ़ील्ड्स को जोड़ता है.\n"
+"\n"
+"ब्राज़ील में SOs के लिए Avatax (l10n_br_avatax_sale)\n"
+"----------------------------------------------\n"
+"सेल्स ऑर्डर मॉड्यूल के विस्तार के साथ l10n_br_avatax मॉड्यूल के समान।\n"
+"\n"
+"Avatax के माध्यम से इलेक्ट्रॉनिक इनवॉइस (l10n_br_edi)\n"
+"-------------------------------------------------\n"
+"Avatax के साथ इलेक्ट्रॉनिक सेल्स इनवॉइस बनाएं.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_kh_reports
@@ -2703,6 +2918,15 @@ msgid ""
 "When you reconcile, simply select the corresponding batch payment to "
 "reconcile all the payments in the batch.\n"
 msgstr ""
+"\n"
+"बैच पेमेंट\n"
+"=======================================\n"
+"बैच पेमेंट, पेमेंट को ग्रुप में रखने की अनुमति देते हैं.\n"
+"\n"
+"इनका उपयोग मुख्य रूप से बैंक में एक साथ जमा करने के लिए कई चेकों को ग्रुप करने हेतु किया जाता "
+"है.\n"
+"जमा की गई कुल राशि आपके बैंक स्टेटमेंट में एक ही ट्रांजेक्शन के रूप में दिखाई देगी.\n"
+"मिलान करते समय, बस संबंधित बैच पेमेंट को चुनें, ताकि सभी पेमेंट का मिलान एक साथ हो सके.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_be_hr_payroll
@@ -3674,6 +3898,22 @@ msgid ""
 "delivery, the system will automatically calculate the linked DDTs for every\n"
 "invoice line to export in the FatturaPA XML.\n"
 msgstr ""
+"\n"
+"डॉकीमेंटो डी ट्रांसपोर्तो (डीडीटी)\n"
+"\n"
+"जब भी A और B के बीच सामान का हस्तांतरण होता है, तो डीडीटी एक वैधता के रूप में काम "
+"करता है, उदाहरण के लिए जब पुलिस आपको रोकती है।\n"
+"\n"
+"जब आप किसी इतालवी कंपनी में एक आउटगोइंग पिकिंग प्रिंट करना चाहते हैं, तो यह इसके बजाय "
+"DDT प्रिंट कर देगा। यह डिलीवरी स्लिप की तरह है, लेकिन इसमें प्रॉडक्ट का मूल्य, परिवहन का "
+"कारण, वाहक, ... भी शामिल होता है, जो इसे एक DDT बनाता है।\n"
+"\n"
+"हम DDT के लिए एक अलग सीक्वेंस का भी उपयोग करते हैं, क्योंकि संख्या में कोई अंतराल नहीं होना "
+"चाहिए और इसका उपयोग केवल तभी किया जाना चाहिए जब सामान भेजा जाता है.\n"
+"\n"
+"जब इनवॉइस उनके सेल्स ऑर्डर से और सेल्स ऑर्डर डिलीवरी से संबंधित होते हैं, तो सिस्टम "
+"FatturaPA XML में एक्सपोर्ट करने के लिए प्रत्येक इनवॉइस लाइन के लिए अपने-आप संबंधित DDT "
+"की गणना करेगा.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_nl_hr_payroll
@@ -3717,6 +3957,27 @@ msgid ""
 "the replaced invoice and the new one and you can reset an invoice\n"
 "you have not already sent to the government to reuse its number.\n"
 msgstr ""
+"\n"
+"E-Faktur मेन्यू (इंडोनेशिया)\n"
+"फ़ॉर्मेट: 010.000-16.00000001\n"
+"* पहले 2 (दो) अंक लेनदेन कोड हैं\n"
+"* अगला 1 (एक) अंक स्थिति कोड है\n"
+"* अगले 3 (तीन) अंक शाखा कोड हैं\n"
+"* पहले 2 (दो) अंक जारी करने का वर्ष हैं\n"
+"* अगले 8 (आठ) अंक क्रमांक (Nomor Urut) हैं\n"
+"\n"
+"ग्राहक इनवॉइस को E-Faktur के रूप में एक्सपोर्ट करने में चालू करने के लिए, आपको "
+"Accounting > Customers > e-Faktur में सरकार द्वारा आपको आवंटित संख्याओं की रेंज दर्ज "
+"करनी होगी.\n"
+"\n"
+"जब आप किसी इनवॉइस को मान्य करते हैं, जहां पार्टनर के पास ID PKP फ़ील्ड चेक किया हुआ "
+"होता है, तो उस इनवॉइस को एक टैक्स संख्या आवंटित की जाएगी।\n"
+"इसके बाद, आप इनवॉइस सूची में अभी भी निर्यात किए जाने वाले चालानों को फ़िल्टर कर सकते हैं "
+"और csv डाउनलोड करने के लिए एक्शन > डाउनलोड E-Faktur पर क्लिक कर सकते हैं और इसे "
+"सरकार की साइट पर अपलोड कर सकते हैं.\n"
+"\n"
+"आप पुराने और नए इनवॉइस की जानकारी देकर पहले से भेजे गए इनवॉइस को दूसरे से बदल सकते हैं, "
+"और सरकार को नहीं भेजे गए इनवॉइस को रीसेट करके उसका नंबर दोबारा इस्तेमाल कर सकते हैं.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_cl_edi_factoring
@@ -4817,6 +5078,24 @@ msgid ""
 "modules and actions. When installed, this module creates easy goals to help "
 "new users to discover Odoo and configure their user profile.\n"
 msgstr ""
+"\n"
+"गेमिफ़िकेशन प्रक्रिया\n"
+"====================\n"
+"गेमिफ़िकेशन मॉड्यूल Odoo के उपयोगकर्ताओं का मूल्यांकन करने और उन्हें प्रेरित करने के तरीके प्रदान "
+"करता है.\n"
+"\n"
+"उपयोगकर्ताओं का मूल्यांकन लक्ष्यों और संख्यात्मक उद्देश्यों को पूरा करने के लिए किया जा सकता "
+"है.\n"
+"**लक्ष्यों** को **चैलेंज** के माध्यम से सौंपा जाता है, ताकि टीम के सदस्यों का एक-दूसरे से और "
+"समय के साथ मूल्यांकन और तुलना की जा सके.\n"
+"\n"
+"गैर-संख्यात्मक उपलब्धियों के लिए, उपयोगकर्ताओं को **बैज** प्रदान किए जा सकते हैं. एक "
+"साधारण \"धन्यवाद\" से लेकर एक असाधारण उपलब्धि तक, एक बैज किसी उपयोगकर्ता के अच्छे काम "
+"के लिए कृतज्ञता व्यक्त करने का एक आसान तरीका है.\n"
+"\n"
+"लक्ष्य और बैज दोनों लचीले हैं और उन्हें कई मॉड्यूल और क्रियाओं के लिए अपने हिसाब से किया जा "
+"सकता है. इंस्टॉल होने पर, यह मॉड्यूल नए उपयोगकर्ताओं को Odoo की खोज करने और अपना यूज़र "
+"प्रोफ़ाइल कॉन्फ़िगर करने में मदद करने के लिए आसान लक्ष्य बनाता है.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr_attendance_gantt
@@ -5204,6 +5483,20 @@ msgid ""
 "* FBM/Hybrid: Delivery information is fetched from Shopee, track and "
 "synchronize the stock level to Shopee\n"
 msgstr ""
+"\n"
+"अपने Shopee ऑर्डर Odoo में इंपोर्ट करें और डिलीवरी को सिंक्रनाइज़ करें\n"
+"============================================================\n"
+"\n"
+"मुख्य विशेषताएं\n"
+"------------\n"
+"* कई खातों और दुकानों से ऑर्डर इंपोर्ट करें\n"
+"* ऑर्डरों को उनके आंतरिक संदर्भ (Shopee में item_id या model_id) के आधार पर Odoo "
+"प्रॉडक्ट से मिलाया जाता है\n"
+"* Shopee द्वारा पूर्ति (FBS), व्यापारी द्वारा पूर्ति (FBM) और सीमा पार विक्रेता द्वारा "
+"पूर्ति (हाइब्रिड) सभी के लिए सपोर्ट:\n"
+"* FBS: पूरा हो चुके ऑर्डर इंपोर्ट करना\n"
+"* FBM/हाइब्रिड: Shopee से डिलीवरी की जानकारी प्राप्त करना और शॉपी के साथ स्टॉक लेवल "
+"को ट्रैक और सिंक्रनाइज़ करना\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_debit_note
@@ -5216,6 +5509,12 @@ msgid ""
 "original invoice.  \n"
 "The wizard used is similar as the one for the credit note.\n"
 msgstr ""
+"\n"
+"कई देशों में, डेबिट नोट का उपयोग किसी मौजूदा इनवॉइस की राशि में वृद्धि के लिए या  \n"
+"कुछ खास मामलों में क्रेडिट नोट को रद्द करने के लिए किया जाता है. \n"
+"यह एक नियमित इनवॉइस की तरह है, लेकिन हमें मूल इनवॉइस के साथ लिंक का हिसाब रखना "
+"होगा.  \n"
+"उपयोग किया गया विज़ॉर्ड क्रेडिट नोट वाले की तरह ही है.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_cn
@@ -5376,6 +5675,21 @@ msgid ""
 "    - Payroll Advice and Report\n"
 "    - Yearly Salary by Employee Report\n"
 msgstr ""
+"\n"
+"भारतीय पेरोल वेतन नियम.\n"
+"============================\n"
+"\n"
+"    -भारत के लोकलाइज़ेशन के लिए hr_payroll का कॉन्फ़िगरेशन\n"
+"    -भारत के पेस्लिप के लिए सभी मुख्य योगदान नियम.\n"
+"    * नई पेस्लिप रिपोर्ट\n"
+"    * कर्मचारी अनुबंध\n"
+"    * बेसिक / ग्रॉस / नेट सैलरी कॉन्फ़िगर करने की अनुमति\n"
+"    * कर्मचारी पेस्लिप\n"
+"    * भत्ता / कटौती\n"
+"    * लीव्स मैनेजमेंट के साथ इंटिग्रेट किया गया\n"
+"    * मेडिकल भत्ता, यात्रा भत्ता, चाइल्ड भत्ता, ...\n"
+"    - पेरोल सलाह और रिपोर्ट\n"
+"    - कर्मचारी के हिसाब से वार्षिक वेतन रिपोर्ट\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_id_hr_payroll
@@ -5586,6 +5900,14 @@ msgid ""
 "level including customer and supplier transactions.\n"
 "Necessary master data is also included.\n"
 msgstr ""
+"\n"
+"लिथुआनियाई SAF-T, XML फ़ॉर्मैट का उपयोग करके अलग-अलग तरह के अकाउंटिंग ट्रांज़ैक्शन डेटा को "
+"एक्सपोर्ट करने के लिए एक स्टैंडर्ड फ़ाइल फ़ॉर्मैट है.\n"
+"उपयोग किया जाने वाला XSD वर्शन v2.01 (2019 से) है. यह लिथुआनियाई अधिकारियों द्वारा "
+"उपयोग किया जाने वाला सबसे नया वर्शन है.\n"
+"SAF-T फाइनेंशियल का पहला वर्शन ग्राहक और सप्लायर ट्रांज़ैक्शन के साथ सामान्य लेजर स्तर तक "
+"सीमित है.\n"
+"ज़रूरी मास्टर डेटा भी शामिल है.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_im_livechat
@@ -5868,6 +6190,18 @@ msgid ""
 "* Incoterms: International Commercial terms\n"
 "\n"
 msgstr ""
+"\n"
+"सेल्स कोटेशन और ऑर्डर को मैनेज करें\n"
+"==================================\n"
+"\n"
+"यह मॉड्यूल सेल्स और वेयरहाउस मैनेजमेंट ऐप्लिकेशन्स के बीच एक लिंक बनाता है.\n"
+"\n"
+"प्राथमिकताएं\n"
+"-----------\n"
+"* शिपिंग: आप सामान को एक ही बार में डिलीवर करना चाहते हैं या टुकड़ों में, यह चुन सकते हैं\n"
+"* इनवॉइसिंग: यह चुनें कि इनवॉइस का भुगतान कैसे किया जाएगा और बिल कब जेनरेट होगा\n"
+"* इनकोटर्म्स: अंतरराष्ट्रीय व्यापारिक नियम\n"
+"\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_helpdesk_sale
@@ -6471,6 +6805,19 @@ msgid ""
 "aren't imported several times or handle multicurrency.\n"
 "Whenever possible, you should use a more appropriate file format like OFX.\n"
 msgstr ""
+"\n"
+"CSV बैंक स्टेटमेंट इंपोर्ट करने के लिए मॉड्यूल.\n"
+"======================================\n"
+"\n"
+"यह मॉड्यूल आपको Odoo में CSV फ़ाइलें इंपोर्ट करने की अनुमति देता है: इन्हें पार्स किया जाता है "
+"और मानव-पठनीय प्रारूप में\n"
+"अकाउंटिंग \\ बैंक और कैश \\ बैंक स्टेटमेंट्स में संग्रहीत किया जाता है।\n"
+"\n"
+"महत्वपूर्ण नोट\n"
+"---------------------------------------------\n"
+"CSV फ़ॉर्मैट की सीमा के कारण, हम यह सुनिश्चित नहीं कर सकते कि एक ही ट्रांज़ैक्शन कई बार "
+"इंपोर्ट न हो या मल्टी-करेंसी को संभाला जा सके।\n"
+"जब भी संभव हो, आपको हमेशा OFX जैसे सही फ़ाइल फ़ॉर्मेट का ही इस्तेमाल करना चाहिए.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_bank_statement_import_ofx
@@ -6515,6 +6862,20 @@ msgid ""
 "aren't imported several times or handle multicurrency.\n"
 "Whenever possible, you should use a more appropriate file format like OFX.\n"
 msgstr ""
+"\n"
+"QIF बैंक स्टेटमेंट्स को इंपोर्ट करने के लिए मॉड्यूल.\n"
+"======================================\n"
+"\n"
+"यह मॉड्यूल आपको Odoo में मशीन द्वारा पठनीय QIF फ़ाइलों को इम्पोर्ट करने की अनुमति देता "
+"है: उन्हें पार्स किया जाता है और मानव द्वारा पठनीय प्रारूप में\n"
+"अकाउंटिंग \\ बैंक और कैश \\ बैंक स्टेटमेंट्स में संग्रहीत किया जाता है।\n"
+"\n"
+"महत्वपूर्ण नोट\n"
+"---------------------------------------------\n"
+"QIF प्रारूप की सीमा के कारण, हम यह सुनिश्चित नहीं कर सकते कि एक ही ट्रांज़ैक्शन कई बार "
+"इंपोर्ट न हो या मल्टी-करेंसी का मैनेजमेंट किया जाए.\n"
+"जब भी संभव हो, आपको सामान्य फ़ाइल के बजाय OFX जैसे सही फ़ॉर्मेट का इस्तेमाल करना "
+"चाहिए.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_be_soda
@@ -6939,6 +7300,18 @@ msgid ""
 "It adds mail.thread.phone mixin that handles sanitation and blacklist of\n"
 "records numbers. "
 msgstr ""
+"\n"
+"फ़ोन नंबर की पुष्टि\n"
+"========================\n"
+"\n"
+"यह मॉड्यूल किसी खास देश के अनुसार फोन नंबरों की पुष्टि और फॉर्मेट करने की \n"
+"सुविधा जोड़ता है.\n"
+"\n"
+"इसमें एक अलग लिस्ट भी है जहां आप उन नंबरों को सेव कर सकते हैं जिन्हें \n"
+"ब्लॉक करना है.\n"
+"\n"
+"इसके साथ 'mail.thread.phone' मिक्सिन भी मिलता है जो नंबरों की सफाई और ब्लैकलिस्टिंग \n"
+"को मैनेज करता है. "
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_it
@@ -7470,6 +7843,17 @@ msgid ""
 "\n"
 "Note: Only the admin user is allowed to make those customizations.\n"
 msgstr ""
+"\n"
+"स्टूडियो - Odoo को कस्टमाइज़ करें\n"
+"=======================\n"
+"\n"
+"यह ऐडऑन उपयोगकर्ता को यूज़र इंटरफ़ेस के ज़्यादातर चीज़ों को एक सरल और ग्राफ़िकल तरीके से "
+"कस्टमाइज़ करने की अनुमति देता है. इसमें दो मुख्य विशेषताएं हैं:\n"
+"\n"
+"* एक नया ऐप्लिकेशन बनाएं (मॉड्यूल, टॉप लेवल मेन्यू आइटम, और डिफ़ॉल्ट ऐक्शन जोड़ें)\n"
+"* एक मौजूदा ऐप्लिकेशन को कस्टमाइज़ करें (मेन्यू, ऐक्शन, व्यू, अनुवाद, ... संपादित करें)\n"
+"\n"
+"नोट: सिर्फ़ एडमिन उपयोगकर्ता को ही ये कस्टमाइज़ेशन करने की अनुमति है.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_website_studio
@@ -7543,6 +7927,25 @@ msgid ""
 "sending by mail.\n"
 "\n"
 msgstr ""
+"\n"
+"स्विस लोकलाइज़ेशन\n"
+"==================\n"
+"यह मॉड्यूल स्विट्ज़रलैंड (स्विस PME/KMU 2015) के लिए एक चार्ट ऑफ़ अकाउंट, टैक्स को "
+"परिभाषित करता है और जब आप एक इनवॉइस प्रिंट करते हैं या इसे मेल द्वारा भेजते हैं तो एक "
+"क्यूआर-बिल के जनरेट करने की सुविधा देता है\n"
+"क्यूआर बिल इनवॉइस से अटैच हो जाता है और इसके भुगतान को आसान बनाता है.\n"
+"\n"
+"एक क्यूआर-बिल तब जनरेट होगा अगर:\n"
+"    - आपके इनवॉइस पर सेट किए गए भागीदार का स्विट्जरलैंड में एक पूरा पता (सड़क, शहर, "
+"डाक कोड और देश) है\n"
+"    - इनवॉइस पर स्विस क्यूआर-कोड जनरेट करने का विकल्प चुना गया है (डिफ़ॉल्ट रूप से किया "
+"जाता है)\n"
+"    - आपके बैंक जर्नल पर एक सही खाता नंबर/QR IBAN सेट किया गया है\n"
+"    - (QR-IBAN का उपयोग करते समय): इनवॉइस का भुगतान संदर्भ एक क्यूआर-संदर्भ है\n"
+"\n"
+"अगर आपकी सेटिंग्स सही हैं, तो सिस्टम अपने आप क्यूआर कोड वाला बिल बना देगा. जब भी आप "
+"बिल प्रिंट करेंगे या ईमेल करेंगे, तो यह क्यूआर-बिल मुख्य इनवॉइस के साथ लगकर आएगा.\n"
+"\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_ch_hr_payroll
@@ -7686,6 +8089,24 @@ msgid ""
 "If you want to save your employees' time and avoid them to always have coins "
 "in their pockets, this module is essential.\n"
 msgstr ""
+"\n"
+"लंच मैनेजमेंट के लिए बेस मॉड्यूल.\n"
+"================================\n"
+"\n"
+"कई कंपनियां अपने कर्मचारियों को ज़्यादा सुविधाएं प्रदान करने के लिए, आम विक्रेताओं से सैंडविच, "
+"पिज्जा और अन्य चीजें मंगवाती हैं.\n"
+"\n"
+"हालांकि, कंपनी के भीतर दोपहर के भोजन के प्रबंधन के लिए उचित प्रशासन की आवश्यकता होती "
+"है, खासकर जब कर्मचारियों या विक्रेताओं की संख्या बड़ी हो.\n"
+"\n"
+"\"लंच ऑर्डर\" मॉड्यूल इस प्रबंधन को आसान बनाने के लिए, साथ ही कर्मचारियों को ज़्यादा "
+"उपकरण और उपयोगिता प्रदान करने के लिए विकसित किया गया है.\n"
+"\n"
+"पूरे भोजन और वेंडर मैनेजमेंट के अलावा, यह मॉड्यूल चेतावनी दिखाने की संभावना प्रदान करता है "
+"और कर्मचारी की पसंद के आधार पर तुरंत ऑर्डर चुनने की सुविधा देता है.\n"
+"\n"
+"अगर आप अपने कर्मचारियों का समय बचाना चाहते हैं और यह सुनिश्चित करना चाहते हैं कि उनके "
+"पास हमेशा सिक्के न हों, तो यह मॉड्यूल ज़रूरी है.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_mx_edi_stock
@@ -7729,6 +8150,17 @@ msgid ""
 "to\n"
 "the SII.\n"
 msgstr ""
+"\n"
+"डिलीवरी गाइड (guia de despacho) इस बात के प्रमाण के रूप में आवश्यक है कि \n"
+"आप A और B के बीच माल भेज रहे हैं.\n"
+"\n"
+"यह पार्टनर पर कॉन्फ़िगर करने योग्य है कि डिलीवरी गाइड \n"
+"पर कीमतों की आवश्यकता है या नहीं और क्या वे सेल ऑर्डर से या \n"
+"प्रॉडक्ट से ही आनी चाहिए.\n"
+"\n"
+"सिर्फ़ डिलीवरी ऑर्डर के मान्य होने पर ही आप \n"
+"डिलीवरी गाइड बना सकते हैं. फिर यह इनवॉइस के समान ही प्रक्रिया का पालन करेगा, \n"
+"और इसे SII पर भेजा जाएगा.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_auth_passkey
@@ -7992,6 +8424,25 @@ msgid ""
 "\n"
 "Print product labels with barcode.\n"
 msgstr ""
+"\n"
+"यह Odoo में प्रॉडक्ट और मूल्य सूचियों को प्रबंधित करने के लिए मूल मॉड्यूल है.\n"
+"========================================================================\n"
+"\n"
+"प्रॉडक्ट वैरिएंट, विभिन्न मूल्य निर्धारण विधियों, विक्रेताओं की जानकारी,\n"
+"स्टॉक/ऑर्डर बनाने, माप की विभिन्न इकाइयों, पैकेजिंग और प्रॉपर्टीज़ के साथ काम करते हैं.\n"
+"\n"
+"काम करने वाली प्राइसलिस्ट:\n"
+"-------------------\n"
+"    * छूट का बहु-स्तरीय (प्रॉडक्ट, श्रेणी, मात्रा के अनुसार)\n"
+"    * विभिन्न मानदंडों के आधार पर कीमत की गणना करें:\n"
+"        * अन्य मूल्य-सूची\n"
+"        * लागत मूल्य\n"
+"        * सूची मूल्य\n"
+"        * विक्रेता मूल्य\n"
+"\n"
+"प्रॉडक्ट और/या भागीदारों द्वारा मूल्य-सूचियों की प्राथमिकताएं.\n"
+"\n"
+"बारकोड के साथ प्रॉडक्ट लेबल प्रिंट करें.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_rs
@@ -8676,6 +9127,16 @@ msgid ""
 "the crm\n"
 "modules.\n"
 msgstr ""
+"\n"
+"यह मॉड्यूल सीआरएम में एक या कई अवसर मामलों पर एक शॉर्टकट जोड़ता है.\n"
+"===========================================================================\n"
+"\n"
+"यह शॉर्टकट आपको चयनित मामले के आधार पर एक सेल्स ऑर्डर बनाने की अनुमति देता है.\n"
+"अगर अलग-अलग मामले खुले हैं (एक सूची), तो यह प्रति मामला एक सेल्स ऑर्डर बनाता है.\n"
+"फिर मामले को बंद कर दिया जाता है और जनरेट किए गए सेल्स बॉर्डर से जोड़ दिया जाता है.\n"
+"\n"
+"हम आपको इस मॉड्यूल को स्थापित करने का सुझाव देते हैं, अगर आपने सेल्स और सीआरएम दोनों "
+"मॉड्यूल स्थापित किए हैं.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr_appraisal_survey
@@ -8726,6 +9187,14 @@ msgid ""
 "of this module is to allow the display of a customer portal without having\n"
 "a dependency towards website editing and customization capabilities."
 msgstr ""
+"\n"
+"यह मॉड्यूल एक पूरी तरह से इंटिग्रेट किए गए कस्टमर पोर्टल के लिए ज़रूरी बेस कोड जोड़ता है.\n"
+"इसमें बेस कंट्रोलर क्लास और बेस टेम्प्लेट्स शामिल हैं. बिज़नेस ऐडऑन\n"
+"ग्राहक पोर्टल का विस्तार करने के लिए, अपने खास टेम्प्लेट और कंट्रोलर जोड़ेंगे.\n"
+"\n"
+"इस मॉड्यूल में odoo v10 वेबसाइट_पोर्टल से अधिकांश कोड शामिल है. इस मॉड्यूल का उद्देश्य \n"
+"वेबसाइट में बदलाव और अपनी ज़रूरत के हिसाब से बदलने की क्षमताओं पर निर्भरता के बिना \n"
+"एक ग्राहक पोर्टल दिखाने की अनुमति देना है।"
 
 #. module: base
 #: model:ir.module.module,description:base.module_account_qr_code_sepa
@@ -8811,6 +9280,14 @@ msgid ""
 "Delivery price pre-configured is an example, you need to adapt the pricing's "
 "rules.\n"
 msgstr ""
+"\n"
+"यह मॉड्यूल आपके ग्राहकों को Point Relais® (एक पिक-अप पॉइंट सर्विस) चुनने और उसे अपने "
+"शिपिंग एड्रेस के रूप में उपयोग करने की सुविधा देता है.\n"
+"यह मॉड्यूल WebService के लिए नहीं है, यह सिर्फ़ यूज़र इंटरफेस (विजेट) को जोड़ने का काम "
+"करता है.\n"
+"\n"
+"डिलीवरी की पहले से तय कीमत केवल एक उदाहरण है, आपको मूल्य निर्धारण नियमों को अपने "
+"अनुसार बदलना होगा.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_pos_hr
@@ -8821,6 +9298,11 @@ msgid ""
 "The actual till still requires one user but an unlimited number of employees "
 "can log on to that till and process sales.\n"
 msgstr ""
+"\n"
+"यह मॉड्यूल कर्मचारियों (न कि उपयोगकर्ता) को बारकोड, पिन नंबर या दोनों का उपयोग करके "
+"पॉइंट ऑफ सेल (POS) ऐप्लिकेशन में लॉग इन करने की अनुमति देता है.\n"
+"मुख्य टिल के लिए अभी भी एक उपयोगकर्ता की ज़रूरत होती है, लेकिन असीमित संख्या में कर्मचारी "
+"उस टिल पर लॉग इन कर सकते हैं और सेल्स प्रोसेस कर सकते हैं.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_rating
@@ -9008,6 +9490,19 @@ msgid ""
 "- Check on middle: Peachtree standard\n"
 "- Check on bottom: ADP standard\n"
 msgstr ""
+"\n"
+"यह मॉड्यूल आपके भुगतानों को पहले से प्रिंट किए गए चेकों पर प्रिंट करने की अनुमति देता है.\n"
+"आप कंपनी सेटिंग में आउटपुट (लेआउट, स्टब्स, पेपर फ़ॉर्मैट वगैरह) को कॉन्फ़िगर कर सकते हैं और "
+"जर्नल सेटिंग में चेक नंबरिंग (यदि आप बिना नंबर वाले पहले से प्रिंट किए गए चेक का उपयोग करते "
+"हैं) का मैनेजमेंट कर सकते हैं।\n"
+"कनाडाई भुगतान संघ (https://www.payments.ca/sites/default/files/"
+"standard_006_complete_0.pdf) के अनुसार\n"
+"\n"
+"इसके साथ काम करने वाले फ़ॉर्मैट\n"
+"-----------------\n"
+"- ऊपर चेक: Quicken / QuickBooks स्टैंडर्ड\n"
+"- बीच में चेक: Peachtree स्टैंडर्ड\n"
+"- नीचे चेक: ADP स्टैंडर्ड\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_website_crm_partner_assign
@@ -9191,6 +9686,17 @@ msgid ""
 "Plan shifts and keep an eye on the hours consumed on your plannable "
 "products.\n"
 msgstr ""
+"\n"
+"यह मॉड्यूल आपको प्रॉडक्ट कॉन्फ़िगरेशन के आधार पर अपने सेल्स ऑर्डर को शेड्यूल करने की अनुमति "
+"देता है.\n"
+"\n"
+"उन प्रॉडक्ट के लिए जिन पर \"सेवाओं की योजना बनाएं\" विकल्प सक्षम है, आपके पास उन "
+"कर्मचारियों की \n"
+"शिफ्टों की ऑटोमैटिक तौर पर योजना बनाने का अवसर होगा जो शिफ्ट ले सकते हैं\n"
+"(यानी, वे कर्मचारी जिनकी भूमिका प्रॉडक्ट पर कॉन्फ़िगर की गई भूमिका के समान है).\n"
+"\n"
+"शिफ्टों की योजना बनाएं और अपने प्लान करने योग्य प्रॉडक्ट पर उपभोग किए गए घंटों पर नज़र "
+"रखें.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_website_sale_renting
@@ -10153,6 +10659,24 @@ msgid ""
 "exactly the same xml as the expected,\n"
 "valid ones.\n"
 msgstr ""
+"\n"
+"यह मॉड्यूल 'account_edi_ubl_cii' मॉड्यूल का टेस्ट करता है, इसे कुछ लोकलाइज़ेशन की "
+"निर्भरताओं\n"
+" के कारण अलग किया गया है. इसका नाम 'l10n' से शुरू होता है, ताकि रनबॉट पर ओवरलोड न "
+"हो.\n"
+"\n"
+"टेस्ट फ़ाइलों को सोर्स के अनुसार बांटा गया है, वे इनसे ली गई हैं:\n"
+"\n"
+"* factur-x दस्तावेज़ (FNFE से)\n"
+"* peppol-bis-invoice-3 दस्तावेज़ (github रिपॉजिटरी: https://github.com/"
+"OpenPEPPOL/peppol-bis-invoice-3/tree/master/rules/examples में उदाहरण हैं)\n"
+"* odoo, ये फ़ाइलें सभी सत्यापन परीक्षणों को पास करती हैं (ecosio या FNFE वैलिडेटर का "
+"उपयोग करके)\n"
+"\n"
+"हम यह टेस्ट करते हैं कि बाहरी उदाहरण सही ढंग से इंपोर्ट किए गए हैं (मुद्रा, कुल राशि और कुल "
+"टैक्स का मिलान).\n"
+"हम यह भी टेस्ट करते हैं कि दिए गए पैरामीटर के साथ odoo से xml जनरेट करने पर, अपेक्षित, "
+"मान्य xml के समान ही xml मिलता है.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_test_website_slides_full
@@ -10291,6 +10815,21 @@ msgid ""
 "where it is enabled. In order to be able to execute RPC scripts, the user\n"
 "can setup API keys to replace their main password.\n"
 msgstr ""
+"\n"
+"टू-फैक्टर ऑथेंटिकेशन (TOTP)\n"
+"================================\n"
+"उपयोगकर्ताओं को अतिरिक्त सुरक्षा के लिए, समय-आधारित वन-टाइम पासवर्ड (TOTP) का उपयोग "
+"करके अपने \n"
+"उपयोगकर्ता खाते पर टू-फैक्टर ऑथेंटिकेशन कॉन्फ़िगर करने की अनुमति देता है.\n"
+"\n"
+"सक्रिय होने के बाद, सिस्टम तक पहुंच प्रदान किए जाने से पहले उपयोगकर्ता को अपने ऑथेंटिकेटर "
+"ऐप द्वारा प्रदान किया गया 6-अंकीय कोड दर्ज करना होगा.\n"
+"सभी लोकप्रिय ऑथेंटिकेटर ऐप्स के साथ काम करता हैं.\n"
+"\n"
+"नोट: तार्किक रूप से, दो-कारक उन उपयोगकर्ताओं के लिए पासवर्ड-आधारित \n"
+"RPC ऐक्सेस को रोकता है जहाँ यह चालू है. RPC स्क्रिप्ट निष्पादित करने में सक्षम होने के लिए, "
+"\n"
+"उपयोगकर्ता अपने मुख्य पासवर्ड को बदलने के लिए API कुंजियाँ सेटअप कर सकता है.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_tr_hr_payroll
@@ -10358,6 +10897,22 @@ msgid ""
 "- Master payroll export\n"
 "- WPS\n"
 msgstr ""
+"\n"
+"संयुक्त अरब अमीरात पेरोल और सेवा समाप्ति के नियम।\n"
+"=======================================================\n"
+"- बेसिक सैलरी की गणना\n"
+"- EOS गणना\n"
+"- वार्षिक अवकाश प्रावधान और EOS प्रावधान\n"
+"- स्थानीय लोगों के लिए सामाजिक बीमा नियम\n"
+"- अन्य इनपुट मामलों के लिए ओवरटाइम नियम\n"
+"- बीमारी-छुट्टी की गणना\n"
+"- DEWS गणना\n"
+"- फ्री ज़ोन (DMCC) के लिए EOS गणना\n"
+"- अनुबंध की समाप्ति पर गणना\n"
+"- ईओएस गणना के लिए अव्यवहारित छुट्टियों की गणना\n"
+"- अतिरिक्त अन्य इनपुट नियम (बोनस, कमीशन, बकाया, आदि के लिए)\n"
+"- मास्टर पेरोल एक्सपोर्ट\n"
+"- डब्ल्यूपीएस\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_us_hr_payroll
@@ -10468,6 +11023,37 @@ msgid ""
 "countries,\n"
 "only the country code will be validated.\n"
 msgstr ""
+"\n"
+"पार्टनर के वैट नंबर के लिए वैट वैलिडेशन.\n"
+"=========================================\n"
+"\n"
+"इस मॉड्यूल को इंस्टॉल करने के बाद, पार्टनर्स के वैट फ़ील्ड में एंटर की गई वैल्यूज़ \n"
+"को सभी सपोर्टेड देशों के लिए वैलिडेट किया जाएगा. देश का पता VAT नंबर के पहले \n"
+"लगे 2-अक्षर वाले कंट्री कोड से लगाया जाता है, उदाहरण के लिए BE0477472701 को\n"
+" बेल्जियम के नियमों का उपयोग करके वैलिडेट किया जाएगा.\n"
+"\n"
+"वैट नंबर वैलिडेशन के दो अलग-अलग लेवल हैं::\n"
+"--------------------------------------------------------\n"
+"    * डिफ़ॉल्ट रूप से, देश के लिए ज्ञात वैलिडेशन नियमों का उपयोग करके एक सिंपल\n"
+"       ऑफ़लाइन चेक किया जाता है, जो आमतौर पर एक सिंपल चेक डिजिट होता है.  \n"
+"      यह तेज़ है और हमेशा उपलब्ध रहता है, लेकिन यह ऐसे नंबर्स को भी अनुमति दे सकता है,\n"
+"       जो शायद सच में एलोकेट नहीं किए गए हैं, या अब मान्य नहीं हैं.\n"
+"\n"
+"    * जब \"VAT VIES Check\" विकल्प चालू होता है (यूज़र की कंपनी के कॉन्फ़िगरेशन में), तो "
+"वैट\n"
+"       नंबर्स को ऑनलाइन EU VIES डेटाबेस में सबमिट किया जाएगा, जो वास्तव में वेरीफ़ाई "
+"करेगा\n"
+"       कि नंबर मान्य है और वर्तमान में किसी EU कंपनी को एलोकेट किया गया है. यह सिंपल\n"
+"       ऑफ़लाइन चेक की तुलना में थोड़ा धीमा है, इसके लिए इंटरनेट कनेक्शन की आवश्यकता होती "
+"है,\n"
+"       और हो सकता है कि यह हर समय उपलब्ध न हो. अगर सर्विस उपलब्ध नहीं है \n"
+"      या अनुरोध किए गए देश (जैसे गैर-EU देशों के लिए) को सपोर्ट नहीं करती है, \n"
+"      तो इसके बजाय एक सिंपल चेक किया जाएगा\n"
+"      .\n"
+"\n"
+"सपोर्टेड देशों में वर्तमान में EU देश और चिली, कोलंबिया, मेक्सिको, नॉर्वे या रूस जैसे\n"
+" कुछ गैर-EU देश शामिल हैं. अनसपोर्टेड देशों के लिए, केवल कंट्री कोड को\n"
+" वैलिडेट किया जाएगा.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_industry_fsm_stock
@@ -11065,7 +11651,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__base_enable_profiling_wizard__duration__months_1
 msgid "1 Month"
-msgstr ""
+msgstr "1 महीना"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.res_lang_form
@@ -12091,8 +12677,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,vat_label:base.au
+#, fuzzy
 msgid "ABN"
-msgstr ""
+msgstr "ABN"
 
 #. module: base
 #: model:ir.model,name:base.model_res_users_apikeys_description
@@ -12609,7 +13196,7 @@ msgstr ""
 #. module: base
 #: model:ir.actions.act_window,name:base.action_view_base_language_install
 msgid "Add Languages"
-msgstr ""
+msgstr "भाषाएं जोड़ें"
 
 #. module: base
 #: model:ir.module.module,description:base.module_data_merge_helpdesk
@@ -13439,7 +14026,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_agriculture_shop
 msgid "Agricultural Store"
-msgstr ""
+msgstr "अग्रीकल्चर स्टोर"
 
 #. module: base
 #: model:res.partner.industry,name:base.res_partner_industry_A
@@ -14843,7 +15430,7 @@ msgstr ""
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_view_form
 msgid "Architecture"
-msgstr ""
+msgstr "आर्किटेक्चर"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_reset_view_arch_wizard__arch_diff
@@ -14966,7 +15553,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_art_craft
 msgid "Arts & Crafts Store"
-msgstr ""
+msgstr "आर्ट और क्राफ़्ट स्टोर"
 
 #. module: base
 #: model:res.country,name:base.aw
@@ -15543,7 +16130,7 @@ msgstr ""
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_attachment_form
 msgid "Attached To"
-msgstr ""
+msgstr "अटैच किया गया"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_attachment
@@ -15601,7 +16188,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_certification_organism
 msgid "Audit & Certification"
-msgstr ""
+msgstr "ऑडिट और सर्टिफ़िकेशन"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.ISK
@@ -15776,7 +16363,7 @@ msgstr "लेखक"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.module_form
 msgid "Author Name"
-msgstr ""
+msgstr "लेखक का नाम"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_module_module_dependency__auto_install_required
@@ -15838,7 +16425,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_automobile
 msgid "Automobile Spare Parts"
-msgstr ""
+msgstr "ऑटोमोबाइल स्पेयर पार्ट्स"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_server__available_model_ids
@@ -16193,7 +16780,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_bar_industry
 msgid "Bar & Pub"
-msgstr ""
+msgstr "बार और पब"
 
 #. module: base
 #: model:res.country,name:base.bb
@@ -16577,8 +17164,9 @@ msgstr "यह केवल एक सुझाव है, Odoo S.A. इसक�
 
 #. module: base
 #: model:res.country,name:base.bj
+#, fuzzy
 msgid "Benin"
-msgstr ""
+msgstr "बेनिन"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_bj
@@ -16699,8 +17287,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.bo
+#, fuzzy
 msgid "Bolivia"
-msgstr ""
+msgstr "बोलीविया"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_bo
@@ -16783,8 +17372,9 @@ msgstr ""
 #: code:addons/base/models/res_company.py:0
 #: model:ir.model.fields,field_description:base.field_res_company__child_ids
 #: model_terms:ir.ui.view,arch_db:base.view_company_form
+#, fuzzy
 msgid "Branches"
-msgstr ""
+msgstr "ब्रांच"
 
 #. module: base
 #: model_terms:res.partner,website_description:base.res_partner_address_15
@@ -17099,8 +17689,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.bf
+#, fuzzy
 msgid "Burkina Faso"
-msgstr ""
+msgstr "बुर्किना फासो"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_bf
@@ -17136,7 +17727,7 @@ msgstr ""
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.module_form
 msgid "By"
-msgstr ""
+msgstr "द्वारा"
 
 #. module: base
 #. odoo-python
@@ -17192,8 +17783,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_gamification_sale_crm
+#, fuzzy
 msgid "CRM Gamification"
-msgstr ""
+msgstr "सीआरएम गेमिफ़िकेशन"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_crm_livechat
@@ -17286,8 +17878,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cm
+#, fuzzy
 msgid "Cameroon"
-msgstr ""
+msgstr "कैमरून"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_cm
@@ -17315,8 +17908,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ca
+#, fuzzy
 msgid "Canada"
-msgstr ""
+msgstr "कनाडा"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ca
@@ -17542,8 +18136,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cf
+#, fuzzy
 msgid "Central African Republic"
-msgstr ""
+msgstr "मध्य अफ़्रीकी गणराज्य"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_cf
@@ -17636,8 +18231,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.td
+#, fuzzy
 msgid "Chad"
-msgstr ""
+msgstr "चाड"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.action_res_users_my
@@ -17659,7 +18255,7 @@ msgstr "पासवर्ड बदलने वाला विज़र्ड
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_users_form_simple_modif
 msgid "Change password"
-msgstr ""
+msgstr "पासवर्ड बदलें"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_country_form
@@ -17747,8 +18343,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_attachment__checksum
+#, fuzzy
 msgid "Checksum/SHA1"
-msgstr ""
+msgstr "Checksum/SHA1"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.BTN
@@ -17915,7 +18512,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_cleaning_services
 msgid "Cleaning Services"
-msgstr ""
+msgstr "साफ-सफाई से जुड़ी सेवाएं"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__update_m2m_operation__clear
@@ -17924,8 +18521,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_website_sale_collect
+#, fuzzy
 msgid "Click & Collect"
-msgstr ""
+msgstr "Click & Collect"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_logging__type__client
@@ -17965,8 +18563,9 @@ msgstr "क्लोदिंग स्टोर"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_cloud_storage
+#, fuzzy
 msgid "Cloud Storage"
-msgstr ""
+msgstr "क्लाउड स्टोरेज"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_cloud_storage_azure
@@ -18000,13 +18599,15 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_be_codabox
+#, fuzzy
 msgid "CodaBox"
-msgstr ""
+msgstr "CodaBox"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_be_codaclean
+#, fuzzy
 msgid "Codaclean"
-msgstr ""
+msgstr "Codaclean"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_base_import_language
@@ -18192,8 +18793,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.km
+#, fuzzy
 msgid "Comoros"
-msgstr ""
+msgstr "कोमोरोस"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_km
@@ -18456,8 +19058,9 @@ msgstr "पासवर्ड की पुष्टि करें"
 
 #. module: base
 #: model:res.country,name:base.cg
+#, fuzzy
 msgid "Congo"
-msgstr ""
+msgstr "कांगो"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_cg
@@ -18578,7 +19181,7 @@ msgstr ""
 #. module: base
 #: model:res.partner.category,name:base.res_partner_category_8
 msgid "Consulting Services"
-msgstr ""
+msgstr "कंसल्टिंग सर्विस"
 
 #. module: base
 #: model:ir.model,name:base.model_res_partner
@@ -18756,8 +19359,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cr
+#, fuzzy
 msgid "Costa Rica"
-msgstr ""
+msgstr "कोस्टा रिका"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_cr
@@ -18846,7 +19450,7 @@ msgstr "कंट्री ग्रुप"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_country__country_group_ids
 msgid "Country Groups"
-msgstr ""
+msgstr "देशों के समूह"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_country__name
@@ -18865,8 +19469,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_loyalty
+#, fuzzy
 msgid "Coupons & Loyalty"
-msgstr ""
+msgstr "कूपन और लॉयल्टी"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_website_sale_loyalty
@@ -18921,7 +19526,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__state__object_create
 msgid "Create Record"
-msgstr ""
+msgstr "रिकॉर्ड बनाएं"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_industry_fsm_report
@@ -19288,8 +19893,9 @@ msgstr "क्रिएटिव"
 
 #. module: base
 #: model:res.country,name:base.hr
+#, fuzzy
 msgid "Croatia"
-msgstr ""
+msgstr "क्रोएशिया"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_hr
@@ -19501,7 +20107,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base.field_ir_cron__selection_value
 #: model_terms:ir.ui.view,arch_db:base.view_server_action_form
 msgid "Custom Value"
-msgstr ""
+msgstr "कस्टम वैल्यू"
 
 #. module: base
 #: model:ir.model,name:base.model_ir_ui_view_custom
@@ -19569,8 +20175,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cy
+#, fuzzy
 msgid "Cyprus"
-msgstr ""
+msgstr "साइप्रस"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_cy
@@ -19589,8 +20196,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cz
+#, fuzzy
 msgid "Czech Republic"
-msgstr ""
+msgstr "चेक गणराज्य"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_cz_reports_2025
@@ -19619,8 +20227,9 @@ msgstr "DHL एक्सप्रेस शिपिंग"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_dhl
+#, fuzzy
 msgid "DHL Express Shipping (Legacy)"
-msgstr ""
+msgstr "DHL एक्सप्रेस शिपिंग (पुराना)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_din5008
@@ -19717,7 +20326,7 @@ msgstr "डेटाबेस"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_attachment__db_datas
 msgid "Database Data"
-msgstr ""
+msgstr "डेटाबेस डेटा"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_actions_act_window__res_id
@@ -19754,7 +20363,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/base/models/ir_qweb_fields.py:0
 msgid "Date format"
-msgstr ""
+msgstr "तारीख का फ़ॉर्मैट"
 
 #. module: base
 #. odoo-python
@@ -20036,8 +20645,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.cd
+#, fuzzy
 msgid "Democratic Republic of the Congo"
-msgstr ""
+msgstr "कांगो लोकतांत्रिक गणराज्य"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_cd
@@ -21295,8 +21905,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_employment_hero
+#, fuzzy
 msgid "Employment Hero Payroll"
-msgstr ""
+msgstr "Employment Hero पेरोल"
 
 #. module: base
 #. odoo-python
@@ -21359,6 +21970,7 @@ msgstr ""
 #: model:ir.module.category,description:base.module_category_productivity_room
 msgid "Enable the user to manage meeting rooms available for booking"
 msgstr ""
+"उपयोगकर्ता को बुकिंग के लिए उपलब्ध मीटिंग रूम को मैनेज करने की अनुमति दें"
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_human_resources_contracts
@@ -21506,8 +22118,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.gq
+#, fuzzy
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "इक्वेटोरियल गिनी"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_hr_maintenance
@@ -21790,8 +22403,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.et
+#, fuzzy
 msgid "Ethiopia"
-msgstr ""
+msgstr "इथियोपिया"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_et
@@ -22110,8 +22724,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country.group,name:base.europe
+#, fuzzy
 msgid "European Union"
-msgstr ""
+msgstr "यूरोपियन यूनियन"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.EUR
@@ -22248,8 +22863,9 @@ msgstr ""
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.res_lang_form
+#, fuzzy
 msgid "Examples"
-msgstr ""
+msgstr "उदाहरण"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_excise_management
@@ -23114,8 +23730,9 @@ msgstr "पूरा हुआ"
 
 #. module: base
 #: model:res.country,name:base.fi
+#, fuzzy
 msgid "Finland"
-msgstr ""
+msgstr "फ़िनलैंड"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_fi_reports
@@ -23170,6 +23787,8 @@ msgid ""
 "If it can't be found among available view modes, the same mode as for wider "
 "screens is used)"
 msgstr ""
+"मोबाइल और छोटी स्क्रीन के लिए पहला व्यू मोड (डिफ़ॉल्ट='कानबान'). अगर यह उपलब्ध व्यू "
+"मोड में नहीं मिलता है, तो बड़ी स्क्रीन वाला मोड ही इस्तेमाल किया जाता है)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_fitness
@@ -23250,7 +23869,7 @@ msgstr "फ़ूड"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_food_trucks
 msgid "Food Trucks"
-msgstr ""
+msgstr "फ़ूड ट्रक"
 
 #. module: base
 #: model:res.partner.industry,name:base.res_partner_industry_I
@@ -23378,7 +23997,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_coal_petroleum
 msgid "Fossil Fuel Trading"
-msgstr ""
+msgstr "जीवाश्म ईंधन की ट्रेडिंग"
 
 #. module: base
 #. odoo-python
@@ -23606,8 +24225,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,vat_label:base.nz
+#, fuzzy
 msgid "GST"
-msgstr ""
+msgstr "GST"
 
 #. module: base
 #: model:res.country,vat_label:base.sg
@@ -23651,8 +24271,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ga
+#, fuzzy
 msgid "Gabon"
-msgstr ""
+msgstr "गैबॉन"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ga
@@ -24169,8 +24790,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.gn
+#, fuzzy
 msgid "Guinea"
-msgstr ""
+msgstr "गिनी"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_gn
@@ -24184,8 +24806,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.gw
+#, fuzzy
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "गिनी-बिसाऊ"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_gw
@@ -24634,8 +25257,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.hn
+#, fuzzy
 msgid "Honduras"
-msgstr ""
+msgstr "होंडुरास"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_hn
@@ -24945,7 +25569,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_it_hardware
 msgid "IT Hardware & Support"
-msgstr ""
+msgstr "आईटी हॉर्डवेयर और सपोर्ट"
 
 #. module: base
 #: model:res.partner.industry,name:base.res_partner_industry_J
@@ -25309,7 +25933,7 @@ msgstr "QIF बैंक स्टेटमेंट इंपोर्ट क�
 #. module: base
 #: model:ir.module.module,summary:base.module_sale_shopee
 msgid "Import Shopee orders and sync deliveries"
-msgstr ""
+msgstr "Shopee ऑर्डर इंपोर्ट करें और डिलीवरी सिंक करें"
 
 #. module: base
 #. odoo-python
@@ -25378,6 +26002,9 @@ msgid ""
 "registered office within 8 days of the delivery of the goods or the "
 "provision of the services."
 msgstr ""
+"इसे स्वीकार्य बनाने के लिए, My Company (San Francisco) को माल की डिलीवरी या सेवाओं "
+"के प्रावधान के 8 दिनों के भीतर उसके पंजीकृत कार्यालय में 'रिकॉर्डेड डिलीवरी' (पंजीकृत डाक) "
+"द्वारा भेजे गए एक पत्र के माध्यम से किसी भी दावे की सूचना दी जानी चाहिए।"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_iap
@@ -25969,8 +26596,9 @@ msgstr "इंटरनेट ऑफ थिंग्स (IoT)"
 #. module: base
 #: model:ir.module.category,name:base.module_category_internet_of_things_(iot)
 #: model:ir.module.category,name:base.module_category_manufacturing_internet_of_things_(iot)
+#, fuzzy
 msgid "Internet of Things (IoT)"
-msgstr ""
+msgstr "इंटरनेट ऑफ थिंग्स (IoT)"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_cron__interval_number
@@ -26280,7 +26908,7 @@ msgstr "इनवॉइसिंग"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hw_posbox_homepage
 msgid "IoT Box Homepage"
-msgstr ""
+msgstr "IoT बॉक्स होमपेज"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_mrp_workorder_iot
@@ -26377,7 +27005,7 @@ msgstr "कंपनी है"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_attachment__public
 msgid "Is public document"
-msgstr ""
+msgstr "पब्लिक दस्तावेज़ है"
 
 #. module: base
 #: model:res.country,name:base.im
@@ -26440,33 +27068,38 @@ msgstr "इटली"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it
+#, fuzzy
 msgid "Italy - Accounting"
-msgstr ""
+msgstr "इटली - अकाउंटिंग"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_reports
+#, fuzzy
 msgid "Italy - Accounting Reports"
-msgstr ""
+msgstr "इटली - अकाउंटिंग रिपोर्ट"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_riba
+#, fuzzy
 msgid "Italy - Bank Receipts (Ri.Ba.)"
-msgstr ""
+msgstr "इटली - बैंक रसीदें (Ri.Ba.)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_edi_doi
+#, fuzzy
 msgid "Italy - Declaration of Intent"
-msgstr ""
+msgstr "Italy - Declaration of Intent"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_edi
+#, fuzzy
 msgid "Italy - E-invoicing"
-msgstr ""
+msgstr "इटली - ई-इनवॉइसिंग"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_edi_withholding
 msgid "Italy - E-invoicing (Withholding)"
-msgstr ""
+msgstr "इटली - ई-इनवॉइसिंग (विदहोल्डिंग)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_edi_ndd
@@ -26474,6 +27107,8 @@ msgid ""
 "Italy - E-invoicing - Additional module to support the debit notes (nota di "
 "debito - NDD)"
 msgstr ""
+"इटली - ई-इनवॉइसिंग - डेबिट नोट (nota di debito - NDD) को सपोर्ट करने के लिए "
+"अतिरिक्त मॉड्यूल"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_edi_ndd_account_dn
@@ -26483,28 +27118,31 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_pos
+#, fuzzy
 msgid "Italy - Point of Sale"
-msgstr ""
+msgstr "इटली - पॉइंट ऑफ़ सेल"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_edi_sale
+#, fuzzy
 msgid "Italy - Sale E-invoicing"
-msgstr ""
+msgstr "इटली - सेल ई-इनवॉइसिंग"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_stock_ddt
+#, fuzzy
 msgid "Italy - Stock DDT"
-msgstr ""
+msgstr "इटली - स्टॉक DDT"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_xml_export
 msgid "Italy - Tax Report XML Export"
-msgstr ""
+msgstr "इटली - टैक्स रिपोर्ट XML एक्सपोर्ट"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_edi_website_sale
 msgid "Italy eCommerce eInvoicing"
-msgstr ""
+msgstr "इटली ई-कॉमर्स ईइनवॉइसिंग"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ci
@@ -26827,8 +27465,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.kw
+#, fuzzy
 msgid "Kuwait"
-msgstr ""
+msgstr "कुवैत"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_kw
@@ -28064,8 +28703,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ml
+#, fuzzy
 msgid "Mali"
-msgstr ""
+msgstr "माली"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ml
@@ -28074,8 +28714,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.mt
+#, fuzzy
 msgid "Malta"
-msgstr ""
+msgstr "माल्टा"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_mt
@@ -28792,7 +29433,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_micro_brewery
 msgid "Microbrewery"
-msgstr ""
+msgstr "माइक्रोब्रुअरी"
 
 #. module: base
 #: model:res.country,name:base.fm
@@ -28812,7 +29453,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,summary:base.module_cloud_storage_migration
 msgid "Migrate local attachments to cloud storage"
-msgstr ""
+msgstr "लोकल अटैचमेंट को क्लाउड स्टोरेज में माइग्रेट करें"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.TND
@@ -29351,8 +29992,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_module_category__module_ids
+#, fuzzy
 msgid "Modules"
-msgstr ""
+msgstr "मॉड्यूल"
 
 #. module: base
 #. odoo-python
@@ -29398,8 +30040,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.mn
+#, fuzzy
 msgid "Mongolia"
-msgstr ""
+msgstr "मंगोलिया"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_mn
@@ -29505,8 +30148,9 @@ msgstr ""
 #. module: base
 #: model:res.groups,name:base.group_multi_company
 #: model_terms:ir.ui.view,arch_db:base.view_users_form
+#, fuzzy
 msgid "Multi Companies"
-msgstr ""
+msgstr "मल्टी कंपनी"
 
 #. module: base
 #: model:res.groups,name:base.group_multi_currency
@@ -29861,8 +30505,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ne
+#, fuzzy
 msgid "Niger"
-msgstr ""
+msgstr "नाइजर"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ne
@@ -30034,8 +30679,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.no
+#, fuzzy
 msgid "Norway"
-msgstr ""
+msgstr "नॉर्वे"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_no
@@ -30401,7 +31047,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_module_module__to_buy
 msgid "Odoo Enterprise Module"
-msgstr ""
+msgstr "Odoo एंटरप्राइज मॉड्यूल"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr
@@ -30942,6 +31588,117 @@ msgid ""
 "interaction history, profiles, and more.\n"
 "\n"
 msgstr ""
+"Odoo पॉइंट ऑफ़ सेल\n"
+"-----------------------------\n"
+"\n"
+"Odoo का <a href=\"https://www.odoo.com/app/point-of-sale-shop\">पॉइंट ऑफ़ सेल</"
+"a>\n"
+"एक बेहद साफ़-सुथरा इंटरफ़ेस पेश करता है जिसे इंस्टॉल करने की ज़रूरत नहीं है\n"
+"और यह नए हार्डवेयर पर ऑनलाइन और ऑफ़लाइन चलता है.\n"
+"\n"
+"कंपनी इन्वेंट्री और अकाउंटिंग के साथ इसका पूरा इंटीग्रेशन,\n"
+"कई ऐप्लिकेशन को जोड़ने की परेशानी के बिना सभी दुकानों के रीयल-टाइम \n"
+"आंकड़े और कंसोलिडेशन देता है.\n"
+"\n"
+"आपके पास पहले से मौजूद हार्डवेयर के साथ काम करें\n"
+"---------------------------------------\n"
+"\n"
+"### आपके वेब ब्राउज़र में\n"
+"\n"
+"Odoo का पीओएस एक वेब ऐप्लिकेशन है जो वेबसाइट दिखाने वाले किसी भी डिवाइस पर बिना\n"
+" या बहुत कम सेटअप के चल सकता है.\n"
+"\n"
+"### टचस्क्रीन या कीबोर्ड?\n"
+"\n"
+"पॉइंट ऑफ़ सेल किसी भी तरह के टच-सक्षम डिवाइस पर पूरी तरह से काम करता है,\n"
+"चाहे वह आईपैड जैसे मल्टी-टच टैबलेट हों या बिना कीबोर्ड वाले टचस्क्रीन \n"
+"टर्मिनल.\n"
+"\n"
+"### स्केल और प्रिंटर\n"
+"\n"
+"बारकोड स्कैनर और प्रिंटर बिना किसी सेटअप के तुरंत काम करते हैं.\n"
+" तराजू, कैशबॉक्स और अन्य बाहरी उपकरणों का उपयोग प्रॉक्सी एपीआई के साथ\n"
+" किया जा सकता है.\n"
+"\n"
+"ऑनलाइन और ऑफ़लाइन\n"
+"------------------\n"
+"\n"
+"### Odoo का पीओएस तब भी विश्वसनीय रहता है जब आपका कनेक्शन ठीक न हो\n"
+"\n"
+"सिर्फ एक इंटरनेट कनेक्शन के साथ नए स्टोर शुरू करें: कोई इंस्टॉलेशन नहीं, \n"
+"किसी खास हार्डवेयर की ज़रूरत नहीं. यह किसी भी आईपैड, टैबलेट पीसी, लैपटॉप या\n"
+" इंडस्ट्रियल पीओएस मशीन के साथ काम करता है.\n"
+"\n"
+"हालांकि, पॉइंट ऑफ़ सेल शुरू करने के लिए इंटरनेट कनेक्शन की आवश्यकता होती है, \n"
+"लेकिन पूरी तरह से डिस्कनेक्ट होने के बाद भी यह काम करता रहेगा.\n"
+"\n"
+"\n"
+"एक शानदार यूज़र इंटरफ़ेसA super clean user interface\n"
+"----------------------------\n"
+"\n"
+"### आसान और शानदार\n"
+"\n"
+"पुराने और बेकार पीओएस सॉफ्टवेयर को अलविदा कहें और आधुनिक रिटेलर्स के लिए\n"
+" बने Odoo वेब इंटरफ़ेस का आनंद.\n"
+"\n"
+"### खास तौर पर प्रॉडक्टिविटी के लिए डिज़ाइन किया गया\n"
+"\n"
+"चाहे रेस्टोरेंट हो या दुकान, आप ग्राहकों को इंतज़ार न कराने के लिए एक साथ \n"
+"कई ऑर्डर सक्रिय कर सकते हैं.\n"
+"\n"
+"### बेहद तेज़ी से खोजने की सुविधा\n"
+"\n"
+"प्रॉडक्ट स्कैन करें, कैटेगरी ब्राउज़ करें या अपने सभी प्रॉडक्ट पर लगे सुपर-फास्ट फ़िल्टर से\n"
+"उनके बारे में तुरंत जानकारी पाएं.\n"
+"\n"
+"इंटिग्रेट किया गया इन्वेंट्री मैनेजमेंट\n"
+"-------------------------------\n"
+"\n"
+"अपनी सभी सेल्स टीमों को रीयल-टाइम में एक साथ लाएं: स्टोर्स, ई-कॉमर्स, \n"
+"सेल्स टीमें. खरीदारी प्रबंधित करने के लिए इन्वेंट्री पर रीयल-टाइम कंट्रोल और\n"
+" सटीक पूर्वानुमान पाएं.\n"
+"\n"
+"एक पूरा वेयरहाउस मैनेजमेंट सिस्टम आपकी उंगलियों पर: प्रॉडक्ट की उपलब्धता के बारे में \n"
+"जानकारी प्राप्त करें, परचेज़ अनुरोध शुरू करें, वगरैह.\n"
+"\n"
+"स्टोर में ग्राहक सेवाएं प्रदान करें\n"
+"----------------------------------\n"
+"\n"
+"इन-स्टोर ग्राहक सेवाओं को जोड़कर अपने खरीदार को एक बेहतरीन अनुभव दें.\n"
+" रिपेयर संभालें, वारंटी ट्रैक करें, ग्राहकों के दावों पर कार्रवाई करें, डिलीवरी ऑर्डर की \n"
+"योजना बनाएं वगैरह.\n"
+"\n"
+"इनवॉइसिंग और अकाउंटिंग इंटिग्रेशन\n"
+"----------------------------------\n"
+"\n"
+"कुछ ही क्लिक में ग्राहकों के इनवॉइस बनाएं. रीयल-टाइम में बिक्री और कैश पर कंट्रोल रखें \n"
+"और अपने स्टोर की कार्यकुशलता बढ़ाने के लिए बेहतर निर्णय\n"
+" लेने हेतु Odoo की दमदार रिपोर्टिंग का उपयोग करें.\n"
+"\n"
+"सॉफ्टवेयर को जोड़ने का अब कोई झंझट नहीं: अपनी सभी सेल्स और इन्वेंट्री \n"
+"ऑपरेशन्स को अपने आप अपने जनरल लेजर में दर्ज पाएं.\n"
+"\n"
+"सभी दुकानों का एक ही जगह पर डेटा\n"
+"------------------------------\n"
+"\n"
+"चुनिंदा स्टोर पर नए प्रॉडक्ट, प्राइसिंग रणनीतियां और प्रमोशन अपने आप लागू पाएं.\n"
+" एक साझा कस्टमर बेस पर काम करें. सभी स्टोर के लिए एक ग्लोबल स्ट्रेटेजी\n"
+" चलाने के लिए किसी जटिल इंटरफ़ेस की ज़रूरत नहीं है.\n"
+"\n"
+"बैकएंड के रूप में Odoo के साथ, आपके पास एक ऐसा सिस्टम है जो छोटे स्टोर या \n"
+"बड़ी मल्टीनेशनल कंपनियों के लिए पूरी तरह से उपयुक्त साबित हुआ है.\n"
+"\n"
+"अपने ग्राहकों को जानें - स्टोर के भीतर और बाहर\n"
+"--------------------------------------\n"
+"\n"
+"सफल ब्रांड सटीक कस्टमर प्रोफाइल बनाने और दुकान या ऑनलाइन खरीदारी का \n"
+"फैसला लेते समय खरीदारों से संवाद करने के लिए अपने सभी चैनलों\n"
+" पर ग्राहक संबंधों को जोड़ते हैं.\n"
+"\n"
+"Odoo के साथ, आपको ग्राहकों की पूरी (360°) जानकारी मिलती है, जिसमें अलग-अलग चैनलों की "
+"बिक्री, \n"
+"बातचीत का इतिहास, प्रोफ़ाइल और बहुत कुछ शामिल है.\n"
+"\n"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_module_module__license__opl-1
@@ -31413,8 +32170,9 @@ msgstr "ठीक है"
 
 #. module: base
 #: model:res.country,name:base.om
+#, fuzzy
 msgid "Oman"
-msgstr ""
+msgstr "ओमान"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_om
@@ -31543,6 +32301,18 @@ msgid ""
 "(<xpath/>) are applied, and the result is used as if it were this view's\n"
 "actual arch.\n"
 msgstr ""
+"सिर्फ़ तभी लागू होता है जब यह व्यू किसी अन्य व्यू से इनहेरिट करता हो (inherit_id False/"
+"Null नहीं है).\n"
+"\n"
+"* अगर एक्सटेंशन (डिफ़ॉल्ट) है, यदि इस व्यू का अनुरोध किया जाता है, तो सबसे करीबी "
+"प्राइमरी व्यू को\n"
+"(inherit_id के माध्यम से) देखा जाता है, फिर इस व्यू के मॉडल के साथ इससे \n"
+"इनहेरिट करने वाले सभी व्यू लागू किए जाते हैं\n"
+"* अगर प्राइमरी है, तो सबसे करीबी प्राइमरी व्यू को पूरी तरह से हल किया जाता है (भले ही "
+"यह इस एक से अलग मॉडल का उपयोग करता हो), \n"
+"फिर इस व्यू की उत्तराधिकार विनिर्देश (inheritance specs) (<xpath/>) लागू की जाती "
+"हैं, और परिणाम का उपयोग इस प्रकार किया जाता है \n"
+"जैसे कि यह इस व्यू का वास्तविक आर्किटेक्चर (arch) हो.\n"
 
 #. module: base
 #. odoo-python
@@ -32089,7 +32859,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields,field_description:base.field_report_paperformat__orientation
 msgid "Orientation"
-msgstr ""
+msgstr "ओरिएंटेशन"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_ui_view_custom__ref_id
@@ -32142,7 +32912,7 @@ msgstr ""
 #. module: base
 #: model:res.partner.industry,name:base.res_partner_industry_S
 msgid "Other Services"
-msgstr ""
+msgstr "अन्य सेवाएं"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_model_form
@@ -32441,7 +33211,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_online_payment_self_order_preparation_display
 msgid "POS Self-Order / Online Payment / Preparation Display"
-msgstr ""
+msgstr "पीओएस सेल्फ़-ऑर्डर / ऑनलाइन पेमेंट / प्रीपरेशन डिस्प्ले"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_six
@@ -32753,8 +33523,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.pa
+#, fuzzy
 msgid "Panama"
-msgstr ""
+msgstr "पनामा"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_pa
@@ -32843,7 +33614,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base.field_base_partner_merge_automatic_wizard__group_by_parent_id
 #: model:ir.model.fields,field_description:base.field_res_company__parent_id
 msgid "Parent Company"
-msgstr ""
+msgstr "पैरेंट कंपनी"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_inherit__parent_field_id
@@ -33392,7 +34163,7 @@ msgstr "पिवट"
 #. module: base
 #: model:ir.module.module,summary:base.module_sale_gelato
 msgid "Place orders through Gelato's print-on-demand service"
-msgstr ""
+msgstr "Gelato की प्रिंट-ऑन-डिमांड सर्विस के माध्यम से ऑर्डर करें"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_project_forecast
@@ -33635,8 +34406,9 @@ msgstr "पोर्ट्रेट"
 
 #. module: base
 #: model:res.country,name:base.pt
+#, fuzzy
 msgid "Portugal"
-msgstr ""
+msgstr "पुर्तगाल"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_pt
@@ -34445,7 +35217,7 @@ msgstr "परचेज"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_purchase_requisition
 msgid "Purchase Agreements"
-msgstr ""
+msgstr "परचेज़ अग्रीमेंट"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_purchase_intrastat
@@ -34546,8 +35318,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.qa
+#, fuzzy
 msgid "Qatar"
-msgstr ""
+msgstr "कतर"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_qa
@@ -35091,7 +35864,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_cron_progress__remaining
 msgid "Remaining"
-msgstr ""
+msgstr "बचा हुआ"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_human_resources_remote_work
@@ -35358,7 +36131,7 @@ msgstr "रिसोर्स"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_attachment__res_field
 msgid "Resource Field"
-msgstr ""
+msgstr "रिसोर्स फ़ील्ड"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_attachment__res_id
@@ -35518,7 +36291,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.category,name:base.module_category_productivity_room
 msgid "Room"
-msgstr ""
+msgstr "रूम"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_company__root_id
@@ -35988,6 +36761,16 @@ msgid ""
 "- Invoice delivered recurring product at the end of invoicing period\n"
 "- Report planned delivery for active subscriptions\n"
 msgstr ""
+"सेल सब्सक्रिप्शन स्टॉक\n"
+"\n"
+"सेल सब्सक्रिप्शन स्टॉक, sale_subscription और sale_stock के बीच एक ब्रिज मॉड्यूल है. \n"
+"इस मॉड्यूल का उद्देश्य उपयोगकर्ता को संग्रहीत प्रॉडक्ट के साथ सब्सक्रिप्शन बिक्री ऑर्डर \n"
+"बनाने की अनुमति देना है, जिससे उनकी बार-बार डिलीवरी और इनवॉइसिंग हो सके.\n"
+"विशेषताएं:\n"
+"- बार-बार बिकने वाले स्टोरेबल प्रॉडक्ट बनाना\n"
+"- बार-बार बिकने वाले स्टोरेबल प्रॉडक्ट के लिए ऑटोमैटिक तौर पर डिलीवरी ऑर्डर बनाएं\n"
+"- इनवॉइस अवधि के अंत में डिलीवर किए गए बार-बार बिकने वाले प्रॉडक्ट का इनवॉइस बनाएं\n"
+"- ऐक्टिव सब्सक्रिप्शन की डिलीवरी रिपोर्ट देखना\n"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_sale_purchase
@@ -35996,8 +36779,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_br_sales
+#, fuzzy
 msgid "Sale modifications for Brazil"
-msgstr ""
+msgstr "ब्राज़ील के लिए सेल्स में बदलाव"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_it_edi_sale
@@ -36016,8 +36800,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_br_sale_subscription
+#, fuzzy
 msgid "Sale subscription modifications for Brazil"
-msgstr ""
+msgstr "ब्राज़ील के लिए सेल्स सब्सक्रिप्शन में बदलाव"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_sales
@@ -36192,18 +36977,21 @@ msgstr "सऊदी अरब"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_sa
+#, fuzzy
 msgid "Saudi Arabia - Accounting"
-msgstr ""
+msgstr "सऊदी अरब - अकाउंटिंग"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_sa_edi
+#, fuzzy
 msgid "Saudi Arabia - E-invoicing"
-msgstr ""
+msgstr "सऊदी अरब - ई-इनवॉइसिंग"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_sa_edi_pos
+#, fuzzy
 msgid "Saudi Arabia - E-invoicing (Simplified)"
-msgstr ""
+msgstr "सऊदी अरब - ई-इनवॉइसिंग (सरलीकृत)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_sa_hr_payroll
@@ -36218,7 +37006,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_sa_pos
 msgid "Saudi Arabia - Point of Sale"
-msgstr ""
+msgstr "Saudi Arabia - पॉइंट ऑफ़ सेल"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_users_form_simple_modif
@@ -36279,7 +37067,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__usage__ir_cron
 #: model_terms:ir.ui.view,arch_db:base.ir_cron_view_search
 msgid "Scheduled Action"
-msgstr ""
+msgstr "शेड्यूल किया गया ऐक्शन"
 
 #. module: base
 #: model:ir.actions.act_window,name:base.ir_cron_act
@@ -36550,8 +37338,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__state__webhook
+#, fuzzy
 msgid "Send Webhook Notification"
-msgstr ""
+msgstr "वेबहुक नोटिफ़िकेशन भेजें"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_account_peppol_selfbilling
@@ -36695,8 +37484,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.sn
+#, fuzzy
 msgid "Senegal"
-msgstr ""
+msgstr "सेनेगल"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.TOP
@@ -36768,8 +37558,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base.sequence_view
 #: model_terms:ir.ui.view,arch_db:base.sequence_view_tree
 #: model_terms:ir.ui.view,arch_db:base.view_sequence_search
+#, fuzzy
 msgid "Sequences"
-msgstr ""
+msgstr "सीक्वेंस"
 
 #. module: base
 #: model:ir.ui.menu,name:base.next_id_5
@@ -36819,8 +37610,9 @@ msgstr "सर्वर ऐक्शन"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_cron__ir_actions_server_id
+#, fuzzy
 msgid "Server action"
-msgstr ""
+msgstr "सर्वर ऐक्शन"
 
 #. module: base
 #. odoo-python
@@ -36854,7 +37646,7 @@ msgstr "सर्विस"
 #: model:ir.model.fields,field_description:base.field_ir_profile__session
 #: model_terms:ir.ui.view,arch_db:base.ir_profile_view_search
 msgid "Session"
-msgstr ""
+msgstr "सेशन"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_device__session_identifier
@@ -37314,12 +38106,12 @@ msgstr "सॉफ़्टवेयर रीसेलर"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_solar_installation
 msgid "Solar Energy Systems"
-msgstr ""
+msgstr "सोलर एनर्जी सिस्टम"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.PEN
 msgid "Soles"
-msgstr ""
+msgstr "सोल्स"
 
 #. module: base
 #: model:res.country,name:base.sb
@@ -37367,8 +38159,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.za
+#, fuzzy
 msgid "South Africa"
-msgstr ""
+msgstr "दक्षिण अफ्रीका"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_za
@@ -37955,12 +38748,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__store
 #: model_terms:ir.ui.view,arch_db:base.view_attachment_search
 msgid "Stored"
-msgstr ""
+msgstr "स्टोर किया गया"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_attachment__store_fname
 msgid "Stored Filename"
-msgstr ""
+msgstr "स्टोर की गई फ़ाइलनेम"
 
 #. module: base
 #: model:res.currency,currency_subunit_label:base.BGN
@@ -38117,7 +38910,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_surveyor
 msgid "Surveying & Mapping"
-msgstr ""
+msgstr "सर्वेक्षण और मैपिंग"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_marketing_surveys
@@ -38247,8 +39040,9 @@ msgstr "सिस्टम पैरामीटर"
 #: model:ir.ui.menu,name:base.ir_config_menu
 #: model_terms:ir.ui.view,arch_db:base.view_ir_config_form
 #: model_terms:ir.ui.view,arch_db:base.view_ir_config_list
+#, fuzzy
 msgid "System Parameters"
-msgstr ""
+msgstr "सिस्टम पैरामीटर"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_ir_config_search
@@ -38325,8 +39119,9 @@ msgstr "टैग"
 
 #. module: base
 #: model:res.country,name:base.tw
+#, fuzzy
 msgid "Taiwan"
-msgstr ""
+msgstr "ताइवान"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_tw
@@ -38386,8 +39181,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.tz
+#, fuzzy
 msgid "Tanzania"
-msgstr ""
+msgstr "तंजानिया"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_tz_account
@@ -38425,7 +39221,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_hr_timesheet
 msgid "Task Logs"
-msgstr ""
+msgstr "टास्क लॉग"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_tattoo_shop
@@ -39023,12 +39819,12 @@ msgstr ""
 #. module: base
 #: model:ir.model.constraint,message:base.constraint_res_currency_rate_currency_rate_check
 msgid "The currency rate must be strictly positive."
-msgstr ""
+msgstr "करेंसी रेट हमेशा पॉज़िटिव यानी ज़ीरो से ज़्यादा होना ज़रूरी है।"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_users__company_id
 msgid "The default company for this user."
-msgstr ""
+msgstr "इस उपयोगकर्ता के लिए डिफ़ॉल्ट कंपनी।"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.demo_failures_dialog
@@ -39837,6 +40633,9 @@ msgid ""
 "UBL/CII eInvoices (but not only). The module is intended be merged with "
 "account, later on, in master"
 msgstr ""
+"यह मॉड्यूल पार्टनर के लिए ग्लोबल लोकेशन नंबर जोड़ता है. डिलीवरी एड्रेस पर उपयोग किया "
+"जाने वाला यह नंबर स्टॉक लोकेशन की पहचान करने के लिए है और यह UBL/CII ई-इनवॉइस के लिए "
+"अनिवार्य है. इस मॉड्यूल को बाद में 'मास्टर' में अकाउंट के साथ जोड़ने की योजना है"
 
 #. module: base
 #: model:ir.module.module,description:base.module_mail_bot_hr
@@ -39967,6 +40766,7 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.module,description:base.module_test_spreadsheet
+#, fuzzy
 msgid ""
 "This module contains tests related to spreadsheet.\n"
 "    The modules exposes some mixin that are only implemented in other "
@@ -39977,6 +40777,12 @@ msgid ""
 "implementation of the later,\n"
 "    hence the need for this test module.\n"
 msgstr ""
+"इस मॉड्यूल में स्प्रेडशीट से संबंधित परीक्षण शामिल हैं.\n"
+"     यह मॉड्यूल कुछ मिक्सिन एक्सपोज करता है जो सिर्फ़ अन्य फ़ंक्शनल मॉड्यूल में लागू होते हैं. \n"
+"    मिक्सिन के वैश्विक व्यवहार का टेस्ट करने का प्रयास करते समय, इसे प्रत्येक उस मॉड्यूल में \n"
+"    टेस्ट करना कोई समझ नहीं है जो मिक्सिन को लागू करता है, बल्कि इसके बाद वाले के एक "
+"डमी इंप्लिमेंटेशन का टेस्ट करना चाहिए,\n"
+"     इसलिए इस टेस्ट मॉड्यूल की ज़रूरत है.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_test_web_gantt
@@ -40442,8 +41248,9 @@ msgstr ""
 #. module: base
 #: model:ir.module.category,name:base.module_category_hidden_tools
 #: model:ir.module.category,name:base.module_category_tools
+#, fuzzy
 msgid "Tools"
-msgstr ""
+msgstr "टूल"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_report_paperformat__margin_top
@@ -40768,8 +41575,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_accounting_localizations_uk
+#, fuzzy
 msgid "UK"
-msgstr ""
+msgstr "यूके"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_uk_reports
@@ -40913,8 +41721,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.ua
+#, fuzzy
 msgid "Ukraine"
-msgstr ""
+msgstr "यूक्रेन"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ua
@@ -40994,8 +41803,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:base.module_form
 #: model_terms:ir.ui.view,arch_db:base.module_view_kanban
 #: model_terms:ir.ui.view,arch_db:base.view_base_module_uninstall
+#, fuzzy
 msgid "Uninstall"
-msgstr ""
+msgstr "अनइंस्टॉल करें"
 
 #. module: base
 #. odoo-python
@@ -41111,8 +41921,9 @@ msgstr "United States Postal Service (USPS) शिपिंग"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_delivery_usps
+#, fuzzy
 msgid "United States Postal Service (USPS) Shipping (Legacy)"
-msgstr ""
+msgstr "United States Postal Service (USPS) शिपिंग (पुराना)"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_uom
@@ -41266,8 +42077,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__state__object_write
+#, fuzzy
 msgid "Update Record"
-msgstr ""
+msgstr "रिकॉर्ड अपडेट करें"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_server__update_related_model_id
@@ -41564,8 +42376,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users__device_ids
+#, fuzzy
 msgid "User devices"
-msgstr ""
+msgstr "उपयोगकर्ता डिवाइस"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_users__log_ids
@@ -41579,8 +42392,9 @@ msgstr ""
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_user_type
+#, fuzzy
 msgid "User types"
-msgstr ""
+msgstr "उपयोगकर्ता के प्रकार"
 
 #. module: base
 #: model:ir.model,name:base.model_change_password_user
@@ -41681,8 +42495,9 @@ msgstr ""
 
 #. module: base
 #: model:res.country,name:base.uz
+#, fuzzy
 msgid "Uzbekistan"
-msgstr ""
+msgstr "उज़्बेकिस्तान"
 
 #. module: base
 #. odoo-python
@@ -42032,7 +42847,7 @@ msgstr "चेतावनी"
 #: code:addons/base/models/decimal_precision.py:0
 #: code:addons/base/models/res_currency.py:0
 msgid "Warning for %s"
-msgstr ""
+msgstr "%s के लिए चेतावनी"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_ui_view__warning_info
@@ -42073,6 +42888,14 @@ msgid ""
 "it contributes to the goals of the company, we then optimize it, and design "
 "the software solutions to best support it."
 msgstr ""
+"हम एक टेक्नोलॉजी कंसल्टिंग और रणनीतिक सलाहकार फ़र्म हैं जो दुनिया भर में अपने क्लाइंट्स के "
+"लिए एडवांस सॉफ़्टवेयर के जरिए वैल्यू बढ़ाने वाले समाधान बनाती है.\n"
+" <br> <br>\n"
+"Lumber Inc में हम ऑपरेशनल अनुभव को तकनीकी सूझबूझ के साथ जोड़ते हैं. हम समझते हैं कि बिज़नेस "
+"ऑपरेशंस को सपोर्ट करने वाला कोई भी सॉफ़्टवेयर इस तरह बनाया जाना चाहिए जो महत्वपूर्ण "
+"प्रक्रियाओं को आसान बनाए और यूजर्स के लिए बाधा के बजाय एक मददगार टूल बने. हमारा "
+"दृष्टिकोण पहले प्रोसेस पर केंद्रित है, यह सुनिश्चित करते हुए कि यह कंपनी के लक्ष्यों में योगदान "
+"दे, फिर हम इसे बेहतर बनाते हैं, और इसे सपोर्ट करने के लिए सॉफ़्टवेयर समाधान डिजाइन करते हैं।"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_web
@@ -42347,7 +43170,7 @@ msgstr "सप्ताह"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_wellness_practitioner
 msgid "Wellness Practitioner"
-msgstr ""
+msgstr "वेलनेस प्रैक्टिशनर"
 
 #. module: base
 #: model:res.country,name:base.eh
@@ -42663,7 +43486,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base.field_ir_model_constraint__write_date
 #: model:ir.model.fields,field_description:base.field_ir_model_relation__write_date
 msgid "Write Date"
-msgstr ""
+msgstr "तारीख लिखें"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_ir_actions_server__code
@@ -43132,8 +43955,9 @@ msgstr "जिप"
 
 #. module: base
 #: model:res.country,name:base.zm
+#, fuzzy
 msgid "Zambia"
-msgstr ""
+msgstr "जाम्बिया"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_zm_account
@@ -43197,7 +44021,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_asset__active
 msgid "active"
-msgstr ""
+msgstr "ऐक्टिव"
 
 #. module: base
 #. odoo-python
@@ -43694,7 +44518,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_model_fields__ttype__properties
 msgid "properties"
-msgstr ""
+msgstr "प्रॉपर्टीज़"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_model_fields__ttype__properties_definition
@@ -43722,7 +44546,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/base/models/ir_qweb_fields.py:0
 msgid "second"
-msgstr ""
+msgstr "दूसरा"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_model_fields__ttype__selection
@@ -43737,7 +44561,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.category,name:base.module_category_services_sales_subscriptions
 msgid "subscriptions"
-msgstr ""
+msgstr "सब्सक्रिप्शन"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_tests
@@ -43859,7 +44683,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_server__value_field_to_show__value
 msgid "value"
-msgstr ""
+msgstr "वैल्यू"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_website_helpdesk_sale_loyalty
@@ -43893,7 +44717,7 @@ msgstr "लिखें"
 #. odoo-python
 #: code:addons/base/models/ir_qweb_fields.py:0
 msgid "year"
-msgstr ""
+msgstr "साल"
 
 #. module: base
 #. odoo-python

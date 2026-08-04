@@ -129,6 +129,24 @@ class TestItEdi(AccountTestInvoicingCommon):
             'amount_type': 'percent',
         })
 
+        cls.vat_0_N1_purchase = cls.env['account.tax'].with_company(cls.company).create({
+            'name': "VAT 0% Natura N1",
+            'amount': 0.0,
+            'amount_type': 'percent',
+            'type_tax_use': 'purchase',
+            'l10n_it_exempt_reason': 'N1',
+            'l10n_it_law_reference': 'test',
+        })
+
+        cls.vat_0_N2_1_purchase = cls.env['account.tax'].with_company(cls.company).create({
+            'name': "VAT 0% Natura N2.1",
+            'amount': 0.0,
+            'amount_type': 'percent',
+            'type_tax_use': 'purchase',
+            'l10n_it_exempt_reason': 'N2.1',
+            'l10n_it_law_reference': 'test',
+        })
+
         cls.module = 'l10n_it_edi'
 
     def _assert_export_invoice(self, invoice, filename):
@@ -143,7 +161,7 @@ class TestItEdi(AccountTestInvoicingCommon):
             ae.args = (ae.args[0] + f"\nFile used for comparison: {filename}", )
             raise
 
-    def _assert_import_invoice(self, filename, expected_values_list, xml_to_apply=None):
+    def _assert_import_invoice(self, filename, expected_values_list, xml_to_apply=None, move_type="in_invoice"):
         """ Tests an invoice imported from an XML vendor bill file on the filesystem
             against expected values. XPATHs can be applied with the `xml_to_apply`
             argument to the XML content before it's imported.
@@ -163,7 +181,12 @@ class TestItEdi(AccountTestInvoicingCommon):
             'name': filename,
             'raw': import_content,
         })
-        purchase_journal = self.company_data_2['default_journal_purchase'].with_context(default_move_type='in_invoice')
+
+        journal_type = {
+            'in_invoice': 'default_journal_purchase',
+            'out_invoice': 'default_journal_sale',
+        }[move_type]
+        purchase_journal = self.company_data_2[journal_type].with_context(default_move_type=move_type)
         invoices = purchase_journal._create_document_from_attachment(attachment.ids)
 
         expected_invoice_values_list = []

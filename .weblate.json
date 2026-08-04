@@ -57,6 +57,11 @@
                 "new_base": "addons/account_peppol/i18n/account_peppol.pot"
             },
             {
+                "name": "account_peppol_response",
+                "filemask": "addons/account_peppol_response/i18n/*.po",
+                "new_base": "addons/account_peppol_response/i18n/account_peppol_response.pot"
+            },
+            {
                 "name": "account_peppol_selfbilling",
                 "filemask": "addons/account_peppol_selfbilling/i18n/*.po",
                 "new_base": "addons/account_peppol_selfbilling/i18n/account_peppol_selfbilling.pot"
@@ -2074,6 +2079,12 @@
                 "language_regex": "^(da)$"
             },
             {
+                "name": "l10n_dk_nemhandel_response",
+                "filemask": "addons/l10n_dk_nemhandel_response/i18n/*.po",
+                "new_base": "addons/l10n_dk_nemhandel_response/i18n/l10n_dk_nemhandel_response.pot",
+                "language_regex": "^(da)$"
+            },
+            {
                 "name": "l10n_dk_oioubl",
                 "filemask": "addons/l10n_dk_oioubl/i18n/*.po",
                 "new_base": "addons/l10n_dk_oioubl/i18n/l10n_dk_oioubl.pot",
@@ -2236,6 +2247,18 @@
                 "language_regex": "^(fr)$"
             },
             {
+                "name": "l10n_fr_pdp",
+                "filemask": "addons/l10n_fr_pdp/i18n/*.po",
+                "new_base": "addons/l10n_fr_pdp/i18n/l10n_fr_pdp.pot",
+                "language_regex": "^(fr)$"
+            },
+            {
+                "name": "l10n_fr_pdp_pos",
+                "filemask": "addons/l10n_fr_pdp_pos/i18n/*.po",
+                "new_base": "addons/l10n_fr_pdp_pos/i18n/l10n_fr_pdp_pos.pot",
+                "language_regex": "^(fr)$"
+            },
+            {
                 "name": "l10n_fr_pos_cert",
                 "filemask": "addons/l10n_fr_pos_cert/i18n/*.po",
                 "new_base": "addons/l10n_fr_pos_cert/i18n/l10n_fr_pos_cert.pot",
@@ -2323,6 +2346,12 @@
                 "name": "l10n_hu_edi",
                 "filemask": "addons/l10n_hu_edi/i18n/*.po",
                 "new_base": "addons/l10n_hu_edi/i18n/l10n_hu_edi.pot",
+                "language_regex": "^(hu)$"
+            },
+            {
+                "name": "l10n_hu_edi_receive",
+                "filemask": "addons/l10n_hu_edi_receive/i18n/*.po",
+                "new_base": "addons/l10n_hu_edi_receive/i18n/l10n_hu_edi_receive.pot",
                 "language_regex": "^(hu)$"
             },
             {
@@ -2764,6 +2793,12 @@
                 "language_regex": "^(pl)$"
             },
             {
+                "name": "l10n_pl_bank_verification",
+                "filemask": "addons/l10n_pl_bank_verification/i18n/*.po",
+                "new_base": "addons/l10n_pl_bank_verification/i18n/l10n_pl_bank_verification.pot",
+                "language_regex": "^(pl)$"
+            },
+            {
                 "name": "l10n_pl_edi",
                 "filemask": "addons/l10n_pl_edi/i18n/*.po",
                 "new_base": "addons/l10n_pl_edi/i18n/l10n_pl_edi.pot",
@@ -3019,6 +3054,12 @@
                 "name": "l10n_vn_edi_viettel",
                 "filemask": "addons/l10n_vn_edi_viettel/i18n/*.po",
                 "new_base": "addons/l10n_vn_edi_viettel/i18n/l10n_vn_edi_viettel.pot",
+                "language_regex": "^(vi)$"
+            },
+            {
+                "name": "l10n_vn_edi_viettel_pos",
+                "filemask": "addons/l10n_vn_edi_viettel_pos/i18n/*.po",
+                "new_base": "addons/l10n_vn_edi_viettel_pos/i18n/l10n_vn_edi_viettel_pos.pot",
                 "language_regex": "^(vi)$"
             }
         ]

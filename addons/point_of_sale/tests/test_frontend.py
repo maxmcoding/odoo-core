@@ -2472,6 +2472,119 @@ class TestUi(TestPointOfSaleHttpCommon):
         self.assertEqual(order.amount_total, 2.80, "The total amount should be rounded to 2 decimals")
         self.assertEqual(order.amount_return, 0, "The return amount should be rounded to 2 decimals")
 
+    def test_offline_barcode_not_in_pos(self):
+        """
+        Tests that an unwanted error is not thrown when trying to scan a barcode while offline
+        for a product that is not in the PoS.
+        """
+        self.wall_shelf.available_in_pos = False
+        self.start_tour("/pos/ui?config_id=%d" % self.main_pos_config.id, 'test_offline_barcode_not_in_pos', login="pos_user")
+
+    def test_barcode_scan_preselect_always_variant(self):
+        """
+        When scanning a barcode that matches a specific variant, the product configurator
+        should open with the 'always' variant attribute (Color) preselected and only the
+        'no_variant' attribute (Size) requiring user input.
+        """
+        color_attribute = self.env['product.attribute'].create({
+            'name': 'Color',
+            'create_variant': 'always',
+            'display_type': 'radio',
+            'value_ids': [(0, 0, {'name': 'Red', 'sequence': 1}), (0, 0, {'name': 'Blue', 'sequence': 2})],
+        })
+        size_attribute = self.env['product.attribute'].create({
+            'name': 'Size',
+            'create_variant': 'no_variant',
+            'display_type': 'radio',
+            'value_ids': [(0, 0, {'name': 'Small', 'sequence': 1}), (0, 0, {'name': 'Large', 'sequence': 2})],
+        })
+        product = self.env['product.template'].create({
+            'name': 'Variant Barcode Product',
+            'available_in_pos': True,
+            'list_price': 10,
+            'taxes_id': False,
+            'attribute_line_ids': [
+                (0, 0, {
+                    'attribute_id': color_attribute.id,
+                    'value_ids': [(6, 0, color_attribute.value_ids.ids)],
+                }),
+                (0, 0, {
+                    'attribute_id': size_attribute.id,
+                    'value_ids': [(6, 0, size_attribute.value_ids.ids)],
+                }),
+            ],
+        })
+        red_variant, blue_variant = product.product_variant_ids
+        red_variant.barcode = 'VAR_RED_001'
+        blue_variant.barcode = 'VAR_BLUE_001'
+
+        self.main_pos_config.with_user(self.pos_user).open_ui()
+        self.start_tour("/pos/ui?config_id=%d" % self.main_pos_config.id, 'test_barcode_scan_preselect_always_variant', login="pos_user")
+
+    def test_refund_backend_duplicate(self):
+        self.main_pos_config.with_user(self.pos_user).open_ui()
+        current_session = self.main_pos_config.current_session_id
+        order = self.env['pos.order'].create({
+            'company_id': self.env.company.id,
+            'session_id': current_session.id,
+            'partner_id': self.partner_test_1.id,
+            'pos_reference': 'Order 0001-001-0001',
+            'lines': [Command.create({
+                'name': "OL/0001",
+                'product_id': self.whiteboard_pen.id,
+                'price_unit': 10.0,
+                'discount': 0.0,
+                'qty': 1.0,
+                'price_subtotal': 10.0,
+                'price_subtotal_incl': 10.0,
+            })],
+            'amount_total': 10.0,
+            'amount_tax': 0.0,
+            'amount_paid': 0.0,
+            'amount_return': 0.0,
+        })
+        payment_context = {"active_ids": order.ids, "active_id": order.id}
+        order_payment = self.env['pos.make.payment'].with_context(**payment_context).create({
+            'amount': order.amount_total,
+            'payment_method_id': self.bank_payment_method.id
+        })
+        order_payment.with_context(**payment_context).check()
+        order.refund()
+        self.start_tour("/pos/ui?config_id=%d" % self.main_pos_config.id, 'test_refund_backend_duplicate', login="pos_user")
+
+    def test_saver_screen_close_overlays(self):
+        """Test that active overlays (e.g., dropdown menus) are closed when the SaverScreen is triggered."""
+        self.main_pos_config.with_user(self.pos_user).open_ui()
+        self.start_pos_tour('SaverScreenCloseOverlaysTour')
+
+    def test_single_value_multi_attribute_configurator(self):
+        # A multi-select attribute with a single value must still open the
+        # configurator when the product is added to the order.
+        product = self.env['product.product'].create({
+            'name': 'Single Multi Product',
+            'available_in_pos': True,
+            'list_price': 10,
+            'taxes_id': False,
+        })
+        multi_attribute = self.env['product.attribute'].create({
+            'name': 'Extras',
+            'display_type': 'multi',
+            'create_variant': 'no_variant',
+        })
+        multi_value = self.env['product.attribute.value'].create({
+            'name': 'Extra Cheese',
+            'attribute_id': multi_attribute.id,
+        })
+        attribute_line = self.env['product.template.attribute.line'].create({
+            'product_tmpl_id': product.product_tmpl_id.id,
+            'attribute_id': multi_attribute.id,
+            'value_ids': [(6, 0, multi_value.ids)],
+        })
+        attribute_line.product_template_value_ids[0].price_extra = 5
+
+        self.main_pos_config.with_user(self.pos_user).open_ui()
+        self.start_pos_tour('test_single_value_multi_attribute_configurator')
+
 
 # This class just runs the same tests as above but with mobile emulation
 class MobileTestUi(TestUi):

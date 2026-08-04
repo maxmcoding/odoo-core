@@ -18,15 +18,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-16 16:38+0000\n"
-"PO-Revision-Date: 2026-03-21 09:27+0000\n"
-"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
+"PO-Revision-Date: 2026-07-28 16:47+0000\n"
+"Last-Translator: Bren Driesen <brdri@odoo.com>\n"
 "Language-Team: Dutch <https://translate.odoo.com/projects/odoo-18/base/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_at_reports
@@ -4319,6 +4319,9 @@ msgid ""
 "Bridge module to support the debit notes (nota di debito - NDD) by adding "
 "debit note fields.\n"
 msgstr ""
+"\n"
+"Brugmodule om de debetnota's (nota di debito - NDD) te ondersteunen door "
+"velden voor debetnota's toe te voegen.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_base_automation_hr_contract
@@ -6005,7 +6008,7 @@ msgid ""
 "Document app.\n"
 msgstr ""
 "\n"
-"De individuele accountformulieren van medewerkers worden automatisch "
+"De individuele rekeningformulieren van werknemers worden automatisch "
 "geïntegreerd in de Documenten-app.\n"
 
 #. module: base
@@ -6155,6 +6158,10 @@ msgid ""
 "Extension for Poland - Accounting to add support for taxable supply date\n"
 "========================================================================\n"
 msgstr ""
+"\n"
+"Uitbreiding voor Polen - Boekhouding, om ondersteuning toe te voegen voor de "
+"datum van belastbare handeling\n"
+"========================================================================\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_website_generator_sale
@@ -7522,6 +7529,12 @@ msgid ""
 "transport\n"
 "modes classified as Air or Sea in the e-Way Bill system.\n"
 msgstr ""
+"\n"
+"India - E-waybill-verzendhavens\n"
+"====================================\n"
+"Een nieuwe module voor het beheer van Indiase havencodes, specifiek voor\n"
+"vervoerswijzen die in het e-Way Bill-systeem zijn geclassificeerd als Lucht "
+"of Zee.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_in
@@ -9997,6 +10010,10 @@ msgid ""
 "============================\n"
 "Submit your Tax Reports to the Danish tax authorities\n"
 msgstr ""
+"\n"
+"RSU Denemarken Lokalisatie.\n"
+"============================\n"
+"Dien je belastingaangiften in bij de Deense belastingdienst\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_hr_payroll_expense
@@ -13428,10 +13445,10 @@ msgstr ""
 "\n"
 "Deze module maakt het mogelijk om de D.406-aangifte vanuit Odoo te "
 "genereren.\n"
-"De D.406-aangifte is een XML-bestand in het SAF-T-formaat dat door Roemeense "
-"bedrijven wordt aangemaakt\n"
-"moeten maandelijks of driemaandelijks worden ingediend, afhankelijk van hun "
-"btw-aangifteperiode.\n"
+"De D.406-aangifte is een XML-bestand in het SAF-T-formaat dat Roemeense "
+"bedrijven\n"
+"maandelijks of driemaandelijks moeten indienen, afhankelijk van hun btw-"
+"aangifteperiode.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_stock_barcode
@@ -14037,6 +14054,12 @@ msgid ""
 "       1. Adds support for different invoice types and payment methods.\n"
 "       2. Introduces demo mode.\n"
 msgstr ""
+"\n"
+"Deze module verbetert de Jordaanse E-facturatie (JoFotara) op de volgende "
+"punten:\n"
+"       1. Voegt ondersteuning toe voor verschillende factuurtypes en "
+"betaalmethoden.\n"
+"       2. Introduceert een demomodus.\n"
 
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_my_edi_extended
@@ -15600,7 +15623,7 @@ msgstr "%y - Jaar zonder eeuw [00,99].\""
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.language_install_view_form_lang_switch
 msgid "&amp; Close"
-msgstr "&amp; Afsluiten"
+msgstr "&amp; Sluiten"
 
 #. module: base
 #. odoo-python
@@ -16882,7 +16905,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields,field_description:base.field_base_partner_merge_automatic_wizard__exclude_contact
 msgid "A user associated to the contact"
-msgstr "Een gebruiker behorende bij dit contactpersoon"
+msgstr "Een gebruiker gekoppeld aan dit contact"
 
 #. module: base
 #: model:ir.module.category,description:base.module_category_human_resources_appraisals
@@ -17119,7 +17142,7 @@ msgstr "Automatische boekingen"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_bank_statement_extract
 msgid "Account Bank Statement Extract"
-msgstr "Rekeningafschrift uittreksel"
+msgstr "Rekeningafschriftgegevens extraheren"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_bank_statement_import
@@ -17163,8 +17186,9 @@ msgstr "Factuurextractie notificatie"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_no_followup
+#, fuzzy
 msgid "Account No Followup"
-msgstr ""
+msgstr "Rekening zonder betaalherinnering"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner_bank__acc_number
@@ -17511,7 +17535,7 @@ msgstr "Toevoegen"
 #. module: base
 #: model:ir.module.module,summary:base.module_account_no_followup
 msgid "Add \"no followup\" field to journal items."
-msgstr ""
+msgstr "Voeg het veld 'geen betaalherinnering' toe aan boekingsregels."
 
 #. module: base
 #: model:ir.module.module,summary:base.module_pos_avatax
@@ -17611,7 +17635,7 @@ msgstr "Voeg een websitefragment toe voor de e-mailgroepen."
 #. module: base
 #: model:ir.module.module,description:base.module_l10n_uy_website_sale
 msgid "Add address Uruguay localisation fields in address page. "
-msgstr ""
+msgstr "Voeg adresvelden voor Uruguay toe aan de adrespagina. "
 
 #. module: base
 #: model:ir.module.module,summary:base.module_account_reports_cash_basis
@@ -17769,7 +17793,7 @@ msgstr ""
 #. module: base
 #: model:ir.module.module,summary:base.module_l10n_ro_efactura_synchronize
 msgid "Additional module to synchronize bills with the SPV"
-msgstr ""
+msgstr "Extra module om leveranciersfacturen te synchroniseren met de SPV"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_pos_self_order
@@ -21555,7 +21579,7 @@ msgstr "Belgische loonadministratie - Aanwezigheid"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_blackbox_be
 msgid "Belgian Registered Cash Register"
-msgstr "Belgische geregistreerde kassa"
+msgstr "Belgisch geregistreerd kassasysteem"
 
 #. module: base
 #: model:res.country,name:base.be
@@ -23482,8 +23506,8 @@ msgid ""
 "Company tagline, which is included in a printed document's header or footer "
 "(depending on the selected layout)."
 msgstr ""
-"Bedrijfsslogan, dat wordt opgenomen in de kop- of voettekst van een "
-"afgedrukt document (afhankelijk van de geselecteerde lay-out)."
+"Bedrijfsslogan die wordt opgenomen in de kop- of voettekst van een afgedrukt "
+"document (afhankelijk van de geselecteerde lay-out)."
 
 #. module: base
 #. odoo-python
@@ -25078,12 +25102,12 @@ msgstr "Gedecimaliseerd getal"
 #. module: base
 #: model:ir.actions.act_window,name:base.action_partner_deduplicate
 msgid "Deduplicate Contacts"
-msgstr "Ontdubbelen contacten"
+msgstr "Contacten ontdubbelen"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
 msgid "Deduplicate the other Contacts"
-msgstr "Ontdubbel de andere contacten"
+msgstr "Andere contacten ontdubbelen"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_users_form
@@ -25314,7 +25338,7 @@ msgstr "Denemarken - Intrastat"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_dk_rsu
 msgid "Denmark - RSU"
-msgstr ""
+msgstr "Denemarken - RSU"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_dk_saft_import
@@ -25329,7 +25353,7 @@ msgstr "Denemarken EDI - Nemhandel"
 #. module: base
 #: model:ir.module.module,summary:base.module_l10n_dk_rsu
 msgid "Denmark Localization - RSU"
-msgstr ""
+msgstr "Lokalisatie voor Denemarken - RSU"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_model_fields__depends
@@ -25403,7 +25427,7 @@ msgstr "Bureau productiebedrijf"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_base_partner_merge_automatic_wizard__dst_partner_id
 msgid "Destination Contact"
-msgstr "Bestemming contactpersoon"
+msgstr "Bestemmingscontact"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_ir_actions_act_window__res_model
@@ -26033,12 +26057,12 @@ msgstr "Toon de font awesome marker niet"
 #: model:ir.model.fields.selection,name:base.selection__ir_actions_todo__state__done
 #: model:ir.model.fields.selection,name:base.selection__res_users_deletion__state__done
 msgid "Done"
-msgstr "Gereed"
+msgstr "Voltooid"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.form_res_users_key_show
 msgid "Done!"
-msgstr "Gereed!"
+msgstr "Voltooid!"
 
 #. module: base
 #: model:res.currency,currency_unit_label:base.VND
@@ -26119,6 +26143,12 @@ msgid ""
 "back in 19.0.\n"
 "    This module ports the feature back in 18.0"
 msgstr ""
+"Tijdens de herwerking van het betaalherinneringsrapport in 18.0 werd het\n"
+"    veld \"Geen betaalherinnering\" uit boekingsregels verwijderd, waardoor "
+"het onmogelijk werd om\n"
+"    individuele boekingsregels uit te sluiten van het activeren van een "
+"betaalherinnering. Dit werd in 19.0 weer toegevoegd.\n"
+"    Deze module brengt de functie terug in 18.0"
 
 #. module: base
 #: model:ir.module.module,description:base.module_pos_no_followup
@@ -26130,6 +26160,12 @@ msgid ""
 "back in 19.0.\n"
 "    This module ports the feature back in 18.0 for point of sale."
 msgstr ""
+"Tijdens de herwerking van het betaalherinneringsrapport in 18.0 werd het\n"
+"    veld \"Geen betaalherinnering\" uit boekingsregels verwijderd, waardoor "
+"het onmogelijk werd om\n"
+"    individuele boekingsregels uit te sluiten van het activeren van een "
+"betaalherinnering. Dit werd in 19.0 weer toegevoegd.\n"
+"    Deze module brengt de functie terug in 18.0 voor Kassa."
 
 #. module: base
 #: model:ir.module.module,summary:base.module_l10n_nl_reports_sbr
@@ -27844,7 +27880,7 @@ msgstr "Uitgebreide adressen"
 #. module: base
 #: model:ir.module.module,summary:base.module_l10n_jo_edi_extended
 msgid "Extended features for JoFotara"
-msgstr ""
+msgstr "Uitgebreide functies voor JoFotara"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_l10n_my_edi_extended
@@ -28825,7 +28861,7 @@ msgstr "Frankrijk - Loonadministratie met boekhouding"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_fr_facturx_chorus_pro
 msgid "France - Peppol integration with Chorus Pro"
-msgstr ""
+msgstr "Frankrijk - Peppol-integratie met Chorus Pro"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_fr_hr_holidays
@@ -28941,6 +28977,8 @@ msgid ""
 "Functionality to manage GSTR Document Summary (Table 13) for India GST "
 "returns."
 msgstr ""
+"Functionaliteit voor het beheren van GSTR-documentoverzichten (Tabel 13) "
+"voor GST-aangiften in India."
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_furniture_store
@@ -29033,7 +29071,7 @@ msgstr "GSTIN"
 #. module: base
 #: model:ir.module.module,summary:base.module_l10n_in_reports_gstr_document_summary
 msgid "GSTR Document Summary Management"
-msgstr ""
+msgstr "Beheer van GSTR-documentoverzichten"
 
 #. module: base
 #: model:res.country,name:base.ga
@@ -29134,7 +29172,7 @@ msgstr "Genereer leads wanneer verkoopkansen afspraken plannen"
 #. module: base
 #: model:ir.module.module,summary:base.module_sale_subscription
 msgid "Generate recurring invoices and manage renewals"
-msgstr "Genereer terugkerende facturen en beheer vernieuwingen"
+msgstr "Genereer terugkerende facturen en beheer verlengingen"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_website_links
@@ -30751,8 +30789,8 @@ msgstr "Implementeert het geregistreerde geldsysteem"
 msgid ""
 "Implements the registered cash system, adhering to guidelines by FPS Finance."
 msgstr ""
-"Implementeert het geregistreerde kas systeem, in overeenstemming met de "
-"richtlijnen van FPS Finance."
+"Implementeert het geregistreerd kassasysteem, in overeenstemming met de "
+"richtlijnen van FOD Financiën."
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_base_import_language
@@ -31015,7 +31053,7 @@ msgstr "India - E-waybill Voorraad"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_in_reports_gstr_document_summary
 msgid "Indian - GSTR Document Summary"
-msgstr ""
+msgstr "India - GSTR-documentoverzicht"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_in_reports_gstr
@@ -31045,7 +31083,7 @@ msgstr "India - Verkoop rapportages (GST)"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_in_ewaybill_port
 msgid "Indian - Shipping Ports for E-waybill"
-msgstr ""
+msgstr "India - Verzendhavens voor E-waybill"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_in_stock
@@ -32066,6 +32104,8 @@ msgstr ""
 msgid ""
 "Italy - E-invoicing - Bridge module between Italy NDD and Account Debit Note"
 msgstr ""
+"Italië - E-facturatie - Brugmodule tussen Italië NDD en Debetnota's in "
+"boekhouding"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_it_pos
@@ -32166,12 +32206,12 @@ msgstr "Jordanië E-facturatie"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_jo_edi_extended
 msgid "Jordan E-Invoicing Extended Features"
-msgstr ""
+msgstr "Uitgebreide functies voor Jordaanse Facturatie"
 
 #. module: base
 #: model:ir.model.fields,field_description:base.field_base_partner_merge_automatic_wizard__exclude_journal_item
 msgid "Journal Items associated to the contact"
-msgstr "Boekingen behorende bij dit contactpersoon"
+msgstr "Boekingsregels gekoppeld aan dit contact"
 
 #. module: base
 #. odoo-python
@@ -37115,112 +37155,116 @@ msgstr ""
 "Odoo Kassa\n"
 "-----------------------------\n"
 "\n"
-"<a href=\"https://www.odoo.com/app/point-of-sale-shop\">Kassa</a> van Odoo "
-"introduceert een schone interface die online en offline werkt op moderne "
+"<a href=\"https://www.odoo.com/app/point-of-sale-shop\">Het kassasysteem</a> "
+"van Odoo heeft een strakke interface die online en offline werkt op moderne "
 "hardware, zonder aparte installatie\n"
 "\n"
 "De volledige integratie met de voorraad en boekhouding van het bedrijf geeft "
-"je realtime statistieken en consolidaties tussen alle winkels zonder het "
+"je realtime statistieken en consolidatie met al je vestigingen zonder het "
 "gedoe van te veel verschillende apps.\n"
 "\n"
 "Werk met de hardware die je al hebt\n"
+"\n"
 "---------------------------------------\n"
 "\n"
 "### In je webbrowser\n"
 "\n"
-"Odoo Kassa is een webapplicatie die kan draaien op elk apparaat dat websites "
-"kan weergeven met weinig tot geen vereiste installatie.\n"
+"Odoo Kassa is een webapplicatie die werkt op eender welk apparaat dat "
+"websites kan weergeven, en vergt weinig tot geen installatie.\n"
 "\n"
 "### Touchscreen of toetsenbord?\n"
 "\n"
-"Kassa werkt perfect op elk type touchscreenapparaat, of het nu gaat om "
-"multitouch-tablets zoals een iPad of resistieve touchscreenterminals zonder "
-"toetsenbord.\n"
+"Het kassasysteem werkt perfect op eender welk touchscreen-apparaat, of het "
+"nu gaat om multi-touchtablets zoals een iPad of om terminals met een "
+"resistieve touchscreen.\n"
 "\n"
 "### Weegschalen en printers\n"
 "\n"
-"Barcodescanners en printers worden standaard ondersteund, zonder "
-"installatie. Weegschalen, kassa's en andere randapparatuur kunnen worden "
-"gebruikt met de API-proxy.\n"
+"Barcodescanners en -printers worden standaard ondersteund, zonder "
+"installatie. Weegschalen, kassalades en randapparatuur kunnen worden "
+"gebruikt via de Proxy API.\n"
 "\n"
 "Online en offline\n"
 "------------------\n"
 "\n"
-"### Odoo's Kassa blijft betrouwbaar, zelfs als je verbinding dat niet is\n"
+"### Je kunt blijven rekenen op Odoo Kassa, ook wanneer je internetverbinding "
+"het begeeft\n"
 "\n"
-"Implementeer nieuwe winkels met alleen een internetverbinding: **geen "
-"installatie of specifieke hardware vereist**. Het werkt met elke **iPad, "
-"tablet-pc, laptop** of industriële Kassa-machine.\n"
+"Zet nieuwe winkels op met alleen een internetverbinding: **geen installatie "
+"of specifieke hardware nodig**. Het werkt op **iPads, tablets, laptops** en "
+"industriële kassaterminals.\n"
 "\n"
-"Een internetverbinding is vereist om de Kassa te starten, maar daarna blijft "
-"het systeem operationeel, zelfs na een volledig onderbroken verbindin.\n"
+"Een internetverbinding is nodig om het kassasysteem op te starten, maar "
+"daarna blijft het operationeel, zelfs wanneer de verbinding volledig "
+"wegvalt.\n"
 "\n"
 "\n"
-"Een superschone gebruikersinterface\n"
+"Een superstrakke interface\n"
 "----------------------------\n"
 "\n"
 "### Eenvoudig en mooi\n"
 "\n"
-"Zeg vaarwel tegen lelijke, verouderde Kassasoftware en geniet van de Odoo-"
-"webinterface die werd ontworpen voor de moderne retailer.\n"
+"Gedaan met lelijke, verouderde kassasoftware! Geniet van de moderne "
+"webinterface van Odoo, speciaal ontworpen voor hedendaagse retailers.\n"
 "\n"
-"### Ontworpen voor productiviteit\n"
+"### Ontworpen voor maximale productiviteit\n"
 "\n"
-"Zowel in restaurants al in winkels kun je meerdere orders parallel "
-"activeren, zodat je klanten niet hoeven te wachten.\n"
+"Zowel in restaurants als in winkels kun je meerdere bestellingen "
+"tegelijkertijd verwerken zodat klanten nooit onnodig hoeven te wachten.\n"
 "\n"
-"### Razendsnel zoeken\n"
+"### Razendsnelle zoekfunctie\n"
 "\n"
-"Scan producten, blader door hiërarchische categorieën of krijg snel "
-"informatie over producten met de razendsnelle filter voor al je producten.\n"
+"Scan producten, blader door hiërarchische categorieën of vind direct de "
+"juiste producten dankzij de uiterst snelle zoek- en filterfunctie.\n"
 "\n"
 "Geïntegreerd voorraadbeheer\n"
 "-------------------------------\n"
 "\n"
-"Geef alle je verkoopteams accurate informatie: winkels, e-commerce, "
-"verkoopteams. Krijg realtime controle over de voorraad en nauwkeurige "
-"voorspelling om de inkoop te beheren.\n"
+"Beheer al je verkoopteams in realtime: winkels, e-commerce, verkoopteams. "
+"Krijg realtime controle over je voorraad en nauwkeurige voorspellingen voor "
+"je inkoop.\n"
 "\n"
-"Een volledig magazijnbeheersysteem binnen handbereik: krijg informatie over "
-"productbeschikbaarheid, trigger inkoopverzoeken, enz.\n"
+"Je beschikt over een compleet magazijnbeheersysteem waarmee je "
+"productbeschikbaarheid kunt controleren, inkoopaanvragen kunt activeren en "
+"nog veel meer.\n"
 "\n"
-"Klantenservice in de winkel leveren\n"
+"Diensten voor klanten aanbieden in de winkel\n"
 "----------------------------------\n"
 "\n"
-"Geef je klanten een positieve ervaring door klantendiensten in de winkel aan "
-"te bieden. Reparaties, garanties, claims van klanten, leveringsopdrachten "
-"plannen, enz.\n"
+"Bied je klanten een optimale winkelervaring door diensten aan te bieden in "
+"de winkel. Beheer reparaties, volg garanties op, behandel klachten en plan "
+"leveringen.\n"
 "\n"
-"Integratie van facturatie en boekhouding\n"
+"Integratie met facturatie en boekhouding\n"
 "----------------------------------\n"
 "\n"
-"Maak facturen in slechts een paar klikken. Beheer verkoop en contant geld in "
-"realtime en gebruik Odoo's krachtige rapportage om slimmere beslissingen te "
-"nemen en je winkel efficiënter te runnen.\n"
+"Maak in enkele klikken facturen voor klanten aan. Beheer je verkopen en "
+"kasstromen in realtime en gebruik de krachtige rapportages van Odoo om "
+"betere beslissingen te nemen en je winkel efficiënter te runnen.\n"
 "\n"
-"Geen gedoe meer met moeilijke softwareintegraties: Verkopen en "
-"voorraadbewerkingen worden automatisch geboekt in je grootboek.\n"
+"Geen ingewikkelde softwarekoppelingen meer: alle verkoop- en "
+"voorraadtransacties worden automatisch verwerkt in je grootboek.\n"
 "\n"
-"Uniforme gegevens voor alle winkels\n"
+"Eén centrale gegevensbron voor al je winkels\n"
 "------------------------------\n"
 "\n"
 "Nieuwe producten, prijsstrategieën en promoties worden automatisch toegepast "
-"op geselecteerde winkels. Werk met een eenduidig klantenbestand. Je hebt "
-"geen complexe interface nodig om een globale strategie uit te werken voor al "
-"je winkels.\n"
+"op de geselecteerde winkels. Werk met één centraal klantenbestand en beheer "
+"al je vestigingen vanuit één systeem, zonder complexe interfaces.\n"
 "\n"
-"Met Odoo als backend heb je een systeem waarvan bewezen is dat het perfect "
-"is voor kleine winkels of grote multinationals.\n"
+"Met odoo als backend beschik je over een systeem dat zich heeft bewezen bij "
+"zowel kleine winkels als grote multinationals.\n"
 "\n"
-"Ken je klanten - in de winkel en daarbuiten\n"
+"Ken je klanten, zowel in de winkel als daarbuiten\n"
 "--------------------------------------\n"
 "\n"
-"Succesvolle merken integreren al hun klantrelaties in al hun kanalen om een "
-"nauwkeurig klantprofiel te ontwikkelen en met klanten te communiceren "
-"terwijl ze aankoopbeslissingen nemen, in de winkel of online.\n"
+"Succesvolle merken brengen alle klantinteracties uit verschillende "
+"verkoopkanalen samen om een compleet klantprofiel op te bouwen en klanten op "
+"het juiste moment te helpen met hun koopbeslissingen, zowel in de winkel als "
+"online\n"
 "\n"
-"Met Odoo krijg je een 360°-beeld van klanten, inclusief cross-channel-"
-"verkoop, interactiegeschiedenis, profielen en meer.\n"
+"Met Odoo krijg je een 360°-beeld van de klant, inclusief cross-channel-"
+"sales, interactiegeschiedenis, profielen en meer.\n"
 "\n"
 
 #. module: base
@@ -38965,7 +39009,7 @@ msgstr "POEdit"
 #. module: base
 #: model:ir.module.module,summary:base.module_pos_no_followup
 msgid "POS \"no followup\" handeling."
-msgstr ""
+msgstr "Gebruik van 'Geen betaalherinnering' in Kassa."
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_barcodelookup
@@ -39050,7 +39094,7 @@ msgstr "Kassa Mercado Pago"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_no_followup
 msgid "POS No Followup"
-msgstr ""
+msgstr "Kassa 'Geen betaalherinnering'"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_pos_paytm
@@ -39918,7 +39962,7 @@ msgstr "Peppol"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_peppol_selfbilling
 msgid "Peppol Self Billing"
-msgstr ""
+msgstr "Peppol Self-billing"
 
 #. module: base
 #: model:ir.module.category,name:base.module_category_theme_personal
@@ -40299,7 +40343,7 @@ msgstr "Polen - SAFT inkomstenbelasting (JPK KR PD)"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_pl_taxable_supply_date
 msgid "Poland - Taxable Supply Date"
-msgstr ""
+msgstr "Polen - Datum van belastbare handeling"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_pl_edi
@@ -42245,7 +42289,7 @@ msgstr "Roemenië - SAF-T Import"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ro_efactura_synchronize
 msgid "Romania - Synchronize E-Factura"
-msgstr ""
+msgstr "Roemenië - E-Factura synchroniseren"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_ro_saft
@@ -42714,7 +42758,6 @@ msgstr "Verkoop Abonnementen Voorraad"
 
 #. module: base
 #: model:ir.module.module,description:base.module_sale_subscription_stock
-#, fuzzy
 msgid ""
 "Sale Subscriptions Stock\n"
 "\n"
@@ -43105,7 +43148,7 @@ msgstr "Zoekweergave ref."
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.base_partner_merge_automatic_wizard_form
 msgid "Search duplicates based on duplicated data in"
-msgstr "Zoek naar dubbels gebaseerd op dubbele gegevens in"
+msgstr "Zoek duplicaten op basis van dubbele gegevens in:"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_module_filter
@@ -43324,7 +43367,7 @@ msgstr "Webhook notificatie verzenden"
 #. module: base
 #: model:ir.module.module,summary:base.module_account_peppol_selfbilling
 msgid "Send and receive self-billing invoices on PEPPOL"
-msgstr ""
+msgstr "Verzend en ontvang verkoopfacturen op basis van Self-billing via PEPPOL"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_sign
@@ -44752,7 +44795,7 @@ msgstr "Sla declaratie-documenten op in de Documenten-app"
 #. module: base
 #: model:ir.module.module,summary:base.module_documents_l10n_ch_hr_payroll
 msgid "Store individual accounts in Documents application"
-msgstr "Bewaar individuele accounts in de Documenten-applicatie"
+msgstr "Bewaar individuele rekeningen in de Documenten-app"
 
 #. module: base
 #: model:ir.module.module,summary:base.module_documents_l10n_hk_hr_payroll
@@ -47329,7 +47372,7 @@ msgstr "Deze modules kunnen niet worden verwijderd: %s"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_lang__thousands_sep
 msgid "Thousands Separator"
-msgstr "Duizend scheidingsteken"
+msgstr "Scheidingsteken voor duizendtallen"
 
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__res_lang__week_start__4
@@ -48509,7 +48552,7 @@ msgstr "Uruguay - Elektronische factuur"
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_uy_website_sale
 msgid "Uruguay Website"
-msgstr ""
+msgstr "Website voor Uruguay"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_l10n_uy_pos
@@ -48693,7 +48736,7 @@ msgstr ""
 #. module: base
 #: model:ir.model.fields,help:base.field_res_users__login
 msgid "Used to log into the system"
-msgstr "Gebruikt voor aanmelding aan het systeem"
+msgstr "Wordt gebruikt om in te loggen op het systeem"
 
 #. module: base
 #: model:ir.model.fields,help:base.field_res_company__sequence
@@ -50661,7 +50704,7 @@ msgstr "documentatie"
 #. module: base
 #: model:ir.model.fields.selection,name:base.selection__base_module_update__state__done
 msgid "done"
-msgstr "gereed"
+msgstr "voltooid"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_partner_form

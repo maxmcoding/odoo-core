@@ -1,5 +1,4 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-from unittest import skip
 
 from . import common
 from odoo import Command
@@ -216,6 +215,11 @@ class TestArManual(common.TestArCommon):
                 'name': 'VAT Content $',
             },
             {
+                'tax_amount_currency': 0.0,
+                'formatted_tax_amount_currency': '0.00',
+                'name': 'Perc IIBB Buenos Aires',
+            },
+            {
                 'tax_amount_currency': 142.20,
                 'formatted_tax_amount_currency': '142.20',
                 'name': 'Other National Ind. Taxes $',
@@ -233,12 +237,6 @@ class TestArManual(common.TestArCommon):
                     'base_amount_currency': 15373.61,
                     'tax_amount_currency': 100.0,
                     'tax_groups': [
-                        {
-                            'id': self.tax_perc_iibb.tax_group_id.id,
-                            'base_amount_currency': 372.9,
-                            'tax_amount_currency': 0.0,
-                            'display_base_amount_currency': 372.9,
-                        },
                         {
                             'id': self.tax_other.tax_group_id.id,
                             'base_amount_currency': 10000.0,
@@ -308,6 +306,83 @@ class TestArManual(common.TestArCommon):
             'subtotals': [],
         })
 
+    def test_21_invoice_b_iibb_perceptions_transparency(self):
+        """ Display IIBB Perceptions by their invoice_label, not in the tax totals box """
+        tax_iibb_caba = self.env['account.tax'].create({
+            "name": "P. IIBB CABA",
+            "invoice_label": "ALÍCUOTA ISIB CABA 3%",
+            "amount": "3",
+            "amount_type": "percent",
+            "sequence": 5,
+            "type_tax_use": "sale",
+            "country_id": self.env.ref("base.ar").id,
+            "company_id": self.company_ri.id,
+            "tax_group_id": self.env.ref(f"account.{self.company_ri.id}_tax_group_percepcion_iibb_caba").id,
+        })
+        tax_iibb_er = self.env['account.tax'].create({
+            "name": "P. IIBB ER",
+            "invoice_label": "Imp. Pciales o IIBB o Profesiones Liberales Entre Ríos 2%",
+            "amount": "2",
+            "amount_type": "percent",
+            "sequence": 6,
+            "type_tax_use": "sale",
+            "country_id": self.env.ref("base.ar").id,
+            "company_id": self.company_ri.id,
+            "tax_group_id": self.env.ref(f"account.{self.company_ri.id}_tax_group_percepcion_iibb_er").id,
+        })
+        tax_iibb_ct = self.env['account.tax'].create({
+            "name": "P. IIBB CHT",
+            "invoice_label": "VALOR APROXIMADO DEL ISIB CHUBUT",
+            "amount": "4",
+            "amount_type": "percent",
+            "sequence": 7,
+            "type_tax_use": "sale",
+            "country_id": self.env.ref("base.ar").id,
+            "company_id": self.company_ri.id,
+            "tax_group_id": self.env.ref(f"account.{self.company_ri.id}_tax_group_percepcion_iibb_ct").id,
+        })
+
+        invoice = self._create_invoice_ar(
+            partner_id=self.partner_cf,
+            company_id=self.company_ri,
+            invoice_date="2021-03-20",
+            invoice_line_ids=[
+                self._prepare_invoice_line(product_id=self.service_iva_21, price_unit=1000.0, tax_ids=self.tax_21 + tax_iibb_caba + tax_iibb_er + tax_iibb_ct),
+            ],
+        )
+        self.assertEqual(invoice.l10n_latam_document_type_id, self.document_type['invoice_b'])
+        results = invoice._l10n_ar_get_invoice_custom_tax_summary_for_report()
+        self.assertEqual(results, [
+            {
+                'tax_amount_currency': 210.0,
+                'formatted_tax_amount_currency': '210.00',
+                'name': 'VAT Content $',
+            },
+            {
+                'tax_amount_currency': 30.0,
+                'formatted_tax_amount_currency': '30.00',
+                'name': "ALÍCUOTA ISIB CABA 3%",
+            },
+            {
+                'tax_amount_currency': 20.0,
+                'formatted_tax_amount_currency': '20.00',
+                'name': "Imp. Pciales o IIBB o Profesiones Liberales Entre Ríos 2%",
+            },
+            {
+                'tax_amount_currency': 40.0,
+                'formatted_tax_amount_currency': '40.00',
+                'name': "VALOR APROXIMADO DEL ISIB CHUBUT",
+            },
+        ])
+        self._assert_tax_totals_summary(invoice._l10n_ar_get_invoice_totals_for_report(), {
+            'same_tax_base': True,
+            'currency_id': self.currency.id,
+            'base_amount_currency': 1300.0,
+            'tax_amount_currency': 0.0,
+            'total_amount_currency': 1300.0,
+            'subtotals': [],
+        })
+
     def test_l10n_ar_prices_and_taxes(self):
         invoice = self.env['account.move'].create({
             "move_type": 'out_invoice',
@@ -371,40 +446,3 @@ class TestArManual(common.TestArCommon):
         })
         debit_note_wizard.create_debit()
         self.assertTrue(invoice.reversal_move_ids.debit_note_ids)
-
-    @skip("TODO: failing test. 'Fix' the rounding error")
-    def test_l10n_ar_rounding_01(self):
-        self.env.company.tax_calculation_rounding_method = 'round_globally'
-        currency_usd = self.env.ref('base.USD')
-        currency_usd.active = True
-
-        self.env['res.currency.rate'].create([{
-            'name': '2025-04-01',
-            'inverse_company_rate': 1066.50,
-            'currency_id': currency_usd.id,
-            'company_id': self.env.company.id,
-        }])
-        tax_02 = self.percent_tax(0.2)
-        invoice_a = self._create_invoice_ar(
-            invoice_date='2025-04-02',
-            currency_id=currency_usd,
-            invoice_line_ids=[self._prepare_invoice_line(price_unit=124, tax_ids=tax_02)],
-        )
-        self.assertEqual(invoice_a.amount_total, invoice_a.invoice_line_ids.price_total, 'The invoice total should match the line total since there is only one line.')
-
-        tax_lines_a = invoice_a.line_ids \
-            .filtered(lambda x: x.tax_line_id) \
-            .sorted(lambda x: (x.move_id.id, x.tax_line_id.id, x.tax_ids.ids, x.tax_repartition_line_id.id))
-        self.env.company.tax_calculation_rounding_method = 'round_per_line'
-        invoice_b = self._create_invoice_ar(
-            invoice_date='2025-04-02',
-            currency_id=currency_usd,
-            invoice_line_ids=[self._prepare_invoice_line(price_unit=124, tax_ids=tax_02)],
-        )
-        self.assertEqual(invoice_b.amount_total, invoice_b.invoice_line_ids.price_total, 'The invoice total should match the line total since there is only one line.')
-
-        tax_lines_b = invoice_b.line_ids \
-            .filtered(lambda x: x.tax_line_id) \
-            .sorted(lambda x: (x.move_id.id, x.tax_line_id.id, x.tax_ids.ids, x.tax_repartition_line_id.id))
-
-        self.assertEqual(tax_lines_a.balance, tax_lines_b.balance, 'Tax balances should be equal since both invoices have a single line and the total matches the line amount.')

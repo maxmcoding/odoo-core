@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-20 18:37+0000\n"
-"PO-Revision-Date: 2026-02-21 18:01+0000\n"
+"POT-Creation-Date: 2026-04-10 18:37+0000\n"
+"PO-Revision-Date: 2026-07-22 17:09+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Hindi <https://translate.odoo.com/projects/odoo-18/"
 "mass_mailing/hi/>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.14.3\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: mass_mailing
 #. odoo-python
@@ -46,11 +46,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mass_mailing.field_mailing_mailing__mailing_filter_count
 msgid "# Favorite Filters"
 msgstr "# पसंदीदा फ़िल्टर"
-
-#. module: mass_mailing
-#: model_terms:ir.ui.view,arch_db:mass_mailing.s_comparisons
-msgid "$18"
-msgstr ""
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_list_view_form
@@ -113,12 +108,6 @@ msgid "(scheduled for %s)"
 msgstr "(%s के लिए शेड्यूल कर दिया है)"
 
 #. module: mass_mailing
-#: model_terms:ir.ui.view,arch_db:mass_mailing.s_hr_options
-#: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
-msgid "100%"
-msgstr ""
-
-#. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_res_config_settings__mass_mailing_reports
 msgid "24H Stat Mailing Reports"
 msgstr "24 घंटे के आंकड़ों वाली मेलिंग रिपोर्ट"
@@ -130,26 +119,8 @@ msgid "24H Stats of %(mailing_type)s \"%(mailing_name)s\""
 msgstr "%(mailing_type)s \"%(mailing_name)s\" के 24 घंटे के आंकड़े"
 
 #. module: mass_mailing
-#: model_terms:ir.ui.view,arch_db:mass_mailing.s_hr_options
-#: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
-msgid "25%"
-msgstr ""
-
-#. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
 msgid "400px"
-msgstr ""
-
-#. module: mass_mailing
-#: model_terms:ir.ui.view,arch_db:mass_mailing.s_hr_options
-#: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
-msgid "50%"
-msgstr "50%"
-
-#. module: mass_mailing
-#: model_terms:ir.ui.view,arch_db:mass_mailing.s_hr_options
-#: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
-msgid "75%"
 msgstr ""
 
 #. module: mass_mailing
@@ -173,8 +144,8 @@ msgid ""
 msgstr ""
 "<br/>\n"
 "                                    <span class=\"text-muted\">\n"
-"                                        <i class=\"fa fa-envelope-o\"/> संपर्"
-"क\n"
+"                                        <i class=\"fa fa-envelope-o\"/> "
+"संपर्क\n"
 "                                    </span>"
 
 #. module: mass_mailing
@@ -225,8 +196,8 @@ msgid ""
 "sales."
 msgstr ""
 "<br/>हम इस अवसर पर अपनी लगातार बढ़ती कम्यूनिटी में आपका स्वागत करना चाहते हैं!!\n"
-"                <br/>आपका प्लेटफ़ॉर्म अब तैयार है, जो डिजिटल सिग्नेचर का खर्च घटाने और बिज़नेस बढ़ाने "
-"में आपकी मदद करेगा।"
+"                <br/>आपका प्लेटफ़ॉर्म अब तैयार है, जो डिजिटल सिग्नेचर का खर्च घटाने और "
+"बिज़नेस बढ़ाने में आपकी मदद करेगा।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_event
@@ -251,8 +222,8 @@ msgid ""
 "<font style=\"color: rgb(12 84 96);\">Don't write about products or services "
 "here, write about solutions.</font>"
 msgstr ""
-"<font style=\"color: rgb(12 84 96);\">यहां प्रॉडक्ट या सर्विस की जानकारी न दें, बल्कि समस्याओं के"
-" हल के बारे में लिखें.</font>"
+"<font style=\"color: rgb(12 84 96);\">यहां प्रॉडक्ट या सर्विस की जानकारी न दें, "
+"बल्कि समस्याओं के हल के बारे में लिखें.</font>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_picture
@@ -260,8 +231,8 @@ msgid ""
 "<font style=\"font-size: 12px;\">Add a caption to enhance the meaning of "
 "this image.</font>"
 msgstr ""
-"<font style=\"font-size: 12px;\">इस इमेज का मतलब बेहतर बनाने के लिए एक कैप्शन "
-"जोड़ें.</font>"
+"<font style=\"font-size: 12px;\">इस इमेज का मतलब बेहतर बनाने के लिए एक कैप्शन जोड़ें."
+"</font>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_event
@@ -376,8 +347,8 @@ msgid ""
 "<i>Write a quote here from one of your customers. Quotes are a great way to "
 "build confidence in your products or services.</i>"
 msgstr ""
-"<i>यहां अपने ग्राहकों में से किसी का कोट लिखें. कोट आपके प्रॉडक्ट या सर्विस में भरोसा जगाने का एक शानदार तरीका "
-"हैं.</i>"
+"<i>यहां अपने ग्राहकों में से किसी का कोट लिखें. कोट आपके प्रॉडक्ट या सर्विस में भरोसा जगाने "
+"का एक शानदार तरीका हैं.</i>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
@@ -389,11 +360,11 @@ msgid ""
 "address must belong to this database.\n"
 "                                                </small>"
 msgstr ""
-"<small class=\"oe_edit_only text-muted mb-2\" style=\"font-size:74%"
-"\" invisible=\"reply_to_mode == 'update' or mailing_model_name in "
+"<small class=\"oe_edit_only text-muted mb-2\" style=\"font-size:74%\" "
+"invisible=\"reply_to_mode == 'update' or mailing_model_name in "
 "['mailing.contact', 'res.partner', 'mailing.list']\">\n"
-"                                                    जवाब ट्रैक करने के लिए, यह पता "
-"इसी डेटाबेस का होना चाहिए.\n"
+"                                                    जवाब ट्रैक करने के लिए, यह "
+"पता इसी डेटाबेस का होना चाहिए.\n"
 "                                                </small>"
 
 #. module: mass_mailing
@@ -410,8 +381,8 @@ msgid ""
 "date\"/>\n"
 "                                        <span>Next Batch</span>"
 msgstr ""
-"<span class=\"fa fa-hourglass-o me-2 small my-auto\" aria-label="
-"\"Scheduled date\"/>\n"
+"<span class=\"fa fa-hourglass-o me-2 small my-auto\" aria-label=\"Scheduled "
+"date\"/>\n"
 "                                        <span>अगला बैच</span>"
 
 #. module: mass_mailing
@@ -481,14 +452,16 @@ msgid ""
 "<span name=\"mailing_schedule_type_now_text\">This mailing will be sent as "
 "soon as possible.</span>"
 msgstr ""
-"<span name=\"mailing_schedule_type_now_text\">यह मेलिंग जल्द से जल्द भेजी जाएगी.</span>"
+"<span name=\"mailing_schedule_type_now_text\">यह मेलिंग जल्द से जल्द भेजी जाएगी.</"
+"span>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
 msgid ""
 "<span name=\"next_departure_text\">This mailing is scheduled for </span>"
 msgstr ""
-"<span name=\"next_departure_text\">यह मेलिंग इस समय के लिए शेड्यूल किया गया है: </span>"
+"<span name=\"next_departure_text\">यह मेलिंग इस समय के लिए शेड्यूल किया गया है: </"
+"span>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
@@ -508,8 +481,8 @@ msgid ""
 "<span name=\"scheduled_text\">emails are in queue and will be sent soon.</"
 "span>"
 msgstr ""
-"<span name=\"scheduled_text\">ईमेल भेजने के लिए वेटिंग लिस्ट में हैं और जल्द ही भेजे "
-"जाएंगे.</span>"
+"<span name=\"scheduled_text\">ईमेल भेजने के लिए वेटिंग लिस्ट में हैं और जल्द ही भेजे जाएंगे."
+"</span>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
@@ -527,14 +500,15 @@ msgid ""
 "<span style=\"color: rgb(12 84 96); font-size: 16px; font-weight: bolder;"
 "\">Explain the benefits you offer</span>"
 msgstr ""
-"<span style=\"color: rgb(12 84 96); font-size: 16px; font-weight: bolder;\""
-">आप जो फ़ायदे दे रहे हैं, उनकी जानकारी यहां विस्तार से दें</span>"
+"<span style=\"color: rgb(12 84 96); font-size: 16px; font-weight: bolder;"
+"\">आप जो फ़ायदे दे रहे हैं, उनकी जानकारी यहां विस्तार से दें</span>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_comparisons
 msgid "<span style=\"font-size: 11px\">user / month (billed annually)</span>"
 msgstr ""
-"<span style=\"font-size: 11px\">उपयोगकर्ता / महीना (सालाना बिल किया जाता है)</span>"
+"<span style=\"font-size: 11px\">उपयोगकर्ता / महीना (सालाना बिल किया जाता है)</"
+"span>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_numbers
@@ -634,8 +608,8 @@ msgstr ""
 "<strong class=\"d-block\" invisible=\"mailing_type == 'mail' or not "
 "ab_testing_enabled or state != 'done' or sent != 0 or failed != 0 or "
 "canceled != 0\">\n"
-"                                <span name=\"ab_test_text\">मेल भेजने के लिए लिस्ट में"
-" अब और लोग नहीं बचे हैं. </span>\n"
+"                                <span name=\"ab_test_text\">मेल भेजने के लिए "
+"लिस्ट में अब और लोग नहीं बचे हैं. </span>\n"
 "                            </strong>"
 
 #. module: mass_mailing
@@ -937,8 +911,7 @@ msgstr "फ़ीडबैक की अनुमति दें"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
 msgid "Allow recipients to blacklist themselves"
-msgstr ""
-"ईमेल पाने वालों को भविष्य में मैसेज न मिलने के लिए खुद को ब्लॉक करने की सुविधा दें"
+msgstr "ईमेल पाने वालों को भविष्य में मैसेज न मिलने के लिए खुद को ब्लॉक करने की सुविधा दें"
 
 #. module: mass_mailing
 #: model:ir.model.fields,help:mass_mailing.field_res_config_settings__show_blacklist_buttons
@@ -946,7 +919,8 @@ msgid ""
 "Allow the recipient to manage themselves their state in the blacklist via "
 "the unsubscription page."
 msgstr ""
-"ईमेल पाने वाला व्यक्ति अनसब्सक्राइब पेज पर जाकर खुद को ब्लैकलिस्ट में डालने या हटाने का फैसला लेने की अनुमति दें।"
+"ईमेल पाने वाला व्यक्ति अनसब्सक्राइब पेज पर जाकर खुद को ब्लैकलिस्ट में डालने या हटाने का "
+"फैसला लेने की अनुमति दें।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
@@ -1072,7 +1046,8 @@ msgid ""
 "At least one of the mailing list you are trying to archive is used in an "
 "ongoing mailing campaign."
 msgstr ""
-"आपके द्वारा आर्काइव की जाने वाली कम से कम एक मेलिंग लिस्ट का उपयोग चल रहे मेलिंग कैंपेन में किया जा रहा है।"
+"आपके द्वारा आर्काइव की जाने वाली कम से कम एक मेलिंग लिस्ट का उपयोग चल रहे मेलिंग कैंपेन में "
+"किया जा रहा है।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
@@ -1201,7 +1176,8 @@ msgid ""
 "Blocklist removal request from portal of mailing %(mailing_link)s (document %"
 "(record_link)s)"
 msgstr ""
-"मेलिंग %(mailing_link)s (दस्तावेज़ %(record_link)s) के पोर्टल से ब्लॉकलिस्ट हटाने का अनुरोध"
+"मेलिंग %(mailing_link)s (दस्तावेज़ %(record_link)s) के पोर्टल से ब्लॉकलिस्ट हटाने का "
+"अनुरोध"
 
 #. module: mass_mailing
 #. odoo-python
@@ -1225,7 +1201,8 @@ msgid ""
 "Blocklist request from unsubscribe link of mailing %(mailing_link)s (direct "
 "link usage)"
 msgstr ""
-"मेलिंग %(mailing_link)s के अनसब्सक्राइब लिंक से ब्लॉकलिस्ट का अनुरोध (सीधे लिंक का इस्तेमाल)"
+"मेलिंग %(mailing_link)s के अनसब्सक्राइब लिंक से ब्लॉकलिस्ट का अनुरोध (सीधे लिंक का "
+"इस्तेमाल)"
 
 #. module: mass_mailing
 #. odoo-python
@@ -1234,7 +1211,8 @@ msgid ""
 "Blocklist request from unsubscribe link of mailing %(mailing_link)s "
 "(document %(record_link)s)"
 msgstr ""
-"मेलिंग %(mailing_link)s (दस्तावेज़ %(record_link)s) के अनसब्सक्राइब लिंक से ब्लॉकलिस्ट का अनुरोध"
+"मेलिंग %(mailing_link)s (दस्तावेज़ %(record_link)s) के अनसब्सक्राइब लिंक से ब्लॉकलिस्ट "
+"का अनुरोध"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.email_designer_snippets
@@ -1293,8 +1271,8 @@ msgid ""
 "Bounce happens when a mailing cannot be delivered (fake address, server "
 "issues, ...). Check each record to see what went wrong."
 msgstr ""
-"बाउंस तब होता है जब मेल डिलीवर नहीं हो पाता (गलत पता, सर्वर की समस्या, वगैरह). क्या गलत हुआ यह देखने "
-"के लिए हर रिकॉर्ड की जांच करें।"
+"बाउंस तब होता है जब मेल डिलीवर नहीं हो पाता (गलत पता, सर्वर की समस्या, वगैरह). क्या "
+"गलत हुआ यह देखने के लिए हर रिकॉर्ड की जांच करें।"
 
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_mailing_mailing__bounced
@@ -1375,8 +1353,7 @@ msgstr "कैंपेन"
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_utm_campaigns
 msgid ""
 "Campaigns are the perfect tool to track results across multiple mailings."
-msgstr ""
-"एक साथ कई ईमेल भेजकर उनके नतीजे देखने के लिए कैंपेन सबसे अच्छा तरीका है।"
+msgstr "एक साथ कई ईमेल भेजकर उनके नतीजे देखने के लिए कैंपेन सबसे अच्छा तरीका है।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_contact_to_list_view_form
@@ -1434,8 +1411,7 @@ msgstr "आइकॉन बदलें"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
 msgid "Check how well your mailing is doing a day after it has been sent"
-msgstr ""
-"ईमेल भेजने के 24 घंटे बाद उसके नतीजे (जैसे कितने लोगों ने खोला या क्लिक किया) देखें"
+msgstr "ईमेल भेजने के 24 घंटे बाद उसके नतीजे (जैसे कितने लोगों ने खोला या क्लिक किया) देखें"
 
 #. module: mass_mailing
 #: model:ir.model.fields,help:mass_mailing.field_res_config_settings__mass_mailing_reports
@@ -1564,16 +1540,14 @@ msgstr ""
 msgid ""
 "Come back once your mailing has been sent to track who clicked on the "
 "embedded links."
-msgstr ""
-"ईमेल भेजने के बाद यहाँ आकर देखें कि किन लोगों ने आपके दिए गए लिंक्स पर क्लिक किया है।"
+msgstr "ईमेल भेजने के बाद यहाँ आकर देखें कि किन लोगों ने आपके दिए गए लिंक्स पर क्लिक किया है।"
 
 #. module: mass_mailing
 #. odoo-python
 #: code:addons/mass_mailing/models/mailing.py:0
 msgid ""
 "Come back once your mailing has been sent to track who opened your mailing."
-msgstr ""
-"ईमेल भेजने के बाद यहां आकर देखें कि किन लोगों ने आपका ईमेल पढ़ा या खोला है।"
+msgstr "ईमेल भेजने के बाद यहां आकर देखें कि किन लोगों ने आपका ईमेल पढ़ा या खोला है।"
 
 #. module: mass_mailing
 #: model:ir.model,name:mass_mailing.model_res_company
@@ -1670,8 +1644,8 @@ msgid ""
 "Contacts successfully imported. Number of contacts imported: %"
 "(imported_count)s. Number of duplicates ignored: %(duplicate_count)s"
 msgstr ""
-"संपर्क सफलतापूर्वक इंपोर्ट किए गए. इंपोर्ट किए गए संपर्क की संख्या: %(imported_count)s. इग्नोर किए "
-"गए डुप्लीकेट संपर्क की संख्या: %(duplicate_count)s"
+"संपर्क सफलतापूर्वक इंपोर्ट किए गए. इंपोर्ट किए गए संपर्क की संख्या: %(imported_count)s. "
+"इग्नोर किए गए डुप्लीकेट संपर्क की संख्या: %(duplicate_count)s"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
@@ -1884,8 +1858,7 @@ msgstr "डिज़ाइन के विकल्प"
 #. module: mass_mailing
 #: model_terms:ir.actions.act_window,help:mass_mailing.mailing_mailing_action_mail
 msgid "Design a striking email, define recipients and track its results."
-msgstr ""
-"एक शानदार ईमेल डिज़ाइन करें, प्राप्तकर्ता चुनें और उसके नतीज़ों को ट्रैक करें।"
+msgstr "एक शानदार ईमेल डिज़ाइन करें, प्राप्तकर्ता चुनें और उसके नतीज़ों को ट्रैक करें।"
 
 #. module: mass_mailing
 #. odoo-python
@@ -1974,8 +1947,7 @@ msgstr "अपना पसंदीदा वर्शन भेजना न �
 #. odoo-javascript
 #: code:addons/mass_mailing/static/src/js/tours/mass_mailing_tour.js:0
 msgid "Don't worry, the mailing contact we created is an internal user."
-msgstr ""
-"चिंता न करें, हमारे द्वारा बनाया गया मेलिंग कांटेक्ट एक इंटरनल यूज़र है।"
+msgstr "चिंता न करें, हमारे द्वारा बनाया गया मेलिंग कांटेक्ट एक इंटरनल यूज़र है।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.snippet_options
@@ -2321,8 +2293,8 @@ msgid ""
 "He loves to keep his hands full by participating in the development of the "
 "software, marketing, and customer experience strategies."
 msgstr ""
-"संस्थापक और मुख्य विज़नरी, टोनी कंपनी की मुख्य ताकत हैं. वे सॉफ़्टवेयर डेवलपमेंट, मार्केटिंग और ग्राहक अनुभव "
-"रणनीतियों में भाग लेकर व्यस्त रहना पसंद करते हैं।"
+"संस्थापक और मुख्य विज़नरी, टोनी कंपनी की मुख्य ताकत हैं. वे सॉफ़्टवेयर डेवलपमेंट, मार्केटिंग और "
+"ग्राहक अनुभव रणनीतियों में भाग लेकर व्यस्त रहना पसंद करते हैं।"
 
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_mailing_trace_report__email_from
@@ -2351,8 +2323,8 @@ msgid ""
 "Get your inside sales (CRM) fully integrated with online sales (eCommerce), "
 "in-store sales (Point of Sale) and marketplaces like Amazon."
 msgstr ""
-"अपनी इनसाइड सेल्स (सीआरएम) को ऑनलाइन सेल्स (ई-कॉमर्स), इन-स्टोर सेल्स (पॉइंट ऑफ़ सेल) और Amazon "
-"जैसे मार्केटप्लेस के साथ पूरी तरह से इंटिग्रेट करें।"
+"अपनी इनसाइड सेल्स (सीआरएम) को ऑनलाइन सेल्स (ई-कॉमर्स), इन-स्टोर सेल्स (पॉइंट ऑफ़ सेल) "
+"और Amazon जैसे मार्केटप्लेस के साथ पूरी तरह से इंटिग्रेट करें।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_features_grid
@@ -2470,8 +2442,8 @@ msgid ""
 "related mail_mail can be deleted separately from its statistics. However the "
 "ID is needed for several action and controllers."
 msgstr ""
-"संबंधित mail_mail की आईडी. यह एक पूर्णांक फ़ील्ड है, क्योंकि संबंधित mail_mail को उसके आँकड़ों से अलग "
-"हटाया जा सकता है. हालाँकि, कई काम और कंट्रोलर्स के लिए आईडी ज़रूरी है।"
+"संबंधित mail_mail की आईडी. यह एक पूर्णांक फ़ील्ड है, क्योंकि संबंधित mail_mail को उसके "
+"आँकड़ों से अलग हटाया जा सकता है. हालाँकि, कई काम और कंट्रोलर्स के लिए आईडी ज़रूरी है।"
 
 #. module: mass_mailing
 #: model:ir.model.fields,field_description:mass_mailing.field_mailing_mailing__activity_exception_icon
@@ -2497,9 +2469,9 @@ msgid ""
 "lets you send different mailings to randomly selected recipients and test "
 "the effectiveness of the mailings, without causing duplicate messages."
 msgstr ""
-"इस विकल्प को चुनने से एक व्यक्ति को पूरी कैंपेन में सिर्फ एक ही ईमेल मिलेगा. यह A/B टेस्टिंग के लिए बढ़िया है, "
-"क्योंकि आप अलग-अलग लोगों को अलग-अलग ईमेल भेजकर चेक कर सकते हैं कि कौन सा बेहतर है, और किसी को भी एक "
-"ही मैसेज दो बार नहीं जाएगा।"
+"इस विकल्प को चुनने से एक व्यक्ति को पूरी कैंपेन में सिर्फ एक ही ईमेल मिलेगा. यह A/B टेस्टिंग के "
+"लिए बढ़िया है, क्योंकि आप अलग-अलग लोगों को अलग-अलग ईमेल भेजकर चेक कर सकते हैं कि कौन सा "
+"बेहतर है, और किसी को भी एक ही मैसेज दो बार नहीं जाएगा।"
 
 #. module: mass_mailing
 #: model:ir.model.fields,help:mass_mailing.field_mailing_contact__message_has_error
@@ -2515,8 +2487,8 @@ msgid ""
 "If set, a mass mailing will be created so that you can track its results in "
 "the Email Marketing app."
 msgstr ""
-"इस विकल्प को चुनने पर एक साथ कई लोगों को भेजे जाने वाला ईमेल कैंपेन बन जाएगा, जिससे आप ईमेल मार्केटिंग ऐप में"
-" देख पाएंगे कि कितने लोगों ने इसे खोला या क्लिक किया।"
+"इस विकल्प को चुनने पर एक साथ कई लोगों को भेजे जाने वाला ईमेल कैंपेन बन जाएगा, जिससे आप "
+"ईमेल मार्केटिंग ऐप में देख पाएंगे कि कितने लोगों ने इसे खोला या क्लिक किया।"
 
 #. module: mass_mailing
 #: model:ir.model.fields,help:mass_mailing.field_mailing_contact__is_blacklisted
@@ -2795,8 +2767,8 @@ msgid ""
 "Link Trackers will measure how many times each link is clicked as well as "
 "the proportion of %s who clicked at least once in your mailing."
 msgstr ""
-"लिंक ट्रैकर्स मापेंगे कि हर लिंक पर कितनी बार क्लिक किया गया है और साथ ही उन %s का अनुपात जिन्होंने आपके मेलिंग "
-"में कम से कम एक बार क्लिक किया है।"
+"लिंक ट्रैकर्स मापेंगे कि हर लिंक पर कितनी बार क्लिक किया गया है और साथ ही उन %s का "
+"अनुपात जिन्होंने आपके मेलिंग में कम से कम एक बार क्लिक किया है।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.social_links
@@ -3021,8 +2993,8 @@ msgid ""
 "the"
 msgstr ""
 "सभी उपयोगकर्ताओं के लिए मेलिंग रिपोर्ट की सुविधा बंद हो गई है. <br/>\n"
-"                                अगर ज़रूरत हो, वे यहां जाकर इस सुविधा को फिर से चालू कर सकते "
-"हैं"
+"                                अगर ज़रूरत हो, वे यहां जाकर इस सुविधा को फिर से "
+"चालू कर सकते हैं"
 
 #. module: mass_mailing
 #: model:ir.model,name:mass_mailing.model_mailing_trace
@@ -3073,7 +3045,8 @@ msgid ""
 "Mailing contacts allow you to separate your marketing audience from your "
 "business contact directory."
 msgstr ""
-"मेलिंग कॉन्टैक्ट्स की मदद से आप अपने मार्केटिंग वाले ग्राहकों को अपने बिज़नेस कॉन्टैक्ट्स से अलग रख सकते हैं।"
+"मेलिंग कॉन्टैक्ट्स की मदद से आप अपने मार्केटिंग वाले ग्राहकों को अपने बिज़नेस कॉन्टैक्ट्स से अलग "
+"रख सकते हैं।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_filter_view_form
@@ -3288,8 +3261,8 @@ msgid ""
 "\">Customer Service</span>"
 msgstr ""
 "माइकल फ्लेचर<br/>\n"
-"                   <span style=\"font-size: 12px; font-weight: bolder;\">ग्रा"
-"हक सर्विस</span>"
+"                   <span style=\"font-size: 12px; font-weight: bolder;"
+"\">ग्राहक सर्विस</span>"
 
 #. module: mass_mailing
 #: model:ir.model.fields.selection,name:mass_mailing.selection__mailing_trace__failure_type__mail_email_missing
@@ -3459,8 +3432,7 @@ msgstr "अभी तक कोई मेलिंग डेटा नहीं 
 msgid ""
 "No contacts were imported. All email addresses are already in the mailing "
 "list."
-msgstr ""
-"कोई संपर्क इंपोर्ट नहीं किया गया. सभी ईमेल पते पहले से ही मेलिंग सूची में हैं।"
+msgstr "कोई संपर्क इंपोर्ट नहीं किया गया. सभी ईमेल पते पहले से ही मेलिंग सूची में हैं।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_comparisons
@@ -3491,7 +3463,8 @@ msgid ""
 "No mailing for this A/B testing campaign has been sent yet! Send one first "
 "and try again later."
 msgstr ""
-"इस A/B टेस्टिंग कैंपेन के लिए अभी तक कोई मेल नहीं भेजा गया है. पहले एक भेजें और बाद में फिर से कोशिश करें।"
+"इस A/B टेस्टिंग कैंपेन के लिए अभी तक कोई मेल नहीं भेजा गया है. पहले एक भेजें और बाद में फिर से "
+"कोशिश करें।"
 
 #. module: mass_mailing
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailing_lists
@@ -3499,8 +3472,8 @@ msgid ""
 "No need to import mailing lists, you can send mailings to contacts saved in "
 "other Odoo apps."
 msgstr ""
-"आपको अलग से लिस्ट अपलोड करने की ज़रूरत नहीं है, आप Odoo के दूसरे ऐप्स वाले कॉन्टैक्ट्स को सीधे मेल भेज "
-"सकते हैं।"
+"आपको अलग से लिस्ट अपलोड करने की ज़रूरत नहीं है, आप Odoo के दूसरे ऐप्स वाले कॉन्टैक्ट्स को "
+"सीधे मेल भेज सकते हैं।"
 
 #. module: mass_mailing
 #: model_terms:ir.actions.act_window,help:mass_mailing.mailing_filter_action
@@ -3641,8 +3614,7 @@ msgstr "ओमनीचैनल सेल्स"
 msgid ""
 "Once the best version is identified, we will send the best one to the "
 "remaining recipients."
-msgstr ""
-"सबसे बेहतर वर्शन की पहचान होने पर, हम बाकी प्राप्तकर्ताओं को वही भेजेंगे।"
+msgstr "सबसे बेहतर वर्शन की पहचान होने पर, हम बाकी प्राप्तकर्ताओं को वही भेजेंगे।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
@@ -3702,8 +3674,8 @@ msgid ""
 "Opt out flag for a specific mailing list. This field should not be used in a "
 "view without a unique and active mailing list context."
 msgstr ""
-"किसी खास मेलिंग लिस्ट के लिए ऑप्ट-आउट फ़्लैग. इस फ़ील्ड का इस्तेमाल तभी करें जब कोई एक्टिव मेलिंग लिस्ट चुनी "
-"गई हो।"
+"किसी खास मेलिंग लिस्ट के लिए ऑप्ट-आउट फ़्लैग. इस फ़ील्ड का इस्तेमाल तभी करें जब कोई एक्टिव "
+"मेलिंग लिस्ट चुनी गई हो।"
 
 #. module: mass_mailing
 #: model:ir.actions.act_window,name:mass_mailing.mailing_subscription_action_report_optout
@@ -3841,8 +3813,7 @@ msgstr "कृपया हमें बताएं कि आपने अप�
 #. odoo-javascript
 #: code:addons/mass_mailing/static/src/js/mailing_portal_subscription_feedback.js:0
 msgid "Please let us know why you want to be in our block list."
-msgstr ""
-"कृपया हमें बताएं कि आप हमारी ब्लॉक लिस्ट में क्यों शामिल होना चाहते हैं।"
+msgstr "कृपया हमें बताएं कि आप हमारी ब्लॉक लिस्ट में क्यों शामिल होना चाहते हैं।"
 
 #. module: mass_mailing
 #. odoo-javascript
@@ -4443,7 +4414,8 @@ msgid ""
 "Since the date and time for this test has not been scheduled, don't forget "
 "to manually send your preferred version."
 msgstr ""
-"चूंकि इस टेस्ट की तारीख और समय तय नहीं है, इसलिए अपना पसंदीदा वर्शन मैन्युअल रूप से भेजना न भूलें।"
+"चूंकि इस टेस्ट की तारीख और समय तय नहीं है, इसलिए अपना पसंदीदा वर्शन मैन्युअल रूप से भेजना "
+"न भूलें।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_alert_options
@@ -4479,8 +4451,8 @@ msgid ""
 "talks on various topics. Stay on top of the latest business management "
 "trends &amp; technologies"
 msgstr ""
-"ग्लोबल एक्सपर्ट्स और स्पीकर्स अलग-अलग टॉपिक्स पर बात करेंगे. बिज़नेस &amp; टेक्नोलॉजी के नए ट्रेंड्स की "
-"जानकारी रखें"
+"ग्लोबल एक्सपर्ट्स और स्पीकर्स अलग-अलग टॉपिक्स पर बात करेंगे. बिज़नेस &amp; टेक्नोलॉजी के नए "
+"ट्रेंड्स की जानकारी रखें"
 
 #. module: mass_mailing
 #: model:ir.model.fields.selection,name:mass_mailing.selection__mailing_mailing__reply_to_mode__new
@@ -4604,8 +4576,8 @@ msgid ""
 "Technical field used to know if the user has activated the outgoing mail "
 "server option in the settings"
 msgstr ""
-"तकनीकी फ़ील्ड जिसका उपयोग यह जानने के लिए किया जाता है कि यूज़र ने सेटिंग्स में आउटगोइंग मेल सर्वर विकल्प चालू "
-"किया है या नहीं"
+"तकनीकी फ़ील्ड जिसका उपयोग यह जानने के लिए किया जाता है कि यूज़र ने सेटिंग्स में आउटगोइंग "
+"मेल सर्वर विकल्प चालू किया है या नहीं"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_features
@@ -4681,8 +4653,7 @@ msgstr "हमारे साथ जुड़ने के लिए धन्�
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_text_block
 msgid "That way, Odoo evolves much faster than any other solution."
-msgstr ""
-"इस तरीके से Odoo बाकी सॉफ़्टवेयर के मुकाबले कहीं ज़्यादा तेज़ी से बेहतर बनता है।"
+msgstr "इस तरीके से Odoo बाकी सॉफ़्टवेयर के मुकाबले कहीं ज़्यादा तेज़ी से बेहतर बनता है।"
 
 #. module: mass_mailing
 #: model:ir.model.constraint,message:mass_mailing.constraint_mailing_mailing_percentage_valid
@@ -4711,8 +4682,8 @@ msgid ""
 "The mailing list can be accessible by recipients in the subscription "
 "management page to allow them to update their preferences."
 msgstr ""
-"मेलिंग लिस्ट को प्राप्तकर्ताओं द्वारा सब्सक्रिप्शन मैनेजमेंट पेज पर ऐक्सेस किया जा सकता है ताकि वे अपनी प्राथमिकताएं "
-"अपडेट कर सकें।"
+"मेलिंग लिस्ट को प्राप्तकर्ताओं द्वारा सब्सक्रिप्शन मैनेजमेंट पेज पर ऐक्सेस किया जा सकता है ताकि "
+"वे अपनी प्राथमिकताएं अपडेट कर सकें।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_text_block
@@ -4732,8 +4703,8 @@ msgid ""
 "developers and business experts to build hundreds of apps in just a few "
 "years."
 msgstr ""
-"Odoo के ओपन सोर्स होने की वजह से हमें हज़ारों डेवलपर्स और एक्सपर्ट्स का साथ मिला, जिससे हमने कुछ ही सालों में"
-" सैकड़ों ऐप्स बना लिए।"
+"Odoo के ओपन सोर्स होने की वजह से हमें हज़ारों डेवलपर्स और एक्सपर्ट्स का साथ मिला, जिससे "
+"हमने कुछ ही सालों में सैकड़ों ऐप्स बना लिए।"
 
 #. module: mass_mailing
 #. odoo-python
@@ -4741,8 +4712,7 @@ msgstr ""
 msgid ""
 "The saved filter targets different recipients and is incompatible with this "
 "mailing."
-msgstr ""
-"सेव किया गया फ़िल्टर दूसरे यूज़र्स के लिए है और इस मेलिंग में काम नहीं करेगा।"
+msgstr "सेव किया गया फ़िल्टर दूसरे यूज़र्स के लिए है और इस मेलिंग में काम नहीं करेगा।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.ab_testing_description
@@ -4750,8 +4720,8 @@ msgid ""
 "The winner has already been sent. Use <b>Compare Version</b> to get an "
 "overview of this A/B testing campaign."
 msgstr ""
-"विजेता वाला ईमेल पहले ही भेजा जा चुका है. इस A/B टेस्टिंग कैंपेन की पूरी जानकारी देखने के लिए <b>वर्शन की तुलना "
-"करें</b> सुविधा का इस्तेमाल करें।"
+"विजेता वाला ईमेल पहले ही भेजा जा चुका है. इस A/B टेस्टिंग कैंपेन की पूरी जानकारी देखने के "
+"लिए <b>वर्शन की तुलना करें</b> सुविधा का इस्तेमाल करें।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.ab_testing_description
@@ -4790,8 +4760,7 @@ msgstr ""
 msgid ""
 "This email has been automatically added in blocklist because of too much "
 "bounced."
-msgstr ""
-"बार-बार बाउंस होने की वजह से इस ईमेल को ऑटोमैटिक ब्लॉकलिस्ट में डाल दिया गया है।"
+msgstr "बार-बार बाउंस होने की वजह से इस ईमेल को ऑटोमैटिक ब्लॉकलिस्ट में डाल दिया गया है।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_subscription_view_form
@@ -4817,8 +4786,7 @@ msgstr ""
 #: model:ir.model.fields,help:mass_mailing.field_res_config_settings__group_mass_mailing_campaign
 msgid ""
 "This is useful if your marketing campaigns are composed of several emails"
-msgstr ""
-"अगर आपके मार्केटिंग कैंपेन में एक से ज़्यादा ईमेल हैं, तो यह विकल्प आपके काम आएगा"
+msgstr "अगर आपके मार्केटिंग कैंपेन में एक से ज़्यादा ईमेल हैं, तो यह विकल्प आपके काम आएगा"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
@@ -4839,7 +4807,8 @@ msgid ""
 "Thread: replies go to target document. Email: replies are routed to a given "
 "email."
 msgstr ""
-"थ्रेड: चुनने पर जवाब सीधे संबंधित डॉक्यूमेंट में जुड़ेंगे. ईमेल: चुनने पर जवाब तय किए गए ईमेल पते पर जाएंगे।"
+"थ्रेड: चुनने पर जवाब सीधे संबंधित डॉक्यूमेंट में जुड़ेंगे. ईमेल: चुनने पर जवाब तय किए गए ईमेल पते "
+"पर जाएंगे।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.social_links
@@ -5039,7 +5008,8 @@ msgid ""
 "Use this component for creating a list of featured elements to which you "
 "want to bring attention."
 msgstr ""
-"उन चुनिंदा चीज़ों की सूची बनाने के लिए इस कॉम्पोनेंट का उपयोग करें जिन पर आप ध्यान आकर्षित करना चाहते हैं।"
+"उन चुनिंदा चीज़ों की सूची बनाने के लिए इस कॉम्पोनेंट का उपयोग करें जिन पर आप ध्यान आकर्षित "
+"करना चाहते हैं।"
 
 #. module: mass_mailing
 #: model_terms:ir.actions.act_window,help:mass_mailing.mailing_trace_report_action_mail
@@ -5049,8 +5019,8 @@ msgid ""
 "replies, clicks, bounces..."
 msgstr ""
 "अपनी भेजी गई ईमेल की रिपोर्ट देखने के लिए इस मेन्यू का इस्तेमाल करें.<br>\n"
-"                    यहां आपको पता चलेगा कि कितने लोगों ने जवाब दिया, लिंक पर क्लिक किया या ईमेल बाउंस "
-"हुआ..।"
+"                    यहां आपको पता चलेगा कि कितने लोगों ने जवाब दिया, लिंक पर क्लिक "
+"किया या ईमेल बाउंस हुआ..।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_media_list
@@ -5059,8 +5029,8 @@ msgid ""
 "or right-aligned image alongside textual content. Duplicate the element to "
 "create a list that fits your needs."
 msgstr ""
-"इस स्निपेट का उपयोग उन कॉम्पोनेंट्स को बनाने के लिए करें जिनमें टेक्स्ट के साथ बाएं या दाएं अलाइन की गई इमेज हो"
-". अपनी ज़रूरत के अनुसार लिस्ट बनाने के लिए इस एलिमेंट को डुप्लिकेट करें।"
+"इस स्निपेट का उपयोग उन कॉम्पोनेंट्स को बनाने के लिए करें जिनमें टेक्स्ट के साथ बाएं या दाएं "
+"अलाइन की गई इमेज हो. अपनी ज़रूरत के अनुसार लिस्ट बनाने के लिए इस एलिमेंट को डुप्लिकेट करें।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_numbers
@@ -5100,8 +5070,7 @@ msgstr "ऑनलाइन देखें"
 msgid ""
 "Wait until your mailing has been sent to check how many recipients you "
 "managed to reach."
-msgstr ""
-"कितने लोगों को मेल मिला, यह देखने के लिए मेलिंग पूरी होने का इंतज़ार करें।"
+msgstr "कितने लोगों को मेल मिला, यह देखने के लिए मेलिंग पूरी होने का इंतज़ार करें।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_contact_import_view_form
@@ -5204,8 +5173,8 @@ msgid ""
 "apps."
 msgstr ""
 "Odoo का ढांचा तकनीकी रूप से बहुत स्ट्रॉन्ग है.\n"
-"                    इसे इस्तेमाल करना बहुत आसान है और इसकी यही खूबी इसके सभी ऐप्स में देखने को "
-"मिलती है।"
+"                    इसे इस्तेमाल करना बहुत आसान है और इसकी यही खूबी इसके सभी ऐप्स में "
+"देखने को मिलती है।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_picture
@@ -5214,8 +5183,8 @@ msgid ""
 "<span style=\"font-weight: bolder;\">top notch usability that scales across "
 "all apps</span>."
 msgstr ""
-"Odoo का ढांचा बहुत मजबूत है. इसमें <span style=\"font-weight: bolder;\"> इस्तेमाल करने की "
-"बेहतरीन सुविधा मिलती है जो इसके हर ऐप में एक जैसी रहती है</span>।"
+"Odoo का ढांचा बहुत मजबूत है. इसमें <span style=\"font-weight: bolder;\"> इस्तेमाल "
+"करने की बेहतरीन सुविधा मिलती है जो इसके हर ऐप में एक जैसी रहती है</span>।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_cover
@@ -5224,8 +5193,8 @@ msgid ""
 "feature.<br/> To be successful your content needs to be useful to your "
 "readers."
 msgstr ""
-"अपने प्रॉडक्ट, सर्विस या किसी खास फ़ीचर के बारे में एक-दो पैराग्राफ लिखें. <br/>आपका कॉन्टेंट ऐसा होना चाहिए जिससे"
-" पढ़ने वालों को फायदा हो।"
+"अपने प्रॉडक्ट, सर्विस या किसी खास फ़ीचर के बारे में एक-दो पैराग्राफ लिखें. <br/>आपका "
+"कॉन्टेंट ऐसा होना चाहिए जिससे पढ़ने वालों को फायदा हो।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.mailing_contact_import_view_form
@@ -5242,6 +5211,11 @@ msgid "Write what the customer would like to know, not what you want to show."
 msgstr "वह लिखें जो ग्राहक जानना चाहता है, वह नहीं जो आप दिखाना चाहते हैं।"
 
 #. module: mass_mailing
+#: model_terms:ir.ui.view,arch_db:mass_mailing.social_links
+msgid "X"
+msgstr "X"
+
+#. module: mass_mailing
 #. odoo-python
 #: code:addons/mass_mailing/controllers/main.py:0
 msgid "You are no longer part of our mailing list(s)."
@@ -5251,8 +5225,7 @@ msgstr "अब आप हमारी मेलिंग लिस्ट का 
 #. odoo-python
 #: code:addons/mass_mailing/controllers/main.py:0
 msgid "You are no longer part of our services and will not be contacted again."
-msgstr ""
-"अब आप हमारी सेवाओं का हिस्सा नहीं हैं और आपसे दोबारा संपर्क नहीं किया जाएगा।"
+msgstr "अब आप हमारी सेवाओं का हिस्सा नहीं हैं और आपसे दोबारा संपर्क नहीं किया जाएगा।"
 
 #. module: mass_mailing
 #. odoo-python
@@ -5290,7 +5263,8 @@ msgid ""
 "mailings in Mass Mailing:\n"
 "%(mailing_names)s"
 msgstr ""
-"आप इन यूटीएम मीडियम को नहीं हटा सकते, क्योंकि वे मास मेलिंग में नीचे दिए गए मेलिंग से जुड़े हैं: \n"
+"आप इन यूटीएम मीडियम को नहीं हटा सकते, क्योंकि वे मास मेलिंग में नीचे दिए गए मेलिंग से जुड़े "
+"हैं: \n"
 "%(mailing_names)s"
 
 #. module: mass_mailing
@@ -5312,8 +5286,8 @@ msgid ""
 "                send emails<br> to any contact saved in other Odoo apps."
 msgstr ""
 "आपको अपनी मेलिंग लिस्ट इंपोर्ट करने की ज़रूरत नहीं है,\n"
-"                <br> आप किसी भी अन्य Odoo ऐप्स में सहेजे गए कॉन्टैक्ट्स को आसानी से ईमेल भेज सकते "
-"हैं।"
+"                <br> आप किसी भी अन्य Odoo ऐप्स में सहेजे गए कॉन्टैक्ट्स को आसानी से ईमेल "
+"भेज सकते हैं।"
 
 #. module: mass_mailing
 #. odoo-python
@@ -5334,8 +5308,7 @@ msgstr "आपको इसमें दिलचस्पी हो सकत�
 msgid ""
 "You should give either list_ids, either subscription_ids to create new "
 "contacts."
-msgstr ""
-"नए कॉन्टैक्ट बनाने के लिए आपको या तो list_ids देने होंगे या subscription_ids।"
+msgstr "नए कॉन्टैक्ट बनाने के लिए आपको या तो list_ids देने होंगे या subscription_ids।"
 
 #. module: mass_mailing
 #. odoo-javascript
@@ -5351,7 +5324,8 @@ msgstr "अब हमारी ओर से आपसे कोई संपर
 msgid ""
 "You will not receive any news from those mailing lists you are a member of:"
 msgstr ""
-"आप जिन भी ईमेल लिस्ट से जुड़े हुए हैं, अब आपको उनकी तरफ से कोई भी अपडेट या खबर नहीं भेजी जाएगी:"
+"आप जिन भी ईमेल लिस्ट से जुड़े हुए हैं, अब आपको उनकी तरफ से कोई भी अपडेट या खबर नहीं भेजी "
+"जाएगी:"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_title
@@ -5451,7 +5425,8 @@ msgid ""
 "is the winner of the A/B testing campaign and has been sent to all remaining "
 "recipients."
 msgstr ""
-"A/B टेस्टिंग में इस वर्शन को सबसे ज्यादा पसंद किया गया, इसलिए इसे बाकी बचे हुए सभी लोगों को भेज दिया गया है।"
+"A/B टेस्टिंग में इस वर्शन को सबसे ज्यादा पसंद किया गया, इसलिए इसे बाकी बचे हुए सभी लोगों "
+"को भेज दिया गया है।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.ab_testing_description
@@ -5462,8 +5437,9 @@ msgid ""
 "this campaign."
 msgstr ""
 "सभी संभावित प्राप्तकर्ताओं में से.<br/>\n"
-"                        <b class=\"text-danger\">कुछ ईमेल नहीं भेजे जाएंगे</b>, क्योंकि "
-"एक ही व्यक्ति को बार-बार ईमेल न मिले, इसके लिए हर यूज़र को केवल एक ही ईमेल भेजा जा रहा है।"
+"                        <b class=\"text-danger\">कुछ ईमेल नहीं भेजे जाएंगे</b>, "
+"क्योंकि एक ही व्यक्ति को बार-बार ईमेल न मिले, इसके लिए हर यूज़र को केवल एक ही ईमेल भेजा "
+"जा रहा है।"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.view_mail_mass_mailing_form
@@ -5509,3 +5485,6 @@ msgstr "⌙ ऐक्टिव"
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_rating_options
 msgid "⌙ Inactive"
 msgstr "⌙ इनऐक्टिव"
+
+#~ msgid "50%"
+#~ msgstr "50%"

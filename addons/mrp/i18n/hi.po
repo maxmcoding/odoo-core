@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-29 18:36+0000\n"
-"PO-Revision-Date: 2026-03-21 09:22+0000\n"
+"POT-Creation-Date: 2026-04-10 18:37+0000\n"
+"PO-Revision-Date: 2026-07-08 18:22+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Hindi <https://translate.odoo.com/projects/odoo-18/mrp/hi/>\n"
 "Language: hi\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_production__state
@@ -227,55 +227,14 @@ msgstr ""
 "प्रॉडक्शन एरिया से स्टॉक में भेजें।"
 
 #. module: mrp
-#: model_terms:ir.ui.view,arch_db:mrp.report_mrporder
-msgid "100"
-msgstr ""
-
-#. module: mrp
-#: model_terms:ir.ui.view,arch_db:mrp.report_mrp_production_components
-#: model_terms:ir.ui.view,arch_db:mrp.report_mrp_workorder
-msgid "12345678901"
-msgstr ""
-
-#. module: mrp
 #: model_terms:product.template,description:mrp.product_product_computer_desk_leg_product_template
 msgid "18″ x 2½″ Square Leg"
 msgstr "18″ x 2½″ स्क्वायर लेग"
 
 #. module: mrp
-#: model_terms:ir.ui.view,arch_db:mrp.report_mrporder
-msgid "2023-09-15"
-msgstr "15-09-2023"
-
-#. module: mrp
-#: model_terms:ir.ui.view,arch_db:mrp.report_mrp_production_components
-msgid "25"
-msgstr ""
-
-#. module: mrp
-#: model_terms:ir.ui.view,arch_db:mrp.report_mrporder
-msgid "50"
-msgstr "50"
-
-#. module: mrp
-#: model_terms:ir.ui.view,arch_db:mrp.report_mrporder
-msgid "58"
-msgstr "58"
-
-#. module: mrp
-#: model_terms:ir.ui.view,arch_db:mrp.report_mrporder
-msgid "60"
-msgstr "60"
-
-#. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.report_mrp_production_components
 msgid "8 GB RAM"
 msgstr "8 GB रैम"
-
-#. module: mrp
-#: model_terms:ir.ui.view,arch_db:mrp.report_mrporder
-msgid "987654321098"
-msgstr ""
 
 #. module: mrp
 #. odoo-javascript
@@ -984,9 +943,10 @@ msgid ""
 "case the product is subcontracted, this can be used to determine the date at "
 "which components should be sent to the subcontractor."
 msgstr ""
-"इस प्रॉडक्ट को बनाने में लगने वाला औसत लीड टाइम (दिनों में). मल्टी-लेवल बीओएम (BOM) के मामले में, कंपोनेंट के"
-" मैन्युफ़ैक्चरिंग लीड टाइम को जोड़ दिया जाएगा. प्रॉडक्ट के सब-कॉन्टैक्ट होने पर, इसका इस्तेमाल उस तारीख़ का पता "
-"लगाने के लिए किया जा सकता है जिस पर कंपोनेंट सब-कॉन्टैक्टर को भेजे जाने चाहिए।"
+"इस प्रॉडक्ट को बनाने में लगने वाला औसत लीड टाइम (दिनों में). मल्टी-लेवल बीओएम (BOM) के "
+"मामले में, कंपोनेंट के मैन्युफ़ैक्चरिंग लीड टाइम को जोड़ दिया जाएगा. प्रॉडक्ट के सब-कॉन्टैक्ट होने "
+"पर, इसका इस्तेमाल उस तारीख़ का पता लगाने के लिए किया जा सकता है जिस पर कंपोनेंट सब-"
+"कॉन्टैक्टर को भेजे जाने चाहिए।"
 
 #. module: mrp
 #. odoo-javascript
@@ -2456,7 +2416,7 @@ msgstr "अनुमानित समस्या"
 #. odoo-javascript
 #: code:addons/mrp/static/src/components/bom_overview_table/mrp_bom_overview_table.xml:0
 msgid "Free to Use"
-msgstr ""
+msgstr "उपयोग के लिए मुफ़्त"
 
 #. module: mrp
 #. odoo-javascript
@@ -2543,7 +2503,7 @@ msgstr "दिखाते समय सीक्वेंस तय करे�
 #: model:ir.model.fields,field_description:mrp.field_mrp_routing_workcenter__worksheet_google_slide
 #: model:ir.model.fields.selection,name:mrp.selection__mrp_routing_workcenter__worksheet_type__google_slide
 msgid "Google Slide"
-msgstr ""
+msgstr "Google Slide"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.mrp_routing_workcenter_form_view
@@ -2776,8 +2736,7 @@ msgstr "बिल ऑफ़ मैटेरियल के लिए टेम�
 #: code:addons/mrp/models/mrp_workorder.py:0
 msgid ""
 "Impossible to plan the workorder. Please check the workcenter availabilities."
-msgstr ""
-"वर्क ऑर्डर का प्लान बनाना असंभव है. कृपया वर्क सेंटर की उपलब्धता की जांच करें।"
+msgstr "वर्क ऑर्डर का प्लान बनाना असंभव है. कृपया वर्क सेंटर की उपलब्धता की जांच करें।"
 
 #. module: mrp
 #. odoo-python
@@ -2830,8 +2789,7 @@ msgstr "इन्वेंट्री मूव्स"
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_workorder__move_line_ids
 msgid "Inventory moves for which you must scan a lot number at this work order"
-msgstr ""
-"इन्वेंट्री मूव्स जिनके लिए आपको इस वर्क ऑर्डर पर लॉट नंबर स्कैन करना होगा"
+msgstr "इन्वेंट्री मूव्स जिनके लिए आपको इस वर्क ऑर्डर पर लॉट नंबर स्कैन करना होगा"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_mrp_production__is_delayed
@@ -3892,8 +3850,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/mrp/models/mrp_production.py:0
 msgid "Only manufacturing orders with a Bill of Materials can be %s."
-msgstr ""
-"सिर्फ़ बिल ऑफ़ मैटेरियल वाले मैन्युफ़ैक्चरिंग ऑर्डर को ही %s किया जा सकता है।"
+msgstr "सिर्फ़ बिल ऑफ़ मैटेरियल वाले मैन्युफ़ैक्चरिंग ऑर्डर को ही %s किया जा सकता है।"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.stock_production_type_kanban
@@ -3998,8 +3955,7 @@ msgstr "वे ऑपरेशन जो इस ऑपरेशन के पू
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_routing_workcenter__blocked_by_operation_ids
 msgid "Operations that need to be completed before this operation can start."
-msgstr ""
-"वे ऑपरेशन जिन्हें इस ऑपरेशन के शुरू होने से पहले पूरा किया जाना ज़रूरी है।"
+msgstr "वे ऑपरेशन जिन्हें इस ऑपरेशन के शुरू होने से पहले पूरा किया जाना ज़रूरी है।"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_mrp_production__orderpoint_id
@@ -4132,14 +4088,12 @@ msgstr "कॉम्पोनेंट चुनें, फिर मैन्�
 #. odoo-python
 #: code:addons/mrp/models/stock_warehouse.py:0
 msgid "Pick components, manufacture and then store products (3 steps)"
-msgstr ""
-"कॉम्पोनेंट चुनें, फिर मैन्युफ़ैक्चर करें और फिर प्रॉडक्ट स्टोर करें (3 स्टेप)"
+msgstr "कॉम्पोनेंट चुनें, फिर मैन्युफ़ैक्चर करें और फिर प्रॉडक्ट स्टोर करें (3 स्टेप)"
 
 #. module: mrp
 #: model:ir.model.fields.selection,name:mrp.selection__stock_warehouse__manufacture_steps__pbm_sam
 msgid "Pick components, manufacture, then store products (3 steps)"
-msgstr ""
-"कॉम्पोनेंट चुनें, फिर मैन्युफ़ैक्चर करें, फिर प्रॉडक्ट स्टोर करें (3 स्टेप)"
+msgstr "कॉम्पोनेंट चुनें, फिर मैन्युफ़ैक्चर करें, फिर प्रॉडक्ट स्टोर करें (3 स्टेप)"
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_stock_warehouse__pbm_mto_pull_id
@@ -4195,8 +4149,7 @@ msgstr "कॉम्पोनेंट के उपलब्धता के �
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.res_config_settings_view_form
 msgid "Plan manufacturing or purchase orders based on forecasts"
-msgstr ""
-"पूर्वानुमान के आधार पर मैन्युफ़ैक्चरिंग या परचेज़ ऑर्डर की प्लानिंग करें"
+msgstr "पूर्वानुमान के आधार पर मैन्युफ़ैक्चरिंग या परचेज़ ऑर्डर की प्लानिंग करें"
 
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.stock_production_type_kanban
@@ -5566,8 +5519,7 @@ msgstr "कॉम्पोनेंट %s तैयार किए जाने
 msgid ""
 "The current configuration is incorrect because it would create a cycle "
 "between these products: %s."
-msgstr ""
-"मौजूदा कॉन्फ़िगरेशन गलत है, क्योंकि यह इन प्रॉडक्ट के बीच एक साइकल बना देगा: %s।"
+msgstr "मौजूदा कॉन्फ़िगरेशन गलत है, क्योंकि यह इन प्रॉडक्ट के बीच एक साइकल बना देगा: %s।"
 
 #. module: mrp
 #: model:ir.model.fields.selection,name:mrp.selection__mrp_production__search_date_category__day_2
@@ -5591,8 +5543,7 @@ msgstr "इस वर्क ऑर्डर से अब तक हैंडल
 msgid ""
 "The operation where the components are consumed, or the finished products "
 "created."
-msgstr ""
-"वह ऑपरेशन जहां कंपोनेंट्स की खपत होती है या तैयार प्रॉडक्ट बनाए जाते हैं।"
+msgstr "वह ऑपरेशन जहां कंपोनेंट्स की खपत होती है या तैयार प्रॉडक्ट बनाए जाते हैं।"
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_bom_byproduct__cost_share
@@ -5682,8 +5633,7 @@ msgstr "टैग का नाम यूनिक होना चाहिए�
 #. odoo-python
 #: code:addons/mrp/models/mrp_bom.py:0
 msgid "The total cost share for a BoM's by-products cannot exceed 100."
-msgstr ""
-"बीओएम के बाई-प्रॉडक्ट के लिए कुल लागत हिस्सेदारी 100 से अधिक नहीं हो सकती।"
+msgstr "बीओएम के बाई-प्रॉडक्ट के लिए कुल लागत हिस्सेदारी 100 से अधिक नहीं हो सकती।"
 
 #. module: mrp
 #. odoo-python
@@ -5709,8 +5659,7 @@ msgstr "वर्क ऑर्डर पहले ही प्रोसेस �
 #: model_terms:ir.ui.view,arch_db:mrp.mrp_production_form_view
 msgid ""
 "There are no components to consume. Are you still sure you want to continue?"
-msgstr ""
-"उपभोग करने के लिए कोई कंपोनेंट नहीं है. क्या आप अभी भी जारी रखना चाहते हैं?"
+msgstr "उपभोग करने के लिए कोई कंपोनेंट नहीं है. क्या आप अभी भी जारी रखना चाहते हैं?"
 
 #. module: mrp
 #. odoo-python
@@ -5748,9 +5697,10 @@ msgid ""
 "the efficiency factor is 200%, however the expected duration will be 30 "
 "minutes."
 msgstr ""
-"इस फ़ील्ड का उपयोग इस वर्क सेंटर पर किसी वर्क ऑर्डर की अनुमानित अवधि की गणना के लिए करें. उदाहरण के लि"
-"ए, अगर किसी वर्क ऑर्डर में एक घंटा लगता है और कार्यकुशलता कारक 100% है, तो अनुमानित अवधि एक घंटा होगी"
-". हालांकि, अगर कार्यकुशलता कारक 200% है, तो अनुमानित अवधि 30 मिनट होगी।"
+"इस फ़ील्ड का उपयोग इस वर्क सेंटर पर किसी वर्क ऑर्डर की अनुमानित अवधि की गणना के लिए "
+"करें. उदाहरण के लिए, अगर किसी वर्क ऑर्डर में एक घंटा लगता है और कार्यकुशलता कारक 100% "
+"है, तो अनुमानित अवधि एक घंटा होगी. हालांकि, अगर कार्यकुशलता कारक 200% है, तो "
+"अनुमानित अवधि 30 मिनट होगी।"
 
 #. module: mrp
 #. odoo-javascript
@@ -6300,8 +6250,7 @@ msgstr "वर्कऑर्डर देखें"
 msgid ""
 "View and allocate production quantities to customer orders or other "
 "manufacturing orders"
-msgstr ""
-"कस्टमर ऑर्डर या अन्य मैन्युफ़ैक्चरिंग ऑर्डर के लिए प्रॉडक्शन मात्रा देखें और आवंटित करें"
+msgstr "कस्टमर ऑर्डर या अन्य मैन्युफ़ैक्चरिंग ऑर्डर के लिए प्रॉडक्शन मात्रा देखें और आवंटित करें"
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_warehouse_orderpoint__manufacturing_visibility_days
@@ -6786,8 +6735,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/mrp/models/mrp_production.py:0
 msgid "You can only merge manufacturing with the same operation type"
-msgstr ""
-"आप सिर्फ़ एक ही ऑपरेशन टाइप वाले मैन्युफ़ैक्चरिंग ऑर्डर को मर्ज कर सकते हैं"
+msgstr "आप सिर्फ़ एक ही ऑपरेशन टाइप वाले मैन्युफ़ैक्चरिंग ऑर्डर को मर्ज कर सकते हैं"
 
 #. module: mrp
 #. odoo-python
@@ -6831,8 +6779,7 @@ msgstr "आप पहले से पूरे हो चुके मैन्
 #. odoo-python
 #: code:addons/mrp/models/mrp_unbuild.py:0
 msgid "You cannot delete an unbuild order if the state is 'Done'."
-msgstr ""
-"अगर अनबिल्ड ऑर्डर 'पूरा हुआ' की स्थिति में है, तो आप उसे मिटा नहीं सकते।"
+msgstr "अगर अनबिल्ड ऑर्डर 'पूरा हुआ' की स्थिति में है, तो आप उसे मिटा नहीं सकते।"
 
 #. module: mrp
 #. odoo-python
@@ -6844,8 +6791,7 @@ msgstr "आप %s को तैयार प्रोडक्ट और बा�
 #. odoo-python
 #: code:addons/mrp/models/mrp_workorder.py:0
 msgid "You cannot link this work order to another manufacturing order."
-msgstr ""
-"आप इस वर्क ऑर्डर को किसी दूसरे मैन्युफ़ैक्चरिंग ऑर्डर से नहीं जोड़ सकते।"
+msgstr "आप इस वर्क ऑर्डर को किसी दूसरे मैन्युफ़ैक्चरिंग ऑर्डर से नहीं जोड़ सकते।"
 
 #. module: mrp
 #. odoo-python
@@ -7091,3 +7037,15 @@ msgstr "स्प्लिट करें"
 #: model_terms:ir.ui.view,arch_db:mrp.mrp_routing_workcenter_form_view
 msgid "work orders"
 msgstr "वर्क ऑर्डर"
+
+#~ msgid "2023-09-15"
+#~ msgstr "15-09-2023"
+
+#~ msgid "50"
+#~ msgstr "50"
+
+#~ msgid "58"
+#~ msgstr "58"
+
+#~ msgid "60"
+#~ msgstr "60"

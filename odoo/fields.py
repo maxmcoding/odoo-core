@@ -341,9 +341,7 @@ class Field(MetaField('DummyField', (object,), {}), typing.Generic[T]):
         return "%s.%s" % (self.model_name, self.name)
 
     def __repr__(self):
-        if self.name is None:
-            return f"{'<%s.%s>'!r}" % (__name__, type(self).__name__)
-        return f"{'%s.%s'!r}" % (self.model_name, self.name)
+        return repr(str(self))
 
     ############################################################################
     #
@@ -1986,7 +1984,7 @@ class _String(Field[str | typing.Literal[False]]):
 
         # not dirty fields
         if not dirty:
-            if self.compute and self.inverse:
+            if self.compute and self.inverse and any(records._ids):
                 # invalidate the values in other languages to force their recomputation
                 values = [{lang: cache_value} for _id in records._ids]
                 cache.update_raw(records, self, values, dirty=False)

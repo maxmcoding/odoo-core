@@ -389,6 +389,7 @@ from lxml import etree
 from dateutil.relativedelta import relativedelta
 from os.path import join as opj
 from psycopg2.extensions import TransactionRollbackError
+from urllib.parse import unquote_plus
 
 from odoo import api, models, tools
 from odoo.modules import get_module_path, registry
@@ -453,6 +454,9 @@ _SAFE_QWEB_OPCODES = _EXPR_OPCODES.union(to_opcodes([
     'STORE_FAST_STORE_FAST', 'STORE_FAST_LOAD_FAST',
     'CONVERT_VALUE', 'FORMAT_SIMPLE', 'FORMAT_WITH_SPEC',
     'SET_FUNCTION_ATTRIBUTE',
+    # 3.14 c.f. safe_eval
+    'LOAD_FAST_BORROW', 'LOAD_FAST_BORROW_LOAD_FAST_BORROW',
+    'POP_ITER', 'LOAD_COMMON_CONSTANT', 'NOT_TAKEN',
 ])) - _BLACKLIST
 
 
@@ -480,7 +484,8 @@ T_CALL_SLOT = '0'
 
 
 # Only allow a javascript scheme if it is followed by [ ][window.]history.back()
-MALICIOUS_SCHEMES = re.compile(r'javascript:(?!( ?)((window\.)?)history\.back\(\)$)', re.I).findall
+MALICIOUS_SCHEMES = re.compile(r'javascript:(?!((window\.)?)history\.back\(\)$)', re.I).findall
+WHITESPACE_REGEX = re.compile(r'[\s\x00-\x08\x0B\x0C\x0E-\x19]+')
 
 
 def indent_code(code, level):
@@ -631,6 +636,7 @@ class IrQWeb(models.AbstractModel):
 
     @QwebTracker.wrap_compile
     def _compile(self, template):
+        assert isinstance(self, IrQWeb)
         if isinstance(template, etree._Element):
             self = self.with_context(is_t_cache_disabled=True)
             ref = None
@@ -2427,7 +2433,10 @@ class IrQWeb(models.AbstractModel):
 
             @returns dict
         """
-        if not atts.pop('__is_static_node', False) and (href := atts.get('href')) and MALICIOUS_SCHEMES(str(href)):
+        if atts.pop('__is_static_node', False):
+            return atts
+        href = str(atts.get('href') or '')
+        if MALICIOUS_SCHEMES(WHITESPACE_REGEX.sub('', unquote_plus(href))):
             atts['href'] = ""
         return atts
 
@@ -2699,7 +2708,7 @@ class IrQWeb(models.AbstractModel):
         modules = self.env['ir.module.module'].search([('state', '=', 'installed')]).mapped('name')
         lazy_bundle_regex = re.compile(r'\bloadBundle\((["\'`])([\w\.-]+)\1\)', flags=re.ASCII)
         bundles = set()
-        for modroot in map(get_module_path, modules):
+        for modroot in filter(None, map(get_module_path, modules)):
             for fname in glob.iglob('**/static/src/**/*.js', root_dir=modroot, recursive=True):
                 with file_open(opj(modroot, fname)) as f:
                     fcontent = f.read()

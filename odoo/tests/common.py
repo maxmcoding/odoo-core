@@ -10,7 +10,6 @@ import base64
 import concurrent.futures
 import contextlib
 import difflib
-import functools
 import importlib
 import inspect
 import itertools
@@ -1031,6 +1030,8 @@ class TransactionCase(BaseCase):
                 *vars(model),
                 # __annotations__ pops up during testing on *some* models
                 '__annotations__',
+                '__annotate_func__',
+                '__annotations_cache__',
                 # if model is transient & transient fields are accessed
                 '_transient_max_count',
                 '_transient_max_hours',
@@ -1249,6 +1250,7 @@ class ChromeBrowser:
             self._logger.warning("websocket-client module is not installed")
             raise unittest.SkipTest("websocket-client module is not installed")
         self.user_data_dir = tempfile.mkdtemp(suffix='_chrome_odoo')
+        self.chrome_log_level = logging.RUNBOT
 
         otc = odoo.tools.config
         self.screencasts_dir = None
@@ -1349,20 +1351,44 @@ class ChromeBrowser:
                 self._websocket_request('Browser.close')
             except ChromeBrowserException as e:
                 _logger.runbot("WS error during browser shutdown: %s", e)
+                self.chrome_log_level = logging.RUNBOT
             except Exception:  # noqa: BLE001
                 _logger.warning("Error during browser shutdown", exc_info=True)
+                self.chrome_log_level = logging.RUNBOT
             self._logger.info("Closing websocket connection")
             self.ws.close()
         if self.chrome:
             self._logger.info("Terminating chrome headless with pid %s", self.chrome.pid)
+            main = psutil.Process(self.chrome.pid)
+            children = main.children(recursive=True)
+            children.insert(0, main)
             self.chrome.terminate()
-            try:
-                self.chrome.wait(15)
-            except subprocess.TimeoutExpired:
-                self._logger.warning("Killing chrome headless with pid %s: still alive", self.chrome.pid)
-                self.chrome.kill()
+            _, alive = psutil.wait_procs(children, 15)
+            if alive:
+                self._logger.warning(
+                    "Killing chrome descendants-or-self of %s: %d remaining%s",
+                    self.chrome.pid,
+                    len(alive),
+                    "".join(f"\n- {p.name()} ({p.status()})" for p in alive),
+                )
+                for p in alive:
+                    p.kill()
+                psutil.wait_procs(alive, 1)
+                self.chrome_log_level = logging.RUNBOT
 
         if self.user_data_dir and os.path.isdir(self.user_data_dir) and self.user_data_dir != '/':
+            log = self.read_log()
+            if log:
+                save_test_file(
+                    self.test_case._testMethodName,
+                    log,
+                    prefix='chrome_log_',
+                    extension='txt',
+                    document_type="Chrome Log",
+                    logger=self._logger,
+                    loglevel=self.chrome_log_level,
+                    directory='chrome_logs',
+                )
             self._logger.info('Removing chrome user profile "%s"', self.user_data_dir)
             shutil.rmtree(self.user_data_dir, ignore_errors=True)
 
@@ -1586,8 +1612,13 @@ class ChromeBrowser:
                 if not self._result.done():
                     del self.ws
                     self._result.set_exception(e)
-                    for f in self._responses.values():
-                        f.cancel()
+                    while True:
+                        try:
+                            _, f = self._responses.popitem()
+                        except KeyError:
+                            break
+                        else:
+                            f.cancel()
                 return
             except Exception as e:
                 if isinstance(e, ConnectionResetError) and self._result.done():
@@ -1913,10 +1944,16 @@ which leads to stray network requests and inconsistencies."""
             if taken > timeout:
                 break
 
-            result = self._websocket_request('Runtime.evaluate', params={
-                'expression': "try { %s } catch {}" % ready_code,
-                'awaitPromise': True,
-            }, timeout=timeout-taken)['result']
+            try:
+                result = self._websocket_request('Runtime.evaluate', params={
+                    'expression': "try { %s } catch {}" % ready_code,
+                    'awaitPromise': True,
+                }, timeout=timeout-taken)['result']
+            except CancelledError:
+                exc = self._result.done() and self._result.exception()
+                if exc:
+                    raise exc from None
+                result = "cancelled"
 
             if result == {'type': 'boolean', 'value': True}:
                 time_to_ready = time.time() - start_time
@@ -1924,6 +1961,9 @@ which leads to stray network requests and inconsistencies."""
                     self._logger.info('The ready code tooks too much time : %s', time_to_ready)
                 return True
 
+        exc = self._result.done() and self._result.exception()
+        if exc:
+            raise exc from None
         self.take_screenshot(prefix='sc_failed_ready_')
         self._logger.info('Ready code last try result: %s', result)
         return False
@@ -1940,30 +1980,19 @@ which leads to stray network requests and inconsistencies."""
             raise ChromeBrowserException("Running code returned an error: %s" % res)
 
         err = ChromeBrowserException("failed")
-        save_log = functools.partial(
-            save_test_file,
-            self.test_case._testMethodName,
-            self.read_log(),
-            prefix='chrome_log_',
-            extension='txt',
-            document_type="Chrome Log",
-            logger=self._logger,
-            directory='chrome_logs',
-        )
         try:
             # if the runcode was a promise which took some time to execute,
             # discount that from the timeout
             if self._result.result(time.time() - start + timeout) and not self.had_failure:
-                save_log(loglevel=logging.INFO)
+                self.chrome_log_level = logging.INFO
                 return
         except CancelledError:
             # regular-ish shutdown
-            save_log(loglevel=logging.INFO)
+            self.chrome_log_level = logging.INFO
             return
         except Exception as e:
             err = e
 
-        save_log()
         self.take_screenshot()
         self._save_screencast()
         if isinstance(err, ChromeBrowserException):

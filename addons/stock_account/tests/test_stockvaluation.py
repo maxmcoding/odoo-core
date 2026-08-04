@@ -4074,8 +4074,22 @@ class TestStockValuation(TestStockValuationBase):
         res = self.env['stock.quant'].read_group([('product_id', '=', self.product1.id)], ['value:sum'], ['product_id'])
         self.assertEqual(res[0]['value'], 5 * 5 + 2 * 6)
 
+        # Ensure account tax is not applied for manual valuation changes
+        tax_group = self.env['account.tax.group'].create({
+            'name': 'Tax Group',
+            'company_id': self.env.company.id,
+        })
+        basic_tax = self.env['account.tax'].create({
+            'name': 'Basic 15% tax',
+            'amount': 15,
+            'tax_group_id': tax_group.id,
+            'country_id': self.env.company.country_id.id or self.ref('base.us'),
+        })
+        self.env.company.anglo_saxon_accounting = False
+        self.product1.property_account_expense_id.tax_ids = basic_tax
         self.product1.write({'standard_price': 7})
         self.assertEqual(self.product1.value_svl, 49)
+        self.assertEqual(len(self.product1.stock_valuation_layer_ids[-1].account_move_id.line_ids), 2)
 
     def test_average_manual_revaluation(self):
         self.product1.categ_id.property_cost_method = 'average'
@@ -4420,49 +4434,3 @@ class TestStockValuation(TestStockValuationBase):
         self.assertEqual(delivery.move_ids.product_qty, 0.01)
         self.assertEqual(delivery.move_ids.stock_valuation_layer_ids.quantity, -0.01)
         self.assertEqual(self.product1.qty_available, 0.00)
-
-    def test_transit_move_does_not_change_valuation(self):
-        category = self.env['product.category'].create({
-            'name': 'Test Category',
-            'property_cost_method': 'fifo',
-            'property_valuation': 'real_time',
-        })
-        product = self.env['product.product'].create({
-            'name': 'Transit Valuation Product',
-            'is_storable': True,
-            'categ_id': category.id,
-        })
-        transit_location = self.env['stock.location'].create({
-            'name': 'Test Transit Location',
-            'usage': 'transit',
-        })
-
-        self._make_in_move(product, 100, unit_cost=10)
-        self._make_out_move(product, 10)
-
-        initial_value = product.total_value
-        self.assertEqual(initial_value, 900)
-        self.assertEqual(product.qty_available, 90)
-
-        move_internal = self.env['stock.move'].create({
-            'name': 'Stock → Transit',
-            'product_id': product.id,
-            'product_uom_qty': 20,
-            'product_uom': product.uom_id.id,
-            'location_id': self.env.ref('stock.stock_location_stock').id,
-            'location_dest_id': transit_location.id,
-        })
-        move_internal._action_confirm()
-        move_internal._action_assign()
-        move_internal.move_line_ids.quantity = 20
-        move_internal.picked = True
-        move_internal._action_done()
-
-        self.assertEqual(product.qty_available, 70)
-        product._compute_value_svl()
-
-        self.assertEqual(
-            product.total_value,
-            initial_value,
-            "Valuation should not change when moving to transit location"
-        )

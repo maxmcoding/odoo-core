@@ -5,8 +5,6 @@ from lxml import etree
 from odoo import fields, Command
 from odoo.addons.account_edi_ubl_cii.tests.common import TestUblCiiCommon
 from odoo.tests import tagged
-from odoo.tools import file_open
-from odoo.tools.safe_eval import datetime
 
 
 @tagged('post_install', '-at_install')
@@ -154,10 +152,6 @@ class TestAccountEdiUblCii(TestUblCiiCommon):
         attachment.raw = etree.tostring(xml_tree)
         new_invoice = invoice.journal_id._create_document_from_attachment(attachment.ids)
         self.assertRecordValues(new_invoice.invoice_line_ids, line_vals)
-
-    def test_export_import_product_new(self):
-        self.env['ir.config_parameter'].sudo().set_param('account_edi_ubl_cii.use_new_dict_to_xml_helpers', True)
-        self.test_export_import_product()
 
     def test_peppol_eas_endpoint_compute(self):
         partner = self.partner_a
@@ -308,31 +302,6 @@ class TestAccountEdiUblCii(TestUblCiiCommon):
         global_end_date = xml_tree.find('.//ram:ApplicableHeaderTradeSettlement/ram:BillingSpecifiedPeriod/ram:EndDateTime/udt:DateTimeString', self.namespaces)
         self.assertEqual(global_end_date.text, '20241226')
 
-        line_vals = [
-            {
-                'product_id': self.product_a.id,
-                'deferred_start_date': datetime.date(2024, 11, 19),
-                'deferred_end_date': datetime.date(2024, 12, 11),
-            },
-            {
-                'product_id': self.product_a.id,
-                'deferred_start_date': datetime.date(2024, 12, 1),
-                'deferred_end_date': datetime.date(2024, 12, 26),
-            },
-            {
-                'product_id': self.product_a.id,
-                'deferred_start_date': False,
-                'deferred_end_date': False,
-            },
-            {
-                'product_id': self.product_a.id,
-                'deferred_start_date': datetime.date(2024, 11, 29),
-                'deferred_end_date': datetime.date(2024, 12, 15),
-            },
-        ]
-        new_invoice = invoice.journal_id._create_document_from_attachment(xml_attachment.ids)
-        self.assertRecordValues(new_invoice.invoice_line_ids, line_vals)
-
     def test_import_bill(self):
         self.env['res.partner.bank'].sudo().create({
             'acc_number': 'Test account',
@@ -388,31 +357,6 @@ comment-->1000.0</TaxExclusiveAmount></xpath>"""
             .with_context(default_journal_id=self.company_data['default_journal_sale'].id)\
             ._create_document_from_attachment(xml_attachment.id)
         self.assertTrue(any('add your own bank account manually' in message.body for message in move.message_ids))
-
-    def test_import_discount(self):
-        invoice = self.env['account.move'].create({
-            'partner_id': self.partner_a.id,
-            'move_type': 'out_invoice',
-            'invoice_line_ids': [
-                Command.create({
-                    'product_id': self.product_a.id,
-                    'quantity': 3,
-                    'price_unit': 11.34,
-                }),
-                Command.create({
-                    'product_id': self.product_a.id,
-                    'quantity': 1.65,
-                    'price_unit': 29.9,
-                }),
-            ],
-        })
-        xml_attachment = self.env['ir.attachment'].create({
-            'raw': self.env['account.edi.xml.cii']._export_invoice(invoice)[0],
-            'name': 'test_invoice.xml',
-        })
-        imported_invoice = self._import_invoice_as_attachment_on(attachment=xml_attachment, journal=self.company_data["default_journal_sale"])
-        for line in imported_invoice.invoice_line_ids:
-            self.assertFalse(line.discount, "A discount on the imported lines signals a rounding error in the discount computation")
 
     def test_payment_means_code_in_facturx_xml(self):
         bank_ing = self.env['res.bank'].create({'name': 'ING', 'bic': 'BBRUBEBB'})
@@ -482,6 +426,28 @@ comment-->1000.0</TaxExclusiveAmount></xpath>"""
             xml_tree = etree.fromstring(xml_attachment.raw)
             code = xml_tree.find('.//ram:SpecifiedTradeSettlementPaymentMeans/ram:TypeCode', self.namespaces)
             self.assertEqual(code.text, '59')
+
+    def test_oin_code(self):
+        partner = self.partner_a
+        partner.peppol_endpoint = '00000000001020304050'
+        partner.country_id = self.env.ref('base.nl').id
+        partner.bank_ids = [Command.create({'acc_number': "0123456789", 'allow_out_payment': True})]
+        invoice = self.env['account.move'].create({
+            'partner_id': partner.id,
+            'move_type': 'out_invoice',
+            'invoice_date': "2024-12-01",
+            'invoice_date_due': "2024-12-31",
+            'invoice_line_ids': [Command.create({'product_id': self.product_a.id})],
+        })
+
+        invoice.partner_id.commercial_partner_id.invoice_edi_format = 'ubl_bis3'
+        invoice.action_post()
+        invoice.invoice_date_due = fields.Date.from_string('2024-12-31')
+        builder = invoice.partner_id.commercial_partner_id._get_edi_builder('ubl_bis3')
+        xml_content = builder._export_invoice(invoice)[0]
+        xml_tree = etree.fromstring(xml_content)
+        scheme_ID = xml_tree.find('.//cac:PartyLegalEntity/cbc:CompanyID[@schemeID]', self.ubl_namespaces)
+        self.assertEqual(scheme_ID.attrib.get("schemeID"), "0190")
 
     def test_facturx_use_correct_vat(self):
         """Test that Factur-X uses the foreign VAT when available, else the company VAT."""
@@ -553,102 +519,27 @@ comment-->1000.0</TaxExclusiveAmount></xpath>"""
         })
         self.assertEqual(node[0].text, self.company.vat, "Company VAT fallback")
 
-    def test_import_and_group_lines_by_tax(self):
-        """
-        Test the group/ungroup lines action on account.move
-        """
-
-        def create_bill(file_path):
-            file_path = f"{self.test_module}/tests/test_files/{file_path}"
-            with file_open(file_path, 'rb') as file:
-                xml_attachment = self.env['ir.attachment'].create({
-                    'mimetype': 'application/xml',
-                    'name': 'bis3_bill_group_by_tax.xml',
-                    'raw': file.read(),
-                })
-            return self._import_invoice_as_attachment_on(
-                attachment=xml_attachment,
-                journal=self.company_data['default_journal_purchase'],
-            )
-
-        # Datas
-        self.env.ref('base.EUR').active = True
-        tax_16 = self.env["account.tax"].create({
-            'name': '16 %',
-            'amount_type': 'percent',
-            'type_tax_use': 'purchase',
-            'amount': 16.0,
+    def test_facturx_line_without_product_has_name(self):
+        """A line with no product_id (e.g. a sale order down payment invoice line) must still
+        expose a ram:Name in the Factur-X/CII export, falling back to the line's free-text name,
+        without also emitting a redundant ram:Description."""
+        invoice = self.env["account.move"].create({
+            "partner_id": self.partner_a.id,
+            "move_type": "out_invoice",
+            "invoice_line_ids": [Command.create({
+                "name": "Down payment of 40.00%",
+                "price_unit": 100.0,
+            })],
         })
-        tax_21 = self.env["account.tax"].create({
-            'name': '21 %',
-            'amount_type': 'percent',
-            'type_tax_use': 'purchase',
-            'amount': 21.0,
-        })
+        invoice.action_post()
 
-        lines_grouped = [
-            {
-                'quantity': 1.0,
-                'price_unit': 600.0,
-                'price_subtotal': 600.0,
-                'price_total': 696.00,
-                'tax_ids': tax_16.ids,
-            },
-            {
-                'quantity': 1.0,
-                'price_unit': 1300.0,
-                'price_subtotal': 1300.0,
-                'price_total': 1573.00,
-                'tax_ids': tax_21.ids,
-            },
-        ]
-        total_values = [{
-            'amount_untaxed': 1900.0,
-            'amount_tax': 369,
-            'amount_total': 2269.00,
-        }]
-
-        # Import bill
-        file_path = "bis3_bill_group_by_tax.xml"
-        bill = create_bill(file_path)
-
-        # Group lines by tax and post
-        bill.action_group_ungroup_lines_by_tax()
-        self.assertRecordValues(bill.invoice_line_ids, lines_grouped)
-        self.assertRecordValues(bill, total_values)
-        bill.action_post()
-
-        # Import the bill a second time, should be grouped as last posted bill from this supplier is grouped
-        bill_2 = create_bill(file_path)
-        self.assertRecordValues(bill_2.invoice_line_ids, lines_grouped)
-        self.assertRecordValues(bill_2, total_values)
-
-        # Should ungroup lines from xml
-        bill_2.action_group_ungroup_lines_by_tax()
-        self.assertRecordValues(bill_2.invoice_line_ids, [
-            {
-                'quantity': 1.0,
-                'price_unit': 600.0,
-                'price_subtotal': 600.0,
-                'price_total': 696.00,
-                'tax_ids': tax_16.ids,
-            },
-            {
-                'quantity': 1.0,
-                'price_unit': 300.0,
-                'price_subtotal': 300.0,
-                'price_total': 363.00,
-                'tax_ids': tax_21.ids,
-            },
-            {
-                'quantity': 2.0,
-                'price_unit': 500.0,
-                'price_subtotal': 1000.0,
-                'price_total': 1210.00,
-                'tax_ids': tax_21.ids,
-            },
-        ])
-        self.assertRecordValues(bill_2, total_values)
+        xml_bytes = self.env["account.edi.xml.cii"]._export_invoice(invoice)[0]
+        xml_tree = etree.fromstring(xml_bytes)
+        name_node = xml_tree.find(".//ram:SpecifiedTradeProduct/ram:Name", self.namespaces)
+        description_node = xml_tree.find(".//ram:SpecifiedTradeProduct/ram:Description", self.namespaces)
+        self.assertIsNotNone(name_node, "ram:Name must be present even when the line has no product")
+        self.assertEqual(name_node.text, "Down payment of 40.00%")
+        self.assertIsNone(description_node)
 
     def test_bank_details_import(self):
         acc_number = '1234567890'

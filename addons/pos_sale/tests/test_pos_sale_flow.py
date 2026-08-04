@@ -200,7 +200,7 @@ class TestPoSSale(TestPointOfSaleHttpCommon):
         self.main_pos_config.open_ui()
         self.start_pos_tour('PosRefundDownpayment', login="accountman")
         self.assertEqual(len(sale_order.order_line), 4)
-        self.assertEqual(sale_order.order_line[2].qty_invoiced, 1)
+        self.assertEqual(sale_order.order_line[2].qty_invoiced, 0)
         self.assertEqual(sale_order.order_line[3].qty_invoiced, -1)
 
     def test_settle_order_unreserve_order_lines(self):
@@ -1224,6 +1224,20 @@ class TestPoSSale(TestPointOfSaleHttpCommon):
         self.start_pos_tour('PoSSettleQuotation', login="accountman")
         self.assertEqual(order.order_line.qty_delivered, 1)
 
+        pos_order = self.main_pos_config.session_ids.order_ids
+        self.assertEqual(pos_order.picking_ids.move_line_ids.quantity, 1)
+        refund_action = pos_order.refund()
+        refund_order = self.env['pos.order'].browse(refund_action['res_id'])
+
+        payment_context = {"active_ids": refund_order.ids, "active_id": refund_order.id}
+        refund_payment = self.env['pos.make.payment'].with_context(**payment_context).create({
+            'amount': refund_order.amount_total,
+            'payment_method_id': self.bank_payment_method.id,
+        })
+        refund_payment.with_context(**payment_context).check()
+
+        self.assertEqual(refund_order.picking_ids.move_line_ids.quantity, 1)
+
     def test_pos_order_and_invoice_amounts(self):
         payment_term = self.env['account.payment.term'].create({
             'name': "early_payment_term",
@@ -1276,6 +1290,44 @@ class TestPoSSale(TestPointOfSaleHttpCommon):
         self.assertFalse(invoice.invoice_payment_term_id)
 
         self.assertAlmostEqual(order.amount_total, invoice.amount_total, places=2, msg="Order and Invoice amounts do not match.")
+
+    def test_settle_cancelled_sale_order(self):
+        """When settling a cancelled (reset to draft) SO in PoS,
+        the PoS picking should include moves for its products."""
+
+        product_a = self.env['product.product'].create({
+            'name': 'Product A',
+            'available_in_pos': True,
+            'is_storable': True,
+            'lst_price': 10.0,
+            'taxes_id': [odoo.Command.clear()],
+        })
+        product_b = self.env['product.product'].create({
+            'name': 'Product B',
+            'available_in_pos': True,
+            'is_storable': True,
+            'lst_price': 20.0,
+            'taxes_id': [odoo.Command.clear()],
+        })
+        partner = self.env['res.partner'].create({'name': 'Test Partner'})
+
+        sale_order = self.env['sale.order'].create({
+            'partner_id': partner.id,
+            'order_line': [
+                odoo.Command.create({'product_id': product_a.id, 'product_uom_qty': 1}),
+                odoo.Command.create({'product_id': product_b.id, 'product_uom_qty': 1}),
+            ],
+        })
+        sale_order.action_confirm()
+        sale_order._action_cancel()
+        sale_order.action_draft()
+
+        self.main_pos_config.open_ui()
+        self.start_pos_tour('test_settle_cancelled_sale_order', login="accountman")
+
+        pos_order = sale_order.pos_order_line_ids.order_id
+        pos_shipped_products = pos_order.picking_ids.filtered(lambda p: p.state == 'done').move_ids.product_id
+        self.assertEqual(pos_shipped_products, product_a | product_b)
 
     def test_settle_order_with_lot(self):
         warehouse = self.env['stock.warehouse'].search([('company_id', '=', self.env.company.id)], limit=1)
@@ -2102,12 +2154,87 @@ class TestPoSSale(TestPointOfSaleHttpCommon):
            'shipping_date': fields.Date.today(),
         }
         data = self.env['pos.order'].sync_from_ui([pos_order_refund])
+        self.assertEqual(sale_order.order_line.qty_invoiced, 2)
         pos_order_refund_id = data['pos.order'][0]['id']
         pos_order_refund_record = self.env['pos.order'].browse(pos_order_refund_id)
         self.assertEqual(sale_order.order_line.qty_delivered, 5)
+        self.assertEqual(sale_order.order_line.qty_invoiced, 2)
         for picking in pos_order_refund_record.picking_ids:
             picking.button_validate()
         self.assertEqual(sale_order.order_line.qty_delivered, 2)
+
+    def test_refund_ship_later_qty_delivered_backend(self):
+        "This test make sure that an order refunded in the backend has correct qty_delivered/invoiced on the original sale order"
+        warehouse = self.env['stock.warehouse'].search([('company_id', '=', self.env.company.id)], limit=1)
+        warehouse.delivery_steps = 'pick_pack_ship'
+
+        sale_order = self.env['sale.order'].create({
+            'partner_id': self.partner_a.id,
+            'order_line': [Command.create({
+                'product_id': self.product_a.id,
+                'name': self.product_a.name,
+                'product_uom_qty': 5,
+                'price_unit': self.product_a.lst_price,
+                'product_uom': self.product_a.uom_id.id
+            })],
+        })
+        sale_order.action_confirm()
+
+        self.main_pos_config.ship_later = True
+        self.main_pos_config.open_ui()
+        current_session = self.main_pos_config.current_session_id
+
+        pos_order = {
+           'amount_paid': self.product_a.lst_price * 5,
+           'amount_return': 0,
+           'amount_tax': 0,
+           'amount_total': self.product_a.lst_price * 5,
+           'company_id': self.env.company.id,
+           'date_order': fields.Datetime.to_string(fields.Datetime.now()),
+           'fiscal_position_id': False,
+           'to_invoice': True,
+           'partner_id': self.partner_a.id,
+           'pricelist_id': self.main_pos_config.available_pricelist_ids[0].id,
+           'lines': [[0,
+             0,
+             {'discount': 0,
+              'pack_lot_ids': [],
+              'price_unit': self.product_a.lst_price,
+              'product_id': self.product_a.id,
+              'price_subtotal': self.product_a.lst_price * 5,
+              'price_subtotal_incl': self.product_a.lst_price * 5,
+              'sale_order_line_id': sale_order.order_line[0].id,
+              'sale_order_origin_id': sale_order.id,
+              'qty': 5,
+              'tax_ids': []}]],
+           'name': 'Order 00044-003-0014',
+           'session_id': current_session.id,
+           'sequence_number': self.main_pos_config.journal_id.id,
+           'payment_ids': [[0,
+             0,
+             {'amount': self.product_a.lst_price * 5,
+              'name': fields.Datetime.now(),
+              'payment_method_id': self.main_pos_config.payment_method_ids[0].id}]],
+           'user_id': self.env.uid,
+           'uuid': str(uuid4()),
+        }
+
+        data = self.env['pos.order'].sync_from_ui([pos_order])
+        pos_order_id = data['pos.order'][0]['id']
+        pos_order_record = self.env['pos.order'].browse(pos_order_id)
+        self.assertEqual(sale_order.order_line.qty_delivered, 5)
+        self.assertEqual(sale_order.order_line.qty_invoiced, 5)
+        pos_order_refund_record = pos_order_record._refund()
+        payment_context = {"active_ids": pos_order_refund_record.ids, "active_id": pos_order_refund_record.id}
+        order_payment = self.env['pos.make.payment'].with_context(**payment_context).create({
+            'amount': -5000,
+            'payment_method_id': self.bank_payment_method.id
+        })
+        order_payment.with_context(**payment_context).check()
+        for picking in pos_order_refund_record.picking_ids:
+            picking.button_validate()
+        self.assertEqual(sale_order.order_line.qty_delivered, 0)
+        self.assertEqual(sale_order.order_line.qty_invoiced, 0)
 
     def test_settle_groupable_lot_total_amount(self):
         uom_category = self.env['uom.category'].create({
@@ -2220,6 +2347,52 @@ class TestPoSSale(TestPointOfSaleHttpCommon):
         invoice.action_post()
 
         self.assertEqual(sale_order.amount_unpaid, 0.0)
+
+    def test_settle_so_custom_attribute_value(self):
+        """When settling a sale order (e.g. from the website) in POS, free-text custom
+        attribute values must appear in the orderline's product name via
+        constructFullProductName, not just the placeholder (e.g. 'Custom').
+        """
+        attr = self.env['product.attribute'].create({
+            'name': 'Inscription',
+            'create_variant': 'no_variant',
+        })
+        attr_value = self.env['product.attribute.value'].create({
+            'name': 'Custom',
+            'attribute_id': attr.id,
+            'is_custom': True,
+        })
+        product_tmpl = self.env['product.template'].create({
+            'name': 'Custom Product',
+            'available_in_pos': True,
+            'type': 'service',
+            'list_price': 10.0,
+            'taxes_id': [],
+            'attribute_line_ids': [Command.create({
+                'attribute_id': attr.id,
+                'value_ids': [Command.link(attr_value.id)],
+            })],
+        })
+        ptav = product_tmpl.attribute_line_ids.product_template_value_ids
+        product = product_tmpl.product_variant_ids[0]
+
+        sale_order = self.env['sale.order'].create({
+            'partner_id': self.env['res.partner'].create({'name': 'Website Customer'}).id,
+            'order_line': [Command.create({
+                'product_id': product.id,
+                'product_uom_qty': 1,
+                'price_unit': 10.0,
+                'product_no_variant_attribute_value_ids': [Command.link(ptav.id)],
+                'product_custom_attribute_value_ids': [Command.create({
+                    'custom_product_template_attribute_value_id': ptav.id,
+                    'custom_value': 'Value',
+                })],
+            })],
+        })
+        sale_order.action_confirm()
+
+        self.main_pos_config.open_ui()
+        self.start_pos_tour('test_settle_so_custom_attribute_value', login="accountman")
 
 
 @odoo.tests.tagged('post_install', '-at_install')

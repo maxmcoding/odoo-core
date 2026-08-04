@@ -793,7 +793,7 @@ class PosOrder(models.Model):
             'pos_refunded_invoice_ids': pos_refunded_invoice_ids,
             'pos_order_ids': self.ids,
             'journal_id': self.session_id.config_id.invoice_journal_id.id,
-            'move_type': 'out_invoice' if self.amount_total >= 0 else 'out_refund',
+            'move_type': 'out_invoice' if float_compare(self.amount_total, 0, precision_rounding=self.currency_id.rounding) >= 0 else 'out_refund',
             'ref': self.name,
             'partner_id': self.partner_id.address_get(['invoice'])['invoice'],
             'partner_shipping_id': self.partner_id.address_get(['delivery'])['delivery'],
@@ -1184,6 +1184,8 @@ class PosOrder(models.Model):
 
     def _create_order_picking(self):
         self.ensure_one()
+        if self.picking_ids:
+            return
         if self.shipping_date:
             self.sudo().lines._launch_stock_rule_from_pos_order_lines()
         else:
@@ -1197,7 +1199,8 @@ class PosOrder(models.Model):
                     destination_id = picking_type.default_location_dest_id.id
 
                 pickings = self.env['stock.picking']._create_picking_from_pos_order_lines(destination_id, self.lines, picking_type, self.partner_id)
-                pickings.write({'pos_session_id': self.session_id.id, 'pos_order_id': self.id, 'origin': self.name})
+                all_pickings = pickings | pickings.backorder_ids
+                all_pickings.write({'pos_session_id': self.session_id.id, 'pos_order_id': self.id, 'origin': self.name})
 
     def add_payment(self, data):
         """Create a new payment for the order"""
@@ -1260,7 +1263,9 @@ class PosOrder(models.Model):
                 PosOrderLineLot = self.env['pos.pack.operation.lot']
                 for pack_lot in line.pack_lot_ids:
                     PosOrderLineLot += pack_lot.copy()
-                line.copy(line._prepare_refund_data(refund_order, PosOrderLineLot))
+                line_copy = line.copy(line._prepare_refund_data(refund_order, PosOrderLineLot))
+                line_copy._onchange_amount_line_all()
+            refund_order._onchange_amount_all()
             refund_orders |= refund_order
         refund_orders._compute_prices()
         return refund_orders
@@ -1484,6 +1489,7 @@ class PosOrderLine(models.Model):
             'pack_lot_ids': PosOrderLineLot,
             'is_total_cost_computed': False,
             'refunded_orderline_id': self.id,
+            'uuid': str(uuid4()),
         }
 
     @api.model_create_multi
@@ -1592,7 +1598,7 @@ class PosOrderLine(models.Model):
             price = self.price_unit * (1 - (self.discount or 0.0) / 100.0)
             self.price_subtotal = self.price_subtotal_incl = price * self.qty
             if (self.tax_ids):
-                taxes = self.tax_ids.compute_all(price, self.order_id.currency_id, self.qty, product=self.product_id, partner=False)
+                taxes = self.tax_ids_after_fiscal_position.compute_all(price, self.order_id.currency_id, self.qty, product=self.product_id, partner=False)
                 self.price_subtotal = taxes['total_excluded']
                 self.price_subtotal_incl = taxes['total_included']
 
@@ -1739,8 +1745,8 @@ class PosOrderLine(models.Model):
         if fiscal_position:
             account = fiscal_position.map_account(account)
 
-        is_refund_order = line.order_id.amount_total < 0.0
-        is_refund_line = line.qty * line.price_unit < 0
+        is_refund_order = float_compare(line.order_id.amount_total, 0, precision_rounding=self.order_id.currency_id.rounding) < 0.0
+        is_refund_line = line.isRefund()
 
         product_name = line.product_id \
             .with_context(lang=line.order_id.partner_id.lang or self.env.user.lang) \
@@ -1787,6 +1793,8 @@ class PosOrderLine(models.Model):
         original_price = self.tax_ids_after_fiscal_position.compute_all(self.price_unit, self.currency_id, self.qty, product=self.product_id, partner=self.order_id.partner_id)['total_included']
         return original_price - self.price_subtotal_incl
 
+    def isRefund(self):
+        return self.qty * self.price_unit < 0
 
 class PosOrderLineLot(models.Model):
     _name = "pos.pack.operation.lot"

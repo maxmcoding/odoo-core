@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 from odoo.tools import float_compare, float_is_zero
 
 from itertools import chain
-from odoo.tools import groupby, OrderedSet
+from odoo.tools import OrderedSet
 from collections import defaultdict
 
 
@@ -103,12 +103,18 @@ class StockValuationLayer(models.Model):
         if am_vals:
             account_moves = self.env['account.move'].sudo().create(am_vals)
             account_moves._post()
-        products_svl = groupby(self, lambda svl: (svl._get_related_product(), svl.company_id.anglo_saxon_accounting))
-        for (product, anglo_saxon_accounting), svls in products_svl:
-            svls = self.browse(svl.id for svl in svls)
+        products_svl = self.grouped(lambda svl: (svl._get_related_product(), svl.company_id.anglo_saxon_accounting))
+        # Reconcile all the products sharing the same invoices at once
+        anglo_saxon_products = self.env['product.product'].browse(
+            product.id for product, anglo_saxon_accounting in products_svl if anglo_saxon_accounting
+        )
+        products_by_invoices = anglo_saxon_products.grouped(
+            lambda product: products_svl[product, True].stock_move_id._get_related_invoices()
+        )
+        for invoices, products in products_by_invoices.items():
+            invoices._stock_account_anglo_saxon_reconcile_valuation(product=products)
+        for (product, _dummy), svls in products_svl.items():
             moves = svls.stock_move_id
-            if anglo_saxon_accounting:
-                moves._get_related_invoices()._stock_account_anglo_saxon_reconcile_valuation(product=product)
             moves = (moves | moves.origin_returned_move_id).with_prefetch(chain(moves._prefetch_ids, moves.origin_returned_move_id._prefetch_ids))
             for aml in moves._get_all_related_aml():
                 if aml.reconciled or aml.move_id.state != "posted" or not aml.account_id.reconcile:
@@ -179,8 +185,11 @@ class StockValuationLayer(models.Model):
             if float_is_zero(candidate.quantity, precision_rounding=rounding):
                 continue
             candidate_quantity = abs(candidate.quantity)
-            returned_qty = sum([sm.product_uom._compute_quantity(sm.quantity, self.uom_id)
-                                for sm in candidate.stock_move_id.returned_move_ids if sm.state == 'done'])
+            returned_qty = sum(
+                sm.product_uom._compute_quantity(sm.quantity, candidate.uom_id)
+                for sm in candidate.stock_move_id.returned_move_ids
+                if sm.state == 'done'
+            )
             candidate_quantity -= returned_qty
             if float_is_zero(candidate_quantity, precision_rounding=rounding):
                 continue
@@ -220,8 +229,11 @@ class StockValuationLayer(models.Model):
             if float_is_zero(svl.quantity, precision_rounding=rounding):
                 continue
             relevant_qty = abs(svl.quantity)
-            returned_qty = sum([sm.product_uom._compute_quantity(sm.quantity, self.uom_id)
-                                for sm in svl.stock_move_id.returned_move_ids if sm.state == 'done'])
+            returned_qty = sum(
+                sm.product_uom._compute_quantity(sm.quantity, svl.uom_id)
+                for sm in svl.stock_move_id.returned_move_ids
+                if sm.state == 'done'
+            )
             relevant_qty -= returned_qty
             if float_is_zero(relevant_qty, precision_rounding=rounding):
                 continue
@@ -280,6 +292,7 @@ class StockValuationLayer(models.Model):
                     'credit': 0,
                     'product_id': product.id,
                     'quantity': 0,
+                    'tax_ids': [],
                 }), (0, 0, {
                     'name': name,
                     'account_id': credit_account_id,
@@ -287,6 +300,7 @@ class StockValuationLayer(models.Model):
                     'credit': abs(value),
                     'product_id': product.id,
                     'quantity': 0,
+                    'tax_ids': [],
                 })],
             }
             am_vals_list.append(move_vals)
