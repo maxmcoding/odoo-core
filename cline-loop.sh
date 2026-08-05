@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# GOAL="Create entities and relations on neo4j memory for .py files in this workspace"
-# Store content in a variable
-GOAL=$(< fillcontextbynode.md)
+CUSTOM_GOAL="try start match with MATCH (n:PythonModel) limit 1   then work with related nodes | "
+# Store content in a variable, prefixed with custom indications
+GOAL="$CUSTOM_GOAL"$'\n\n'"$(< fillcontextbynode.md)"
 MAX_RETRIES=10222
 RETRY_COUNT=0
 DELAY_SECONDS=5
@@ -22,8 +22,9 @@ while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
     EXIT_CODE=$?
 
     if [ $EXIT_CODE -eq 0 ]; then
-        echo "Task completed successfully!"
-        exit 0
+        echo "Task completed successfully! ... Wating to restart over"
+        sleep $DELAY_SECONDS
+        # exit 0
     else
         echo "Cline crashed or LM Studio threw an error (Exit code: $EXIT_CODE)."
         RETRY_COUNT=$((RETRY_COUNT+1))

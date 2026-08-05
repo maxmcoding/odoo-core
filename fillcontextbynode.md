@@ -74,7 +74,7 @@ graph is a separate, empty, generic entity/observation store and has nothing to 
 architecture graph. `get_neo4j_schema` is unavailable here (this instance has no APOC plugin
 installed) — use `read_neo4j_cypher` for schema discovery too, if ever needed.
 
-### The enforced loop — batched by shared file, capped
+### The enforced — batched by shared file, capped
 
 **Performance rule:** many `ModelMethod`/`ModelField`/`XMLRecord`/`Function` nodes point at the *same*
 `filePath` (e.g. a model file with 20 methods). Re-opening that file once per node is the main reason
@@ -87,7 +87,7 @@ and write all of their `context` values back in a **single** batched query. Neve
 Tool: `read_neo4j_cypher`
 ```json
 {
-  "query": "MATCH (n) WHERE  n.filePath IS NOT NULL RETURN elementId(n) AS id, labels(n), n.context, n.description LIMIT 30"
+  "query": "MATCH (n) WHERE   n.filePath IS NOT NULL and ( n.context = "" or n.context IS  NULL ) AND ANY(ext IN [".py", ".js", ".xml"] WHERE n.filePath ENDS WITH ext) RETURN elementId(n) AS id, labels(n), n.context, n.description LIMIT 30"
 }
 ```
 
@@ -96,8 +96,7 @@ Swap the label (`ModelMethod`, `PythonModel`, `Controller`, `ControllerMethod`, 
 `ModelField`) to choose which slice to work through; drop it from both `MATCH` clauses only if you
 deliberately want to move through all label types mixed together (still one shared `filePath` per
 cycle). The inner `LIMIT 30` caps batch size so one cycle stays reviewable — if a file has more than 30
-matching nodes, the remainder is simply picked up again on a later cycle (it's still there, still
-matching, nothing is lost).
+matching nodes.
 
 No `SKIP`/pagination bookkeeping needed: once a node's `context` is set in Step 3, it stops matching
 `context IS NULL OR context = ''`, so re-running this exact query always returns the next untouched
@@ -115,7 +114,7 @@ call covers the whole batch. Python for `ModelMethod`/`Function`/`ControllerMeth
 specific section in the file you just opened — do not write `context` for any node from its name or
 `description` alone, and do not let one node's real behavior bleed into another's description. If the
 file is large enough that some rows' sections fall outside what you actually read, drop those rows from
-the Step 3 batch (they'll be picked up again next cycle) rather than guessing.
+the Step 3 batch rather than guessing.
 
 **Step 3 — WRITE: set `context` for the whole verified batch, nothing else.**
 
@@ -142,9 +141,6 @@ Tool: `write_neo4j_cypher`
 - This exact shape only — no other clause, no other property, no `DELETE`/`REMOVE`/`CREATE`/`MERGE`
   (see the DO NOT section above). If `write_neo4j_cypher` fails, continue to the next step.
 
-**Step 4 — REPEAT.** Go back to Step 1. Do not queue up reasoning for the next file's batch before this
-one's Step 3 has actually been sent — one full loop (one file, its whole verified batch), then the
-next.
 
 
 ### Prevention Checklist (Do Before Each Tool Call):
