@@ -56,6 +56,16 @@ manually.
 
 ### How to talk to Neo4j — SEARCH and UPDATE only, nothing else
 
+**SEARCH** = `read_neo4j_cypher`, for Step 1 only. It is strictly **MATCH-only**: the server does a
+text-level check and hard-rejects any query containing a write clause (`SET`, `CREATE`, `MERGE`,
+`DELETE`, `REMOVE`, `DROP`) — even one merely prefixed with `EXPLAIN` — with
+`Only MATCH queries are allowed for read-query`. Never route Step 3's `SET` through it.
+
+**UPDATE** = `write_neo4j_cypher`, for Step 3 only. It's the only tool allowed to execute the
+`SET n.context = ...` query — never call it for anything but that (see the DO NOT section above). If
+you're ever unsure which of the two a query belongs to, scan it for write keywords first: any hit means
+`write_neo4j_cypher`, no exceptions.
+
 Use only the two tools on the **`neo4j-database`** MCP server below (Claude Code prefixes them
 `mcp__neo4j-database__read_neo4j_cypher` / `mcp__neo4j-database__write_neo4j_cypher`; other MCP
 clients may use the bare names). Do **not** use the `neo4j-memory` server (`read_graph`,
@@ -116,12 +126,12 @@ Tool: `write_neo4j_cypher`
   "params": {
     "updates": [
       {
-        "id": "4:e179a577-119d-49cc-9910-746aa300882b:0",
-        "context": "Confirms the order, generates a procurement group + stock pickings via _action_launch_stock_rule, and posts the analytic entries; the docstring already says 'Confirm the given quotation(s)' so this adds the side effects it doesn't mention."
+        "id": "4:e179a577-119d-49cc-9910-746aa300882b:208",
+        "context": "Holds the OWL Colorpicker component (colorpicker.js), its QWeb template (colorpicker.xml) and styles (colorpicker.scss): a draggable hue/saturation/opacity picker with hex/rgb/hsl inputs, used wherever the web client needs a color-selection widget."
       },
       {
-        "id": "4:e179a577-119d-49cc-9910-746aa300882b:1",
-        "context": "Trivial override: just calls super() and adds no behavior of its own."
+        "id": "4:e179a577-119d-49cc-9910-746aa300882b:209",
+        "context": "Implements the domain/condition-tree editor UI: condition_tree.js defines the internal tree/condition/connector data model, tree_editor.js is the main OWL component that renders and diffs trees using ModelFieldSelector, and the remaining files (operator/value editors, autocomplete, utils) supply per-field-type operator and value widgets used to build Odoo domain expressions visually."
       }
     ]
   }
@@ -144,6 +154,21 @@ __1. JSON Validation:__
 - Verify complete, valid JSON with proper quoting and no trailing commas
 - For Neo4j read/write tools: ensure exact shape `{ "query": "...", "params": {...} }`
 - Double-check `write_neo4j_cypher` params follow documented structure
+- for json call, always ensure that atributes empty be clean, Example  atibute tu prevent ({"\"": null} , {"":""}, {"*":""})
+- Whenever you need to validate a JSON string (e.g. the `query`/`params` payload before calling
+  `read_neo4j_cypher` or `write_neo4j_cypher`), you must validate it using the `json-validate` MCP tool
+  — never the `jq` CLI. Follow these rules:
+
+  1. Call `mcp__json-validate__validate_json` with the full JSON string as `json_text`. Example:
+     ```json
+     {
+       "json_text": "{\"query\": \"UNWIND $updates AS u MATCH (n) WHERE elementId(n) = u.id SET n.context = u.context\", \"params\": {\"updates\": [{\"id\": \"4:e179a577-119d-49cc-9910-746aa300882b:0\", \"context\": \"...\"}]}}"
+     }
+     ```
+  2. It returns `{"valid": true, "error": null}` on success, or `{"valid": false, "error": "..."}` on
+     failure.
+  3. If `valid` is `false`, review `error`, fix the structural issue in the string, and re-validate.
+  4. Do not output or utilize the JSON data until `validate_json` returns `"valid": true`.
 
 __2. Fresh Results Verification:__
 
