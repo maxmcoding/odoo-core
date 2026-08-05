@@ -7,7 +7,7 @@
 - save context on node
 - Use `neo4j-database`
 - only use provide query  like examples
-- if write_neo4j_cypher fail, continue  to next step
+- if write_neo4j_cypher fail, use validate_json
 
 **Only call the exact tools and JSON shapes documented below — verbatim, one real MCP tool call at a
 time.**  
@@ -87,7 +87,7 @@ and write all of their `context` values back in a **single** batched query. Neve
 Tool: `read_neo4j_cypher`
 ```json
 {
-  "query": "MATCH (n) WHERE  n.filePath IS NOT NULL RETURN elementId(n) AS id, labels(n), n.context, n.description LIMIT 10"
+  "query": "MATCH (n) WHERE  n.filePath IS NOT NULL RETURN elementId(n) AS id, labels(n), n.context, n.description LIMIT 30"
 }
 ```
 
@@ -95,7 +95,7 @@ Swap the label (`ModelMethod`, `PythonModel`, `Controller`, `ControllerMethod`, 
 `QWebTemplate`, `XMLRecord`, `JSComponent`, `Addon`, `AssetBundle`, `Asset`, `Folder`, `File`,
 `ModelField`) to choose which slice to work through; drop it from both `MATCH` clauses only if you
 deliberately want to move through all label types mixed together (still one shared `filePath` per
-cycle). The inner `LIMIT 10` caps batch size so one cycle stays reviewable — if a file has more than 10
+cycle). The inner `LIMIT 30` caps batch size so one cycle stays reviewable — if a file has more than 30
 matching nodes, the remainder is simply picked up again on a later cycle (it's still there, still
 matching, nothing is lost).
 
@@ -168,7 +168,7 @@ __1. JSON Validation:__
   2. It returns `{"valid": true, "error": null}` on success, or `{"valid": false, "error": "..."}` on
      failure.
   3. If `valid` is `false`, review `error`, fix the structural issue in the string, and re-validate.
-  4. Do not output or utilize the JSON data until `validate_json` returns `"valid": true`.
+  4. When utilize the JSON data enforce to use `validate_json` returns `"valid": true`.
 
 __2. Fresh Results Verification:__
 
@@ -176,10 +176,10 @@ __2. Fresh Results Verification:__
 - Clear cached state before next query after successful writes
 - Cross-reference file paths match between Step 1 and Step 2 queries
 
-__3. File Path Handling (MCP filesystem):__
+__3. File Path Handling (MCP filesystem-MisProyectos):__
 
-- Use `@workspace:full/path/to/file.ext` format for read_file/write_to_file tools
-- Don't use simple relative paths like `addons/...` without the prefix
+- Use  read_text_file tool to read file content
+- when node is type folder path put as context "folder"
 - Verify file existence at intended path before reading
 
 __4. MCP Server Selection:__
