@@ -1,3 +1,4 @@
+Unit and integration tests for the pivot chart widget, covering data aggregation functions, grouping operations by field properties, sorting/filtering of result sets, interactive features like drilling down to child records via popup panels, and performance handling with large datasets. Tests validate rendering accuracy against expected aggregated results and ensure proper communication between web client components and backend Odoo API endpoints for pivot view queries.
 /** @odoo-module */
 
 import { expect, test } from "@odoo/hoot";

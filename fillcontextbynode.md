@@ -27,6 +27,7 @@ server's knowledge graph is empty/unrelated. The actual Odoo architecture graph 
 **`neo4j-database`** MCP server as a real Cypher property graph, confirmed by node counts and sample
 reads on 2026-08-03. Use `neo4j-database`, not `neo4j-memory`, for everything below.)
 
+
 ### PRIMARY OBJECTIVE
 
 **Goal, in one line: give every graph node a real, source-verified `context` sentence explaining what
@@ -45,7 +46,7 @@ it, and write back what you learned. `context` must say something `description` 
 Structural nodes with no code body (`Folder`, `Addon`, `AssetBundle`, `Asset`, plain `File`) get one
 sentence on role/purpose instead, based on actually looking at contents/manifest — not the name alone.
 
-Keep it to 2–4 sentences. Do not hallucinate behavior that isn't in the code.
+Keep it to 4–8 sentences. Be objetive to what you read in the code.
 
 **Never pick a label** (`ModelMethod`, `XMLRecord`, etc.) because it seems "common" or "representative"
 when the user didn't name one — that is a guess, and this task runs on verified facts, not guesses. If
@@ -87,15 +88,14 @@ and write all of their `context` values back in a **single** batched query. Neve
 Tool: `read_neo4j_cypher`
 ```json
 {
-  "query": "MATCH (n) WHERE   n.filePath IS NOT NULL and ( n.context = "" or n.context IS  NULL ) AND ANY(ext IN [".py", ".js", ".xml"] WHERE n.filePath ENDS WITH ext) RETURN elementId(n) AS id, labels(n), n.context, n.description LIMIT 30"
+  "query": "MATCH (n) WHERE NOT 'ModelField' IN labels(n) AND n.filePath IS NOT NULL AND (n.context = "" OR n.context IS NULL) AND ANY(ext IN [".py", ".js", ".xml"] WHERE n.filePath ENDS WITH ext) RETURN  elementId(n) AS id, labels(n), n.context, n.description LIMIT 10"
 }
 ```
 
 Swap the label (`ModelMethod`, `PythonModel`, `Controller`, `ControllerMethod`, `Function`,
-`QWebTemplate`, `XMLRecord`, `JSComponent`, `Addon`, `AssetBundle`, `Asset`, `Folder`, `File`,
-`ModelField`) to choose which slice to work through; drop it from both `MATCH` clauses only if you
+`QWebTemplate`, `XMLRecord`, `JSComponent`, `Addon`, `AssetBundle`, `Asset`, `Folder`, `File`) to choose which slice to work through; drop it from both `MATCH` clauses only if you
 deliberately want to move through all label types mixed together (still one shared `filePath` per
-cycle). The inner `LIMIT 30` caps batch size so one cycle stays reviewable — if a file has more than 30
+cycle). The inner `LIMIT 10` caps batch size so one cycle stays reviewable — if a file has more than 10
 matching nodes.
 
 No `SKIP`/pagination bookkeeping needed: once a node's `context` is set in Step 3, it stops matching
@@ -182,3 +182,42 @@ __4. MCP Server Selection:__
 
 - Always use server name `neo4j-database` (not `neo4j-memory`)
 - Confirm JSON matches documented schemas verbatim
+
+
+
+### Think method 
+
+You are a precise assistant. Before answering, write a brief internal thought process inside <scratch> tags. Keep your thoughts under 30 words, using shorthand or fragments. Then, provide the final answer immediately.
+
+Protocol
+
+For each file, follow this loop:
+
+Classify complexity (silent, no output)
+SIMPLE: single-purpose script, config, data file, or short module with an obvious role.
+COMPLEX: multi-responsibility module, entry point, orchestrator, or file with non-obvious control flow / dependencies.
+Reason before writing — Chain-of-Draft style, not Chain-of-Thought
+SIMPLE files: skip reasoning, write the description directly.
+COMPLEX files: reason in compressed drafts only — ≤5 words per step, symbols/keywords over prose, no restating the file content, no narrating your own process. Budget: ≤80 reasoning tokens per file. Stop as soon as the file's purpose and key behavior are clear.
+If you need exact details (function signatures, imports, line counts), read them directly — do not guess or hallucinate content you have not seen.
+Write the description
+Medium length: 3–6 sentences, ~60–120 words. Not a one-liner, not a full walkthrough.
+Cover, in order of priority: (a) what the file's primary responsibility is, (b) how it fits into the broader sequence of files if that's inferable, (c) any notable dependencies, side effects, or risks (e.g. writes to disk, calls external APIs, mutates shared state) — only if present and relevant.
+No restating the reasoning trace. No filler openers ("This file is responsible for..." → just state it: "Handles...").
+Do not quote large code blocks. Paraphrase; cite specific function/class names only when they aid clarity.
+Move to the next file. Do not carry unnecessary context forward — only carry facts that affect interpretation of later files (e.g. a shared config schema, a naming convention, an established data flow).
+Output format (repeat per file)
+### {filename}
+{medium-length description, 3–6 sentences}
+
+No preamble before the first file. No summary after the last file unless explicitly requested.
+
+Rules
+Never fabricate file contents you have not actually read.
+Never explain your SIMPLE/COMPLEX classification to the user.
+Favor correctness over hitting the token budget exactly — the 80-token reasoning cap is a target, not a hard wall for genuinely ambiguous files.
+If a file is unreadable, empty, or binary with no inspectable content, say so in one sentence instead of guessing.
+Keep tone neutral and technical — no evaluative language ("great", "poorly written") unless explicitly asked for a code review.
+Tuning notes
+{80 tokens} reasoning cap and {3–6 sentences} output length are the two knobs to adjust per use case. Increase the reasoning cap for large/complex codebases; decrease output length if you need a quick index rather than a description.
+For very large batches (50+ files), consider adding a running "context digest" (1–2 sentences) after every 10 files, so later descriptions can reference established patterns without re-deriving them from scratch.
